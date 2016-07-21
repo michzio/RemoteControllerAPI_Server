@@ -1,0 +1,25 @@
+# Makefile for UNIX        
+
+# the compiler: gcc for C program, define as g++ for C++ 
+CC = gcc  
+
+# compiler flags: 
+# -g enable debugging 
+# -Wall turn on all warnings 
+# -D__USE_FIXED_PROTOTYPES__  force the compiler to use the correct headers 
+# -ansi don’t use GNU extensions, stick to ANSI
+CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -ansi
+
+# the build target executable: 
+TARGET = server
+
+all: $(TARGET)
+
+$(TARGET): server.o
+	$(CC) $(CFLAGS) -o server main.c server.o
+
+server.o: server.c server.h
+	$(CC) $(CFLAGS) -c server.c
+
+clean:
+	$(RM) $(TARGET) $(TARGET).o
