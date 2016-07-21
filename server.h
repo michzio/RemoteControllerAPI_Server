@@ -5,6 +5,9 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_SERVER_H
 #define REMOTECONTROLLERAPI_SERVER_SERVER_H
 
+#define PORT "2016" // the port remote controller server will be listening for connections
+#define BACKLOG 10  // number of pending connections that can be waiting on the listen queue
+
 enum result {
     SUCCESS = 0,
     FAILURE = 1,
