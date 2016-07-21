@@ -10,11 +10,11 @@
 
 enum result {
     SUCCESS = 0,
-    FAILURE = 1,
+    FAILURE = -1,
 };
 
 int start_server(void);
-int create_passive_socket(void);
+int create_passive_socket(int *res_fd);
 int listen_connections(void);
 int accept_new_connection(void);
 int end_server(void);
