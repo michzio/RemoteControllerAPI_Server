@@ -35,8 +35,6 @@ int create_passive_socket(int *res_fd) {
     struct addrinfo addrinfo_hints, *addrinfo_res, *ai_ptr; // address info structures holding host address information
     int gai_res; // getaddrinfo() result value
     int optval = 1; // used in setsockopt to set option value
-    char *ip_address; // address passive socket was binded to
-    int port; // port passive socket was binded to
 
     // populating address info hints for getaddrinfo()
     memset(&addrinfo_hints, 0, sizeof(addrinfo_hints));
@@ -83,20 +81,19 @@ int create_passive_socket(int *res_fd) {
 
     *res_fd = ps_fd; // return created passive socket file descriptor
 
-    if(get_address_and_port_from_sockfd(ps_fd, &ip_address, &port) == FAILURE) {
-        fprintf(stderr, "get_address_and_port_from_sockfd: faild!");
-        return FAILURE;
-    }
-
-    printf("Created passive socket %d binded to %s:%d\n", ps_fd, ip_address, port);
-
-    free(ip_address);
+    print_socket_address(ps_fd, PASSIVE_SOCKET);
 
     return SUCCESS;
 }
 
 int listen_connections(int ps_fd) {
 
+    if( listen(ps_fd, BACKLOG) < 0 ) {
+        fprintf(stderr, "listen: %s\n", strerror(errno));
+        return FAILURE;
+    }
+
+    printf("Start listening...\n");
 
     return SUCCESS;
 }
@@ -108,6 +105,35 @@ int accept_new_connection(void) {
 
 int end_server() {
 
+
+    return SUCCESS;
+}
+
+int print_socket_address(int sockfd, socket_type_t socket_type) {
+
+    char *ip_address; // address (passive) socket was binded to
+    int port; // port (passive) socket was binded to
+
+    if(get_address_and_port_from_sockfd(sockfd, &ip_address, &port) == FAILURE) {
+        fprintf(stderr, "get_address_and_port_from_sockfd: faild!");
+        return FAILURE;
+    }
+
+    switch(socket_type)
+    {
+        case PASSIVE_SOCKET:
+            printf("Created passive socket %d binded to %s:%d\n", sockfd, ip_address, port);
+            break;
+        case CONNECTION_SOCKET:
+            printf("Socket %d binded to %s:%d\n", sockfd, ip_address, port);
+            break;
+        default:
+            free(ip_address);
+            fprintf(stderr, "Incorrect socket type!");
+            return FAILURE;
+    }
+
+    free(ip_address);
 
     return SUCCESS;
 }
