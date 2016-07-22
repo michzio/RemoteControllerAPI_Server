@@ -7,8 +7,9 @@ CC = gcc
 # -g enable debugging 
 # -Wall turn on all warnings 
 # -D__USE_FIXED_PROTOTYPES__  force the compiler to use the correct headers 
-# -ansi don’t use GNU extensions, stick to ANSI
-CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -ansi
+# -ansi don’t use GNU extensions, stick to ANSI (c89)
+# -std=c99 use newer version
+CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -std=c99
 
 # the build target executable: 
 TARGET = server

@@ -8,6 +8,8 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#include <arpa/inet.h>
+#include <stdlib.h>
 
 int start_server(void) {
 
@@ -20,6 +22,10 @@ int start_server(void) {
         return FAILURE;
     }
 
+    listen_connections(ps_fd);
+
+    close(ps_fd);
+
     return SUCCESS;
 }
 
@@ -29,6 +35,8 @@ int create_passive_socket(int *res_fd) {
     struct addrinfo addrinfo_hints, *addrinfo_res, *ai_ptr; // address info structures holding host address information
     int gai_res; // getaddrinfo() result value
     int optval = 1; // used in setsockopt to set option value
+    char *ip_address; // address passive socket was binded to
+    int port; // port passive socket was binded to
 
     // populating address info hints for getaddrinfo()
     memset(&addrinfo_hints, 0, sizeof(addrinfo_hints));
@@ -67,7 +75,7 @@ int create_passive_socket(int *res_fd) {
     }
 
     if(ai_ptr == NULL) {
-        fprintf(stderr, "server passive socket: failed to create or bind\n");
+        fprintf(stderr, "server passive socket: failed to be created or binded\n");
         return FAILURE;
     }
 
@@ -75,10 +83,20 @@ int create_passive_socket(int *res_fd) {
 
     *res_fd = ps_fd; // return created passive socket file descriptor
 
+    if(get_address_and_port_from_sockfd(ps_fd, &ip_address, &port) == FAILURE) {
+        fprintf(stderr, "get_address_and_port_from_sockfd: faild!");
+        return FAILURE;
+    }
+
+    printf("Created passive socket %d binded to %s:%d\n", ps_fd, ip_address, port);
+
+    free(ip_address);
+
     return SUCCESS;
 }
 
-int listen_connections(void) {
+int listen_connections(int ps_fd) {
+
 
     return SUCCESS;
 }
@@ -92,4 +110,72 @@ int end_server() {
 
 
     return SUCCESS;
+}
+
+/**
+ * function retrieves ip address and port for given socket file descriptor
+ */
+int get_address_and_port_from_sockfd(int sockfd, char **ip_address, int *port) {
+
+    struct sockaddr sockaddr;
+    socklen_t sockaddrlen = sizeof(sockaddr);
+
+    if(getsockname(sockfd, &sockaddr, &sockaddrlen) < 0) {
+        fprintf(stderr, "getsockname: %s\n", strerror(errno));
+        return FAILURE;
+    }
+
+    return get_address_and_port_from_sockaddr(&sockaddr, ip_address, port);
+}
+
+/**
+ * function unwrap ip address and port from addrinfo structure
+ */
+int get_address_and_port_from_addrinfo(const struct addrinfo *addrinfo, char **ip_address, int *port) {
+
+    return get_address_and_port_from_sockaddr((struct sockaddr *)addrinfo->ai_addr, ip_address, port);
+}
+
+/**
+ * function unwrap ip address and port from sockaddr structure
+ */
+int get_address_and_port_from_sockaddr(const struct sockaddr *sockaddr, char **ip_address, int *port) {
+
+    *ip_address = malloc(INET6_ADDRSTRLEN);
+
+    // converting network address to presentation address
+    if(inet_ntop(sockaddr->sa_family, get_in_addr(sockaddr), *ip_address, sizeof(*ip_address)) == NULL) {
+        fprintf(stderr, "inet_ntop: %s\n", strerror(errno));
+        return FAILURE;
+    }
+
+    // converting network port to host port
+    *port = ntohs(get_in_port(sockaddr));
+
+    return SUCCESS;
+}
+
+/**
+ * function unwrap in_addr or in6_addr structure from
+ * sockaddr structure depending on address family
+ * AF_INET or AF_INET6
+ */
+void *get_in_addr(const struct sockaddr *sa) {
+
+    if( sa->sa_family == AF_INET) // IPv4 address
+        return &(((struct sockaddr_in*)sa)->sin_addr);
+    // else IPv6 address
+    return &(((struct sockaddr_in6*)sa)->sin6_addr);
+}
+
+/**
+ * function unwrap in_port from sockaddr structure
+ * depending on address family AF_INET or AF_INET6
+ */
+in_port_t get_in_port(const struct sockaddr *sa)
+{
+    if( sa->sa_family == AF_INET ) // IPv4 address
+        return (((struct sockaddr_in*)sa)->sin_port);
+    // else IPv6 address
+    return (((struct sockaddr_in6*)sa)->sin6_port);
 }
