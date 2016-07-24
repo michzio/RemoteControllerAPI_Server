@@ -2,34 +2,40 @@
  * Created by Michal Ziobro on 21/07/2016.
  */
 
-#include "server.h"
+#define _REENTRANT
+#include <pthread.h> // biblioteka wątków standardu POSIX
+
 #include <stdio.h>
-#include <netdb.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include <arpa/inet.h>
-#include <stdlib.h>
+#include "server.h"
+
 
 int start_server(void) {
 
-    int ps_fd;
+    int ps_fd; // passive socket file descriptor
 
     printf("Starting new server...\n");
 
-    if(create_passive_socket(&ps_fd) == FAILURE ) {
-        fprintf(stderr, "create_passive_socket: faild!");
+    if(create_passive_socket(&ps_fd) == FAILURE) {
+        fprintf(stderr, "create_passive_socket: failed!\n");
         return FAILURE;
     }
 
-    listen_connections(ps_fd);
+    if(listen_connections(ps_fd) == FAILURE) {
+        fprintf(stderr, "listen_connections: failed!\n");
+        return FAILURE;
+    }
+
+    wait_for_connections(ps_fd);
 
     close(ps_fd);
 
     return SUCCESS;
 }
 
-int create_passive_socket(int *res_fd) {
+result_t create_passive_socket(int *res_fd) {
 
     int ps_fd; // passive socket file descriptor
     struct addrinfo addrinfo_hints, *addrinfo_res, *ai_ptr; // address info structures holding host address information
@@ -48,6 +54,7 @@ int create_passive_socket(int *res_fd) {
         return FAILURE;
     }
 
+    // loop through address info results and bind to the first we can
     for(ai_ptr = addrinfo_res; ai_ptr != NULL; ai_ptr = ai_ptr->ai_next) {
 
         // create new server passive socket
@@ -86,7 +93,7 @@ int create_passive_socket(int *res_fd) {
     return SUCCESS;
 }
 
-int listen_connections(int ps_fd) {
+result_t listen_connections(int ps_fd) {
 
     if( listen(ps_fd, BACKLOG) < 0 ) {
         fprintf(stderr, "listen: %s\n", strerror(errno));
@@ -98,7 +105,38 @@ int listen_connections(int ps_fd) {
     return SUCCESS;
 }
 
-int accept_new_connection(void) {
+/**
+ * function is looping infinitely and waiting
+ * for new incoming client connections
+ */
+int wait_for_connections(int ps_fd) {
+
+    printf("Waiting for new connections on the main thread...\n");
+
+    while(1) {
+        accept_new_connection(ps_fd);
+    }
+}
+
+int accept_new_connection(int ps_fd) {
+
+    int cs_fd; // connection socket file descriptor
+    struct sockaddr sockaddr;
+    socklen_t sockaddrlen = sizeof(sockaddr);
+
+    if( (cs_fd = accept(ps_fd, &sockaddr, &sockaddrlen)) < 0 ) {
+        if(errno == EINTR) return CONTINUE;
+        fprintf(stderr, "accept: %s\n", strerror(errno));
+        return FAILURE;
+    }
+
+    print_socket_address(cs_fd, CONNECTION_SOCKET);
+
+    char *ip_address;
+    int port;
+    get_address_and_port_from_sockaddr(&sockaddr, &ip_address, &port);
+
+    printf("Socket %d connected to %s:%d\n", cs_fd, ip_address, port);
 
     return SUCCESS;
 }
@@ -107,101 +145,4 @@ int end_server() {
 
 
     return SUCCESS;
-}
-
-int print_socket_address(int sockfd, socket_type_t socket_type) {
-
-    char *ip_address; // address (passive) socket was binded to
-    int port; // port (passive) socket was binded to
-
-    if(get_address_and_port_from_sockfd(sockfd, &ip_address, &port) == FAILURE) {
-        fprintf(stderr, "get_address_and_port_from_sockfd: faild!");
-        return FAILURE;
-    }
-
-    switch(socket_type)
-    {
-        case PASSIVE_SOCKET:
-            printf("Created passive socket %d binded to %s:%d\n", sockfd, ip_address, port);
-            break;
-        case CONNECTION_SOCKET:
-            printf("Socket %d binded to %s:%d\n", sockfd, ip_address, port);
-            break;
-        default:
-            free(ip_address);
-            fprintf(stderr, "Incorrect socket type!");
-            return FAILURE;
-    }
-
-    free(ip_address);
-
-    return SUCCESS;
-}
-
-/**
- * function retrieves ip address and port for given socket file descriptor
- */
-int get_address_and_port_from_sockfd(int sockfd, char **ip_address, int *port) {
-
-    struct sockaddr sockaddr;
-    socklen_t sockaddrlen = sizeof(sockaddr);
-
-    if(getsockname(sockfd, &sockaddr, &sockaddrlen) < 0) {
-        fprintf(stderr, "getsockname: %s\n", strerror(errno));
-        return FAILURE;
-    }
-
-    return get_address_and_port_from_sockaddr(&sockaddr, ip_address, port);
-}
-
-/**
- * function unwrap ip address and port from addrinfo structure
- */
-int get_address_and_port_from_addrinfo(const struct addrinfo *addrinfo, char **ip_address, int *port) {
-
-    return get_address_and_port_from_sockaddr((struct sockaddr *)addrinfo->ai_addr, ip_address, port);
-}
-
-/**
- * function unwrap ip address and port from sockaddr structure
- */
-int get_address_and_port_from_sockaddr(const struct sockaddr *sockaddr, char **ip_address, int *port) {
-
-    *ip_address = malloc(INET6_ADDRSTRLEN);
-
-    // converting network address to presentation address
-    if(inet_ntop(sockaddr->sa_family, get_in_addr(sockaddr), *ip_address, sizeof(*ip_address)) == NULL) {
-        fprintf(stderr, "inet_ntop: %s\n", strerror(errno));
-        return FAILURE;
-    }
-
-    // converting network port to host port
-    *port = ntohs(get_in_port(sockaddr));
-
-    return SUCCESS;
-}
-
-/**
- * function unwrap in_addr or in6_addr structure from
- * sockaddr structure depending on address family
- * AF_INET or AF_INET6
- */
-void *get_in_addr(const struct sockaddr *sa) {
-
-    if( sa->sa_family == AF_INET) // IPv4 address
-        return &(((struct sockaddr_in*)sa)->sin_addr);
-    // else IPv6 address
-    return &(((struct sockaddr_in6*)sa)->sin6_addr);
-}
-
-/**
- * function unwrap in_port from sockaddr structure
- * depending on address family AF_INET or AF_INET6
- */
-in_port_t get_in_port(const struct sockaddr *sa)
-{
-    if( sa->sa_family == AF_INET ) // IPv4 address
-        return (((struct sockaddr_in*)sa)->sin_port);
-    // else IPv6 address
-    return (((struct sockaddr_in6*)sa)->sin6_port);
 }
