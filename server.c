@@ -132,17 +132,48 @@ int accept_new_connection(int ps_fd) {
 
     print_socket_address(cs_fd, CONNECTION_SOCKET);
 
-    char *ip_address;
-    int port;
-    get_address_and_port_from_sockaddr(&sockaddr, &ip_address, &port);
+    /*  char *ip_address;
+        int port;
+        get_address_and_port_from_sockaddr(&sockaddr, &ip_address, &port);
 
-    printf("Socket %d connected to %s:%d\n", cs_fd, ip_address, port);
+        printf("Socket %d connected to %s:%d\n", cs_fd, ip_address, port);
+     */
+
+    handle_communication(cs_fd);
 
     return SUCCESS;
 }
 
+int handle_communication(int cs_fd) {
+
+    return echo(cs_fd);
+}
+
 int end_server() {
 
+
+    return SUCCESS;
+}
+
+result_t echo(int cs_fd) {
+
+    char rbuf[100];
+    int n_recv; // number of bytes received
+    int n_sent; // number of bytes sent
+
+    if( (n_recv = recv(cs_fd, rbuf, sizeof(rbuf) -1, 0)) < 0) {
+        perror("recv");
+        return FAILURE;
+    }
+
+    rbuf[n_recv] = '\0';
+
+    printf("server: received '%s'\n", rbuf);
+
+    if( (n_sent = send(cs_fd, rbuf, strlen(rbuf), 0)) < 0) {
+        perror("send");
+        return FAILURE;
+    }
 
     return SUCCESS;
 }
