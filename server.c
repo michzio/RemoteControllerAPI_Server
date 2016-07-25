@@ -146,7 +146,7 @@ int accept_new_connection(int ps_fd) {
 
 int handle_communication(int cs_fd) {
 
-    return echo(cs_fd);
+    while(1) echo(cs_fd);
 }
 
 int end_server() {
