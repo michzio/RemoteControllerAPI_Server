@@ -21,7 +21,7 @@ result_t print_socket_address(int sockfd, socket_type_t socket_type) {
     {
         case PASSIVE_SOCKET:
             if(get_current_address_and_port(sockfd, &ip_address, &port) == FAILURE) {
-                fprintf(stderr, "get_current_address_and_port: faild!");
+                fprintf(stderr, "get_current_address_and_port: faild!\n");
                 free(ip_address);
                 return FAILURE;
             }
@@ -29,14 +29,14 @@ result_t print_socket_address(int sockfd, socket_type_t socket_type) {
             break;
         case CONNECTION_SOCKET:
             if(get_peer_address_and_port(sockfd, &ip_address, &port) == FAILURE) {
-                fprintf(stderr, "get_peer_address_and_port: faild!");
+                fprintf(stderr, "get_peer_address_and_port: faild!\n");
                 free(ip_address);
                 return FAILURE;
             }
             printf("Socket %d connected to %s:%d\n", sockfd, ip_address, port);
             break;
         default:
-            fprintf(stderr, "Incorrect socket type!");
+            fprintf(stderr, "Incorrect socket type!\n");
             free(ip_address);
             return FAILURE;
     }
@@ -92,10 +92,10 @@ result_t get_address_and_port_from_addrinfo(const struct addrinfo *addrinfo, cha
  */
 result_t get_address_and_port_from_sockaddr(const struct sockaddr *sockaddr, char **ip_address, int *port) {
 
-    *ip_address = malloc(INET6_ADDRSTRLEN);
+    *ip_address = (char *) malloc(INET6_ADDRSTRLEN * sizeof(char));
 
     // converting network address to presentation address
-    if(inet_ntop(sockaddr->sa_family, get_in_addr(sockaddr), *ip_address, sizeof(*ip_address)) == NULL) {
+    if(inet_ntop(sockaddr->sa_family, get_in_addr(sockaddr), *ip_address, INET6_ADDRSTRLEN * sizeof(char)) == NULL) {
         fprintf(stderr, "inet_ntop: %s\n", strerror(errno));
         return FAILURE;
     }

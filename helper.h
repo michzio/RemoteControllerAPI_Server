@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_HELPER_H
 #define REMOTECONTROLLERAPI_SERVER_HELPER_H
 
-#include <ntsid.h>
+#include <netdb.h>
 
 typedef enum {
     SUCCESS = 0,
