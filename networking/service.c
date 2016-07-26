@@ -8,12 +8,16 @@
 
 result_t rpc_service_handler(sock_fd_t sock_fd) {
 
-    // TO DO
+    // TODO
+
+    return SUCCESS;
 }
 
 result_t event_service_handler(sock_fd_t sock_fd) {
 
-    // TO DO
+    // TODO
+
+    return SUCCESS;
 }
 
 #define MAX_BUF_SIZE 256

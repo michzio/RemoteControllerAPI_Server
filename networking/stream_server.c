@@ -11,11 +11,15 @@
 result_t rpc_stream_server(void) {
 
     // TODO
+
+    return SUCCESS;
 }
 
 result_t event_stream_server(void) {
 
     // TODO
+
+    return SUCCESS;
 }
 
 result_t echo_stream_server(void) {

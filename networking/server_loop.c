@@ -45,11 +45,17 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t hand
 }
 
 result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
+
     // TODO
+
+    return SUCCESS;
 }
 
 result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
+
     // TODO
+
+    return SUCCESS;
 }
 
 #define MAX_BUF_SIZE 256
@@ -75,10 +81,14 @@ result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t hand
 
         if(handle_datagram(ps_fd, (struct sockaddr *) &peer_addr, buf) == FAILURE) {
             fprintf(stderr, "handle_datagram: %s\n", strerror(errno));
+            continue;
         }
     }
 }
 
 result_t concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
+
     // TODO
+
+    return SUCCESS;
 }
