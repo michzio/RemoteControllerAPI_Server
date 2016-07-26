@@ -16,14 +16,35 @@ TARGET = server
 
 all: $(TARGET)
 
-$(TARGET): server.o helper.o
-	$(CC) $(CFLAGS) -o server main.c server.o helper.o -lpthread
+$(TARGET): server.o datagram.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o -lpthread
 
 server.o: server.c server.h
-	$(CC) $(CFLAGS) -c server.c 
+	$(CC) $(CFLAGS) -c server.c
 
-helper.o: helper.c helper.h
-	$(CC) $(CFLAGS) -c helper.c 
+datagram.o: networking/datagram.c networking/datagram.h
+    $(CC) $(CFLAGS) -c networking/datagram.c
+
+generic_server.o: networking/generic_server.c networking/generic_server.h
+    $(CC) $(CFLAGS) -c networking/generic_server.c
+
+passive_connection.o: networking/passive_connection.c networking/passive_connection.h
+    $(CC) $(CFLAGS) -c networking/passive_connection.c
+
+passive_socket.o: networking/passive_socket.c networking/passive_socket.h
+    $(CC) $(CFLAGS) -c networking/passive_socket.c
+
+server_loop.o: networking/server_loop.c networking/server_loop.h
+    $(CC) $(CFLAGS) -c networking/server_loop.c
+
+service.o: networking/service.c networking/service.h
+    $(CC) $(CFLAGS) -c networking/service.c
+
+stream_server.o: networking/stream_server.c networking/stream_server.h
+    $(CC) $(CFLAGS) -c networking/stream_server.c
+
+address_helper.o: common/address_helper.c common/address_helper.h
+	$(CC) $(CFLAGS) -c common/address_helper.c 
 
 clean:
-	$(RM) $(TARGET) $(TARGET).o
+	$(RM) $(TARGET) $(TARGET).o datagram.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o

@@ -2,8 +2,8 @@
 // Created by Michal Ziobro on 24/07/2016.
 //
 
-#ifndef REMOTECONTROLLERAPI_SERVER_HELPER_H
-#define REMOTECONTROLLERAPI_SERVER_HELPER_H
+#ifndef REMOTECONTROLLERAPI_SERVER_ADDRESS_HELPER_H
+#define REMOTECONTROLLERAPI_SERVER_ADDRESS_HELPER_H
 
 #include <netdb.h>
 
@@ -26,4 +26,4 @@ result_t get_address_and_port_from_sockaddr(const struct sockaddr *sockaddr, cha
 void *get_in_addr(const struct sockaddr *sa);
 in_port_t get_in_port(const struct sockaddr *sa);
 
-#endif //REMOTECONTROLLERAPI_SERVER_HELPER_H
+#endif //REMOTECONTROLLERAPI_SERVER_ADDRESS_HELPER_H

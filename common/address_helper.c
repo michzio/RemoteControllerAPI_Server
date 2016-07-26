@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#include "helper.h"
+#include "address_helper.h"
 
 result_t print_socket_address(int sockfd, socket_type_t socket_type) {
 
