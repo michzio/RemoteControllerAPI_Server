@@ -48,7 +48,7 @@ static result_t create_passive_socket(const char *port, sock_type_t sock_type, s
             return FAILURE;
         }
 
-        if( setsockopt(ps_fd, IPPROTO_IPV6, IPV6_V6ONLY, (void *)&optval_no, sizeof(optval_no)) < 0 ) {
+        if( (ai_ptr->ai_family == AF_INET6) && setsockopt(ps_fd, IPPROTO_IPV6, IPV6_V6ONLY, &optval_no, sizeof(optval_no)) < 0 ) {
             fprintf(stderr, "setsockopt IPV6_V6ONLY: %s\n", strerror(errno));
             return FAILURE;
         }
