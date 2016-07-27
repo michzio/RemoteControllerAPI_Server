@@ -23,7 +23,7 @@ static result_t create_passive_socket(const char *port, sock_type_t sock_type, s
     // populating address info hints for getaddrinfo()
     memset(&addrinfo_hints, 0, sizeof(addrinfo_hints));
     addrinfo_hints.ai_flags = AI_PASSIVE; // current host IP
-    addrinfo_hints.ai_family = AF_UNSPEC;
+    addrinfo_hints.ai_family = AF_INET; //AF_UNSPEC; // AF_INET to force IPv4
     addrinfo_hints.ai_socktype = (int) sock_type;
 
     // getting result address info structure

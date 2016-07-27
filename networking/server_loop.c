@@ -31,7 +31,7 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t hand
             continue;
         }
 
-        printf("Handle connection on the main thread...");
+        printf("Handle connection on the main thread...\n");
 
         if(handle_connection(cs_fd) < 0) {
             fprintf(stderr, "handle_connection: failed!\n");
@@ -77,7 +77,7 @@ result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t hand
         }
         buf[n_recv] = '\0';
 
-        printf("Handle datagram on the main thread...");
+        printf("Handle datagram on the main thread...\n");
 
         if(handle_datagram(ps_fd, (struct sockaddr *) &peer_addr, buf) == FAILURE) {
             fprintf(stderr, "handle_datagram: %s\n", strerror(errno));

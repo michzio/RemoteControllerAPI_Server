@@ -8,15 +8,17 @@
       <sourceFolder url="file://$MODULE_DIR$/common/address_helper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/server_loop.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/service.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/passive_socket.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/service.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/stream_server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/datagram.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/generic_server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/stream_server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/datagram.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/datagram_server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/passive_socket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/passive_socket.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/datagram_server.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/generic_server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/generic_server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/server_loop.h" isTestSource="false" />

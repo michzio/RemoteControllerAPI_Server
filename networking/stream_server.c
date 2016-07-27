@@ -24,7 +24,7 @@ result_t event_stream_server(void) {
 
 result_t echo_stream_server(void) {
 
-    if(create_stream_server(PORT, iterative_stream_server_loop, echo_service_handler) == FAILURE) {
+    if(create_stream_server(PORT, iterative_stream_server_loop, echo_service_connection_handler) == FAILURE) {
         fprintf(stderr, "create_stream_server: failed!\n");
         return FAILURE;
     }
