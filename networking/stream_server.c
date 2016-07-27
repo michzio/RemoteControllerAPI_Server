@@ -31,3 +31,13 @@ result_t echo_stream_server(void) {
 
     return SUCCESS;
 }
+
+result_t echo_concurrent_stream_server(void) {
+
+    if(create_stream_server(PORT, concurrent_stream_server_loop, echo_service_connection_handler) == FAILURE) {
+        fprintf(stderr, "create_stream_server: failed!\n");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}

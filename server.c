@@ -10,7 +10,8 @@
 int start_server(void) {
 
     // echo_stream_server();
-    echo_datagram_server();
+    // echo_datagram_server();
+    echo_concurrent_stream_server();
 
     return SUCCESS;
 }

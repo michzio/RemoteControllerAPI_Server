@@ -7,6 +7,7 @@
 #include <string.h>
 #include <errno.h>
 #include "server_loop.h"
+#include "../concurrency/thread.h"
 
 // TCP
 
@@ -46,9 +47,23 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t hand
 
 result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
 
-    // TODO
+    int cs_fd;
 
-    return SUCCESS;
+    printf("Waiting for new connections on the main thread...\n");
+
+    while(1) {
+        cs_fd = accept_new_connection(ps_fd);
+
+        if(cs_fd == FAILURE) {
+            fprintf(stderr, "accept_new_connection: failed!\n");
+            return FAILURE;
+        } else if(cs_fd == CONTINUE) {
+            continue;
+        }
+
+        // handle new connection on concurrent thread
+        connection_thread(cs_fd, conn_handler);
+    }
 }
 
 result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {

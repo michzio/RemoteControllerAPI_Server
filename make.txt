@@ -16,8 +16,8 @@ TARGET = server
 
 all: $(TARGET)
 
-$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o -lpthread
+$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o -lpthread
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c
@@ -46,8 +46,11 @@ service.o: networking/service.c networking/service.h
 stream_server.o: networking/stream_server.c networking/stream_server.h
 	$(CC) $(CFLAGS) -c networking/stream_server.c
 
+thread.o: concurrency/thread.c concurrency/thread.h 
+	$(CC) $(CFLAGS) -c concurrency/thread.c 
+
 address_helper.o: common/address_helper.c common/address_helper.h
 	$(CC) $(CFLAGS) -c common/address_helper.c
 
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o address_helper.o
+	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o
