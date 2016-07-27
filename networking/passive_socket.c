@@ -18,12 +18,13 @@ static result_t create_passive_socket(const char *port, sock_type_t sock_type, s
     int ps_fd; // passive socket file descriptor
     struct addrinfo addrinfo_hints, *addrinfo_res, *ai_ptr; // address info structures holding host address information
     int gai_res; // getaddrinfo() result value
-    int optval = 1; // used in setsockopt to set option value
+    int optval_yes = 1; // used in setsockopt to set option value to yes
+    int optval_no = 0;  // used in setsockopt to set option value to no
 
     // populating address info hints for getaddrinfo()
     memset(&addrinfo_hints, 0, sizeof(addrinfo_hints));
     addrinfo_hints.ai_flags = AI_PASSIVE; // current host IP
-    addrinfo_hints.ai_family = AF_UNSPEC; // AF_INET to force IPv4
+    addrinfo_hints.ai_family = AF_UNSPEC; // AF_INET to force IPv4, AF_INET6 to force IPv6
     addrinfo_hints.ai_socktype = (int) sock_type;
 
     // getting result address info structure
@@ -42,8 +43,13 @@ static result_t create_passive_socket(const char *port, sock_type_t sock_type, s
         }
 
         // set passive socket to reuse host address and port
-        if( setsockopt(ps_fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) < 0 ) {
-            fprintf(stderr, "setsockopt: %s\n", strerror(errno));
+        if( setsockopt(ps_fd, SOL_SOCKET, SO_REUSEADDR, &optval_yes, sizeof(optval_yes)) < 0 ) {
+            fprintf(stderr, "setsockopt SO_REUSEADDR: %s\n", strerror(errno));
+            return FAILURE;
+        }
+
+        if( setsockopt(ps_fd, IPPROTO_IPV6, IPV6_V6ONLY, (void *)&optval_no, sizeof(optval_no)) < 0 ) {
+            fprintf(stderr, "setsockopt IPV6_V6ONLY: %s\n", strerror(errno));
             return FAILURE;
         }
 
