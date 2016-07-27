@@ -57,7 +57,7 @@ result_t echo_service_datagram_handler(sock_fd_t sock_fd, const struct sockaddr 
     char *ip_address;
     int port;
     get_address_and_port_from_sockaddr(peer_addr, &ip_address, &port);
-    printf("Sending datagram back to (%s, %d).", ip_address, port);
+    printf("Sending datagram back to (%s, %d).\n", ip_address, port);
 
     if ((n_sent = sendto(sock_fd, datagram, strlen(datagram), 0, peer_addr, sizeof(*peer_addr))) < 0) {
         perror("send");
