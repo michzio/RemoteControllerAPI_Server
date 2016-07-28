@@ -2,29 +2,37 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/test/test_doubly_linked_list.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_doubly_linked_list.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/thread.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/thread.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/task_queue.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/thread_pool.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/thread_pool.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/task_queue.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/address_helper.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/address_helper.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/collections/doubly_linked_list.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/collections/doubly_linked_list.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/server_loop.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/service.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/passive_socket.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/service.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/stream_server.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/datagram.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/stream_server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/datagram.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/stream_server.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/datagram_server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/passive_socket.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/datagram.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/datagram_server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/generic_server.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/networking/passive_connection.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/generic_server.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/networking/server_loop.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/server.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

@@ -14,10 +14,13 @@ CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -std=c99
 # the build target executable: 
 TARGET = server
 
+# directories aliases 
+THREAD_POOL_DIR = concurrency/thread_pool
+
 all: $(TARGET)
 
-$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o -lpthread
+$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o -lpthread
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c
@@ -49,8 +52,17 @@ stream_server.o: networking/stream_server.c networking/stream_server.h
 thread.o: concurrency/thread.c concurrency/thread.h 
 	$(CC) $(CFLAGS) -c concurrency/thread.c 
 
+task_queue.o: $(THREAD_POOL_DIR)/task_queue.c $(THREAD_POOL_DIR)/task_queue.h
+	$(CC) $(CFLAGS) -c $(THREAD_POOL_DIR)/task_queue.c
+
+thread_pool.o: $(THREAD_POOL_DIR)/thread_pool.c $(THREAD_POOL_DIR)/thread_pool.h 
+	$(CC) $(CFLAGS) -c $(THREAD_POOL_DIR)/thread_pool.c
+
 address_helper.o: common/address_helper.c common/address_helper.h
 	$(CC) $(CFLAGS) -c common/address_helper.c
 
+doubly_linked_list.o: collections/doubly_linked_list.c collections/doubly_linked_list.h 
+	$(CC) $(CFLAGS) -c collections/doubly_linked_list.c 
+
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o address_helper.o
+	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o
