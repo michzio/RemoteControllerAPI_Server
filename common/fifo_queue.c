@@ -30,7 +30,7 @@ void fifo_free(fifo_queue_t *fifo) {
     fifo = NULL;
 }
 
-void fifo_enqueue(fifo_queue_t *fifo, const void *data, const size_t data_size) {
+void fifo_enqueue(fifo_queue_t *fifo, void *data, size_t data_size) {
     push_front(fifo->queue, data, data_size);
 }
 

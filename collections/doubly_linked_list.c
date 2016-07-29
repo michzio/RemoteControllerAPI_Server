@@ -24,7 +24,7 @@ void list_init(doubly_linked_list_t **list) {
     (*list)->head = NULL;
     (*list)->tail = NULL;
 }
-void node_init(doubly_linked_node_t **node, const void *data, const size_t data_size) {
+void node_init(doubly_linked_node_t **node, void *data, size_t data_size) {
     *node = malloc(sizeof(doubly_linked_node_t));
     (*node)->prev = NULL;
     (*node)->next = NULL;
@@ -72,7 +72,7 @@ doubly_linked_node_t *find_first(const doubly_linked_list_t *list, const void *d
     return NULL;
 }
 
-void insert_at_pos(doubly_linked_list_t *list, doubly_linked_node_t *pos, const void *data, const size_t data_size) {
+void insert_at_pos(doubly_linked_list_t *list, doubly_linked_node_t *pos, void *data, size_t data_size) {
 
     // wrap data into node
     doubly_linked_node_t *new_node;
@@ -97,7 +97,7 @@ void insert_node_at_pos(doubly_linked_list_t *list, doubly_linked_node_t *pos, d
 
 }
 
-void push_front(doubly_linked_list_t *list, const void *data, const size_t data_size) {
+void push_front(doubly_linked_list_t *list, void *data, size_t data_size) {
 
     // wrap data into node
     doubly_linked_node_t *new_node;
@@ -126,7 +126,7 @@ void push_node_front(doubly_linked_list_t *list, doubly_linked_node_t *new_node)
     list->head = new_node;
 }
 
-void push_back(doubly_linked_list_t *list, const void *data, const size_t data_size) {
+void push_back(doubly_linked_list_t *list, void *data, size_t data_size) {
 
     // wrap data into node
     doubly_linked_node_t *new_node;
@@ -219,7 +219,7 @@ void *unwrap_data(doubly_linked_node_t *node, size_t *data_size) {
     if(data_size != NULL) *data_size = node->data_size; // return size of data through pointer argument
     return node->data;
 }
-void wrap_data(doubly_linked_node_t *node, const void *data, const size_t data_size) {
+void wrap_data(doubly_linked_node_t *node, void *data, size_t data_size) {
     node->data = data;
     node->data_size = data_size;
 }

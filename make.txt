@@ -19,8 +19,8 @@ THREAD_POOL_DIR = concurrency/thread_pool
 
 all: $(TARGET)
 
-$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o assertion.o test_doubly_linked_list.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o assertion.o test_doubly_linked_list.o -lpthread
+$(TARGET): server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o fifo_queue.o doubly_linked_list.o assertion.o test_doubly_linked_list.o test_fifo_queue.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o fifo_queue.o doubly_linked_list.o assertion.o test_doubly_linked_list.o test_fifo_queue.o -lpthread
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c
@@ -61,6 +61,9 @@ thread_pool.o: $(THREAD_POOL_DIR)/thread_pool.c $(THREAD_POOL_DIR)/thread_pool.h
 address_helper.o: common/address_helper.c common/address_helper.h
 	$(CC) $(CFLAGS) -c common/address_helper.c
 
+fifo_queue.o: common/fifo_queue.c common/fifo_queue.h
+	$(CC) $(CFLAGS) -c common/fifo_queue.c
+
 doubly_linked_list.o: collections/doubly_linked_list.c collections/doubly_linked_list.h 
 	$(CC) $(CFLAGS) -c collections/doubly_linked_list.c 
 
@@ -70,5 +73,8 @@ assertion.o: test/assertion.c test/assertion.h
 test_doubly_linked_list.o: test/test_doubly_linked_list.c test/test_doubly_linked_list.h
 	$(CC) $(CFLAGS) -c test/test_doubly_linked_list.c
 
+test_fifo_queue.o: test/test_fifo_queue.c test/test_fifo_queue.h
+	$(CC) $(CFLAGS) -c test/test_fifo_queue.c 
+
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o doubly_linked_list.o assertion.o test_doubly_linked_list.o
+	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o fifo_queue.o doubly_linked_list.o assertion.o test_doubly_linked_list.o test_fifo_queue.o
