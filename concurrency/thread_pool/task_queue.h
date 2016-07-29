@@ -22,6 +22,7 @@ typedef runner_res_t (*runner_t)(runner_attr_t);
 void task_queue_init(task_queue_t **task_queue);
 void enqueue_task(task_queue_t *task_queue, task_t *task);
 task_t *dequeue_task(task_queue_t *task_queue);
+int task_count(task_queue_t *task_queue);
 void task_queue_free(task_queue_t *task_queue);
 
 // task operations

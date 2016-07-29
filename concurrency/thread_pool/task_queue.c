@@ -8,6 +8,7 @@
 // TASK QUEUE
 struct task_queue {
     fifo_queue_t *fifo;
+    int task_count;
 };
 
 // TASK
