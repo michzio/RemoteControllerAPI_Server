@@ -43,7 +43,7 @@ static void test_enqueue_and_dequeue(void) {
 
     }
     printf("\n");
-    for(int i=0; i<8; i++) {
+    for(int i=0; i<9; i++) {
         printf("dequeue: %s, ", (char *) fifo_dequeue(fifo, NULL));
     }
     printf("\n");

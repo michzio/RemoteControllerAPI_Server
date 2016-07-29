@@ -36,10 +36,16 @@ void fifo_enqueue(fifo_queue_t *fifo, void *data, size_t data_size) {
 
 void *fifo_dequeue(fifo_queue_t *fifo, size_t *data_size) {
 
+    doubly_linked_node_t *node;
     size_t tmp_size;
     void *tmp_data;
     // get data and its size from the last node in the queue
-    tmp_data = unwrap_data(back(fifo->queue), &tmp_size);
+    if((node = back(fifo->queue)) == NULL) {
+        fprintf(stderr, "back: queue is empty!");
+        data_size = NULL;
+        return NULL;
+    };
+    tmp_data = unwrap_data(node, &tmp_size);
 
     // copy retrieved data
     void *data = malloc(tmp_size);
