@@ -23,13 +23,6 @@ void fifo_init(fifo_queue_t **fifo) {
     list_init( &((*fifo)->queue) );
 }
 
-void fifo_free(fifo_queue_t *fifo) {
-
-    free_doubly_linked_list(fifo->queue);
-    free(fifo);
-    fifo = NULL;
-}
-
 void fifo_enqueue(fifo_queue_t *fifo, void *data, size_t data_size) {
     push_front(fifo->queue, data, data_size);
 }
@@ -56,4 +49,11 @@ void *fifo_dequeue(fifo_queue_t *fifo, size_t *data_size) {
 
     if(data_size != NULL) *data_size = tmp_size; // return size of data through pointer argument
     return data;
+}
+
+void fifo_free(fifo_queue_t *fifo) {
+
+    free_doubly_linked_list(fifo->queue);
+    free(fifo);
+    fifo = NULL;
 }

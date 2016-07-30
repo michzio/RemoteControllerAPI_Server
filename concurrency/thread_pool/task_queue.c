@@ -3,6 +3,8 @@
 //
 
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "task_queue.h"
 #include "../../common/fifo_queue.h"
 
@@ -24,6 +26,20 @@ static pthread_mutex_t mutex;
 static pthread_cond_t conditional_variable;
 
 // task queue operations
+
+void task_queue_init(task_queue_t **task_queue) {
+
+    // allocation of memory for task queue and internal fifo queue
+    *task_queue = malloc(sizeof(task_queue_t));
+    fifo_init( &((*task_queue)->fifo) );
+
+    // set initial num of tasks in the queue
+    (*task_queue)->task_count = 0;
+
+    // init synchronization objects: mutex, conditional variable
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_init(&conditional_variable, NULL);
+}
 
 /**
  * function enqueueing task is implemented
@@ -47,6 +63,8 @@ void enqueue_task(task_queue_t *task_queue, task_t *task) {
     fifo_enqueue(task_queue->fifo, task, sizeof(task));
     task_queue->task_count++; // increment num of tasks
 
+    printf("thread: %p has added task to the queue.\n", pthread_self());
+
     // 5. release mutex
     pthread_mutex_unlock(&mutex);
 }
@@ -69,14 +87,61 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     pthread_mutex_lock(&mutex);
 
     // 2. while task queue is empty
-    while (task_queue->task_count == 0)
+    while (task_queue->task_count == 0) {
+        printf("thread: %p is waiting on the queue for new tasks.\n", pthread_self());
         // 3. wait for new tasks on conditional variable (mutex released, and if signaled granted again)
         pthread_cond_wait(&conditional_variable, &mutex);
+    }
 
     // 4. dequeue task
     task_t *task = fifo_dequeue(task_queue->fifo, NULL);
     task_queue->task_count--; // decrement num of tasks
 
+    printf("thread: %p has taken task from the queue.\n", pthread_self());
+
     // 5. release mutex
     pthread_mutex_unlock(&mutex);
+
+    return task;
+}
+
+int task_count(task_queue_t *task_queue) {
+    return task_queue->task_count;
+}
+
+void task_queue_free(task_queue_t *task_queue) {
+
+    // deallocate internal fifo queue
+    fifo_free(task_queue->fifo);
+    // reset task queue counter
+    task_queue->task_count = 0;
+    // free task queue
+    free(task_queue);
+    task_queue = NULL;
+}
+
+// task operations
+
+void task_init(task_t **task) {
+
+    *task = malloc(sizeof(task_t));
+    (*task)->runner_attr = NULL;
+    (*task)->runner = NULL;
+    (*task)->runner_res = NULL;
+}
+
+/**
+ * function executes given task using it's
+ * runner (function pointer) and by passing
+ * runner_attr to it. It returns results
+ * through runner_res field in task structure.
+ */
+void task_run(task_t *task) {
+    task->runner_res = task->runner(task->runner_attr);
+}
+
+void task_free(task_t *task) {
+
+    free(task);
+    task = NULL;
 }
