@@ -16,6 +16,7 @@ typedef struct task task_t;
 typedef void * runner_attr_t;
 typedef void * runner_res_t;
 typedef runner_res_t (*runner_t)(runner_attr_t);
+typedef void (*runner_res_handler_t) (runner_res_t);
 
 // task queue operations
 void task_queue_init(task_queue_t **task_queue);

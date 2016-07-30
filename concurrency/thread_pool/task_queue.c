@@ -19,6 +19,7 @@ struct task {
     runner_t runner;
     runner_attr_t runner_attr;
     runner_res_t runner_res;
+    runner_res_handler_t runner_res_handler;
 };
 
 // synchronization of access to queue
@@ -129,6 +130,7 @@ void task_init(task_t **task) {
     (*task)->runner_attr = NULL;
     (*task)->runner = NULL;
     (*task)->runner_res = NULL;
+    (*task)->runner_res_handler = NULL;
 }
 
 /**
@@ -139,6 +141,9 @@ void task_init(task_t **task) {
  */
 void task_run(task_t *task) {
     task->runner_res = task->runner(task->runner_attr);
+    // handle runner results if handler is defined
+    if(task->runner_res_handler != NULL)
+        task->runner_res_handler(task->runner_res);
 }
 
 void task_free(task_t *task) {
