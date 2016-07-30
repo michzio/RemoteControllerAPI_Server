@@ -45,27 +45,24 @@ void task_queue_init(task_queue_t **task_queue) {
  * function enqueueing task is implemented
  * as producer from producer-consumer model.
  * It uses mutex to get exclusive access to
- * task queue. If task queue is empty it
- * signals waiting worker threads about
- * addition of new task to the queue.
+ * the task queue. It signals waiting worker threads
+ * about addition of new task to the queue.
  */
 void enqueue_task(task_queue_t *task_queue, task_t *task) {
 
     // 1. take mutex
     pthread_mutex_lock(&mutex);
 
-    // 2. is task queue empty?
-    if (task_queue->task_count == 0)
-        // 3. if so signal waiting threads (workers) that new task has been enqueued
-        pthread_cond_signal(&conditional_variable);
-
-    // 4. enqueue new task
+    // 2. enqueue new task
     fifo_enqueue(task_queue->fifo, task, sizeof(task));
     task_queue->task_count++; // increment num of tasks
 
     printf("thread: %p has added task to the queue.\n", pthread_self());
 
-    // 5. release mutex
+    // 3. signal waiting threads (workers) that new task has been enqueued
+    pthread_cond_signal(&conditional_variable);
+
+    // 4. release mutex
     pthread_mutex_unlock(&mutex);
 }
 
@@ -118,6 +115,10 @@ void task_queue_free(task_queue_t *task_queue) {
     // free task queue
     free(task_queue);
     task_queue = NULL;
+
+    // destroy mutex and conditional variable
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&conditional_variable);
 }
 
 // task operations
