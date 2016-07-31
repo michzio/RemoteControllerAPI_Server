@@ -6,12 +6,7 @@
 #define REMOTECONTROLLERAPI_SERVER_ADDRESS_HELPER_H
 
 #include <netdb.h>
-
-typedef enum {
-    SUCCESS = 0,
-    FAILURE = -1,
-    CONTINUE = -2,
-} result_t;
+#include "types.h"
 
 typedef enum {
     PASSIVE_SOCKET = 0,

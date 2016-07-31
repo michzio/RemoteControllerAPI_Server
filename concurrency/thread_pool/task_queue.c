@@ -5,6 +5,8 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <errno.h>
 #include "task_queue.h"
 #include "../../common/fifo_queue.h"
 
@@ -101,6 +103,49 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     pthread_mutex_unlock(&mutex);
 
     return task;
+}
+
+static void set_timespec_from_timeout(struct timespec *timespec, int ms_timeout) {
+
+    struct timeval timeval;
+    gettimeofday(&timeval, NULL);
+
+    timespec->tv_sec = time(NULL) + ms_timeout/1000;
+    timespec->tv_nsec = timeval.tv_usec * 1000 + 1000 * 1000 * (ms_timeout % 1000);
+    timespec->tv_sec += timespec->tv_nsec / (1000 * 1000 * 1000);
+    timespec->tv_nsec %= (1000 * 1000 * 1000);
+}
+
+task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
+
+    // 1. take mutex
+    pthread_mutex_lock(&mutex);
+
+    // 2. while task queue is empty
+    while (task_queue->task_count == 0) {
+
+        struct timespec timespec;
+        set_timespec_from_timeout(&timespec, ms_timeout);
+
+        printf("thread: %p is timed waiting on the queue for new tasks.\n", pthread_self());
+        // 3. wait for new tasks on conditional variable (mutex released, and if signaled granted again)
+        if(pthread_cond_timedwait(&conditional_variable, &mutex, &timespec) == ETIMEDOUT) {
+            fprintf(stderr, "thread: %p timed out.\n", pthread_self());
+            return NULL;
+        }
+    }
+
+    // 4. dequeue task
+    task_t *task = fifo_dequeue(task_queue->fifo, NULL);
+    task_queue->task_count--; // decrement num of tasks
+
+    printf("thread: %p has taken task from the queue.\n", pthread_self());
+
+    // 5. release mutex
+    pthread_mutex_unlock(&mutex);
+
+    return task;
+
 }
 
 int task_count(task_queue_t *task_queue) {
