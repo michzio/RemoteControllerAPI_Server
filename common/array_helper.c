@@ -16,7 +16,7 @@ int array_find_int(const int *array, const size_t array_size, const int elem, co
     return FAILURE;
 }
 
-int array_find(const elem_t *array, const size_t array_size, const elem_t *elem, compare_func_t cmp_func) {
+int array_find(const elem_t *array, const size_t array_size, const elem_t elem, compare_func_t cmp_func) {
 
     for(int i=0; i<array_size; i++) {
         if(cmp_func(array[i], elem) == 0)

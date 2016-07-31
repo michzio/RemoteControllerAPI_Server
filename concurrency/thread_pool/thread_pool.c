@@ -26,16 +26,16 @@ struct thread_pool {
 // synchronization of access to thread pool (modification of workers and its counter)
 static pthread_mutex_t mutex;
 
-static void remove_worker(thread_pool_t *thread_pool, pthread_t worker) {
+static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_pthread_t) {
 
-    int worker_idx;
+    unsigned int worker_idx;
 
     // 1. find index of worker in workers array
-    worker_idx = array_find(thread_pool->workers, thread_pool->workers_count, worker, pthread_equal);
+    worker_idx = array_find(thread_pool->workers, thread_pool->workers_count, worker_pthread_t, pthread_equal);
     // 2. remove element, and move remaining elements to get rid of the hole
-
+    array_remove(thread_pool->workers, thread_pool->workers_count, worker_idx);
     // 3. modify workers counter
-
+    (thread_pool->workers_count)--;
 }
 
 // worker
