@@ -217,12 +217,17 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
 
 void thread_pool_free(thread_pool_t *thread_pool) {
 
+    // reset workers count to prevent workers self killing while cancelling them
+    pthread_mutex_lock(&mutex);
+    int workers_count = thread_pool->workers_count;
+    thread_pool->workers_count = 0;
+    pthread_mutex_unlock(&mutex);
+
     // join workers to release their resources
-    for(int i= (thread_pool->workers_count-1); i == 0 ; i--) {
+    for(int i=0; i < workers_count; i++) {
         pthread_cancel(thread_pool->workers[i]);
         pthread_join(thread_pool->workers[i], NULL);
     }
-    thread_pool->workers_count = 0;
     // deallocate internal array of workers
     free(thread_pool->workers);
 
