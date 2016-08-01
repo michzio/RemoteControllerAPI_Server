@@ -35,13 +35,13 @@ static void test_travers_backward(void) {
 }
 static void test_find_first(void) {
     test_create();
-    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_fun);
+    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_func);
     assert_not_null(found_node, __func__);
     test_clean();
 }
 static void test_insert_at_pos(void) {
     test_create();
-    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_fun);
+    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_func);
     char *data =  malloc(256);
     strcpy(data, "new test");
     insert_at_pos(list, found_node, data, sizeof(data));
@@ -50,7 +50,7 @@ static void test_insert_at_pos(void) {
 }
 static void test_insert_node_at_pos(void) {
     test_create();
-    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_fun);
+    doubly_linked_node_t *found_node = find_first(list, "test 5", str_cmp_func);
     doubly_linked_node_t *new_node;
     char *data =  malloc(256);
     strcpy(data, "new node");
@@ -97,9 +97,9 @@ static void test_push_node_back(void) {
 }
 static void test_remove_node(void) {
     test_create();
-    doubly_linked_node_t *old_node1 = find_first(list, "test 5", str_cmp_fun);
-    doubly_linked_node_t *old_node2 = find_first(list, "test 4", str_cmp_fun);
-    doubly_linked_node_t *old_node3 = find_first(list, "test 9", str_cmp_fun);
+    doubly_linked_node_t *old_node1 = find_first(list, "test 5", str_cmp_func);
+    doubly_linked_node_t *old_node2 = find_first(list, "test 4", str_cmp_func);
+    doubly_linked_node_t *old_node3 = find_first(list, "test 9", str_cmp_func);
     remove_node(list, old_node1);
     remove_node(list, old_node2);
     remove_node(list, old_node3);

@@ -9,6 +9,7 @@
 #include "thread_pool.h"
 #include "task_queue.h"
 #include "../../common/array_helper.h"
+#include "../../config.h"
 
 const size_t default_pool_size = 10;        // default num of workers if not specified by user
 const size_t default_max_pool_size = 20;    // max num of workers if not specified by user
@@ -26,16 +27,21 @@ struct thread_pool {
 // synchronization of access to thread pool (modification of workers and its counter)
 static pthread_mutex_t mutex;
 
-static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_pthread_t) {
+static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_thread) {
 
     unsigned int worker_idx;
 
     // 1. find index of worker in workers array
-    worker_idx = array_find(thread_pool->workers, thread_pool->workers_count, worker_pthread_t, pthread_equal);
-    // 2. remove element, and move remaining elements to get rid of the hole
-    array_remove(thread_pool->workers, thread_pool->workers_count, worker_idx);
+    worker_idx = array_find( (const void **) thread_pool->workers, thread_pool->workers_count, worker_thread, (int (*)(const void *, const void *)) pthread_equal);
+    // 2. remove element based on it's index, and move remaining elements to get rid of the hole
+    array_remove( (void **) thread_pool->workers, thread_pool->workers_count, worker_idx);
     // 3. modify workers counter
     (thread_pool->workers_count)--;
+
+    if(DEBUG) {
+        printf("worker thread: %p has been removed from thread pool.\n", worker_thread);
+        array_print( (const void **) thread_pool->workers, thread_pool->workers_count, pointer_printer);
+    }
 }
 
 // worker
@@ -79,17 +85,17 @@ result_t thread_pool_init_default(thread_pool_t **thread_pool) {
 
 result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const size_t max_size, const int worker_ms_timeout) {
 
-    if(size > max_size) {
+    if (size > max_size) {
         fprintf(stderr, "thread pool initialization failed, size is larger then max size!\n");
         return FAILURE;
     }
 
     // allocation of memory for thread pool and internal task queue
     *thread_pool = malloc(sizeof(thread_pool_t));
-    task_queue_init( &((*thread_pool)->task_queue) );
+    task_queue_init(&((*thread_pool)->task_queue));
 
     // allocation of memory for workers array
-    (*thread_pool)->workers = (pthread_t *) malloc(sizeof(pthread_t)*max_size);
+    (*thread_pool)->workers = (pthread_t *) malloc(sizeof(pthread_t) * max_size);
     (*thread_pool)->workers_limit_min = size;
     (*thread_pool)->workers_limit_max = max_size;
     (*thread_pool)->worker_ms_timeout = worker_ms_timeout;
@@ -101,19 +107,28 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     pthread_attr_t pthread_attr;
     pthread_attr_init(&pthread_attr);
 
-    for(int i=0; i<size; i++) {
-        pthread_mutex_lock(&mutex);
-        if( pthread_create(&((*thread_pool)->workers[i]), &pthread_attr, worker, (void *) *thread_pool) != 0 ) {
+    // protect initial creation of worker threads, in order to not corrupt thread pool
+    pthread_mutex_lock(&mutex);
+
+    for (int i = 0; i < size; i++) {
+        if (pthread_create(&((*thread_pool)->workers[i]), &pthread_attr, (void *(*)(void *)) worker,
+                           (void *) *thread_pool) != 0) {
             fprintf(stderr, "pthread_create: failed to create worker thread.\n");
             return FAILURE;
         }
         (*thread_pool)->workers_count++;
-        pthread_mutex_unlock(&mutex);
     }
 
-    if((*thread_pool)->workers_count != size) {
+    if ((*thread_pool)->workers_count != size) {
         fprintf(stderr, "thread pool initialization failed, not created all worker threads!\n");
     }
+
+    if (DEBUG) {
+        printf("created worker threads:\n");
+        array_print((const void **) (*thread_pool)->workers, (*thread_pool)->workers_count, pointer_printer);
+    }
+
+    pthread_mutex_unlock(&mutex);
 
     return SUCCESS;
 }

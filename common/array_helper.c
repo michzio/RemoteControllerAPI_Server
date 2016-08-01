@@ -1,7 +1,7 @@
 //
 // Created by Michal Ziobro on 31/07/2016.
 //
-
+#include <stdio.h>
 #include "array_helper.h"
 
 /**
@@ -16,7 +16,7 @@ int array_find_int(const int *array, const size_t array_size, const int elem, co
     return FAILURE;
 }
 
-int array_find(const elem_t *array, const size_t array_size, const elem_t elem, compare_func_t cmp_func) {
+int array_find(const void **array, const size_t array_size, const void *elem, compare_func_t cmp_func) {
 
     for(int i=0; i<array_size; i++) {
         if(cmp_func(array[i], elem) == 0)
@@ -39,7 +39,7 @@ result_t array_remove_int(int *array, const size_t array_size, const unsigned in
     return SUCCESS;
 }
 
-result_t array_remove(elem_t *array, const size_t array_size, const unsigned int elem_idx) {
+result_t array_remove(void **array, const size_t array_size, const unsigned int elem_idx) {
 
     if(elem_idx > array_size || array == 0)
         return FAILURE;
@@ -48,4 +48,27 @@ result_t array_remove(elem_t *array, const size_t array_size, const unsigned int
         array[i] = array[i + 1];
 
     return SUCCESS;
+}
+
+void array_print_int(const int *array, const size_t array_size) {
+
+    for(int i=0; i<array_size; i++)
+        printf("%d, ", array[i]);
+    printf("\n");
+}
+
+void array_print(const void **array, const size_t array_size,  printer_t printer) {
+    for (int i = 0; i < array_size; i++) {
+        string_printer(array[i]);
+        printf(", ");
+    }
+    printf("\n");
+}
+
+void string_printer(const void *element) {
+    printf("%s", (const char *) element);
+}
+
+void pointer_printer(const void *element) {
+    printf("%p", element);
 }

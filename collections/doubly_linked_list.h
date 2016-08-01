@@ -13,6 +13,8 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_DOUBLY_LINKED_LIST_H
 #define REMOTECONTROLLERAPI_SERVER_DOUBLY_LINKED_LIST_H
 
+#include "../common/comparer.h"
+
 struct doubly_linked_node;
 typedef struct doubly_linked_node doubly_linked_node_t;
 
@@ -20,7 +22,6 @@ struct doubly_linked_list;
 typedef struct doubly_linked_list doubly_linked_list_t;
 
 typedef void (*data_handler_t)(void *);
-typedef int (*compare_func_t)(const void *, const void *);
 
 // list operations
 void list_init(doubly_linked_list_t **list);
@@ -46,6 +47,5 @@ void *unwrap_data(doubly_linked_node_t *node, size_t *data_size);
 void wrap_data(doubly_linked_node_t *node, void *data, size_t data_size);
 
 void print_string_data_handler(void *);
-int str_cmp_fun(const void *str1, const void *str2);
 
 #endif //REMOTECONTROLLERAPI_SERVER_DOUBLY_LINKED_LIST_H

@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "doubly_linked_list.h"
 
 struct doubly_linked_node {
@@ -226,8 +225,4 @@ void wrap_data(doubly_linked_node_t *node, void *data, size_t data_size) {
 
 void print_string_data_handler(void *data) {
     printf("%s, ", (char *) data);
-}
-
-int str_cmp_fun(const void *str1, const void *str2) {
-    return strcmp((const char *) str1, (const char *) str2);
 }

@@ -34,7 +34,7 @@ void *fifo_dequeue(fifo_queue_t *fifo, size_t *data_size) {
     void *tmp_data;
     // get data and its size from the last node in the queue
     if((node = back(fifo->queue)) == NULL) {
-        fprintf(stderr, "back: queue is empty!");
+        fprintf(stderr, "back: queue is empty!\n");
         data_size = NULL;
         return NULL;
     };
