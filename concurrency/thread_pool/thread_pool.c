@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include "thread_pool.h"
 #include "../../common/array_helper.h"
 #include "../../config.h"
@@ -23,6 +24,7 @@ struct thread_pool {
     int worker_ms_timeout;      // worker max time in ms to wait for new task until it will be killed
 
     doubly_linked_list_t *deleted_workers; // deleted worker threads that should be joined to release resources
+    bool shutting_down;          // flag indicating if thread pool is shutting down currently or not
 };
 
 // synchronization of access to thread pool (modification of workers and its counter)
@@ -128,6 +130,7 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     (*thread_pool)->workers_limit_min = size;
     (*thread_pool)->workers_limit_max = max_size;
     (*thread_pool)->worker_ms_timeout = worker_ms_timeout;
+    (*thread_pool)->shutting_down = 0;
 
     // init synchronization objects: mutex
     pthread_mutex_init(&mutex, NULL);
@@ -165,10 +168,28 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
 
 void thread_pool_execute(thread_pool_t *thread_pool, task_t *task) {
 
+    if(thread_pool == NULL || task == NULL) {
+        fprintf(stderr, "thread_pool_execute: thread pool or task is empty!\n");
+        return;
+    }
+    if(thread_pool->shutting_down) {
+        fprintf(stderr, "thread_pool_execute: thread pool is currently shutting down!\n");
+        return;
+    }
+
     enqueue_task( thread_pool->task_queue, task );
 }
 
 void thread_pool_run(thread_pool_t *thread_pool, runner_t runner, runner_attr_t runner_attr, runner_res_handler_t runner_res_handler) {
+
+    if(thread_pool == NULL || runner == NULL) {
+        fprintf(stderr, "thread_pool_run: thread pool or runner is empty!\n");
+        return;
+    }
+    if(thread_pool->shutting_down) {
+        fprintf(stderr, "thread_pool_run: thread pool is currently shutting down!\n");
+        return;
+    }
 
     task_t *task;
     task_init(&task);
@@ -215,7 +236,63 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
     return SUCCESS;
 }
 
+/**
+ * function shutdowns gracefully thread pool
+ * waiting until all pending tasks will be
+ * executed and starving worker threads will
+ * be removed by itself. It needs to set
+ * workers_limit_min to 0 (enabling to remove
+ * all existing worker threads), worker_ms_timeout
+ * to low value ex. 10ms (fast starvation of worker threads
+ * on pthread_cond_timedwait() ). Than it needs to join
+ * all self terminating worker threads. Then it frees
+ * resources associated with thread pool.
+ */
+void thread_pool_shutdown(thread_pool_t *thread_pool) {
+
+    pthread_mutex_lock(&mutex); // lock mutex to stop removing workers
+
+    join_deleted_workers(thread_pool);
+
+    // get remaining worker threads to remove
+    int workers_count = thread_pool->workers_count;
+    pthread_t *workers = malloc(sizeof(pthread_t) * workers_count);
+    for(int i=0; i<workers_count; i++) {
+        workers[i] = thread_pool->workers[i];
+    }
+
+    thread_pool->shutting_down = 1; // shutting down mode - disable addition of new tasks
+    thread_pool->workers_limit_min = 0; // enable deletion of all worker threads - NO min limit
+    thread_pool->worker_ms_timeout = 10; // short time of waiting for tasks
+
+    pthread_mutex_unlock(&mutex); // unlock mutex to start removing all starving workers
+
+    // join remaining worker threads
+    for(int i=0; i< workers_count; i++)
+        pthread_join(workers[i], NULL);
+
+    // deallocate internal array of workers
+    free(thread_pool->workers);
+    // deallocate internal list of deleted workers
+    free_doubly_linked_list(thread_pool->deleted_workers);
+    //deallocate internal task queue
+    task_queue_free(thread_pool->task_queue);
+    // deallocate thread pool
+    free(thread_pool);
+
+    pthread_mutex_destroy(&mutex);
+}
+
+/**
+ * function forcefully free thread pool and associated resources
+ * like worker threads and task queue. It doesn't wait to finish
+ * pending tasks in the queue, rather cancel worker threads
+ * in the nearest possible cancellation point.
+ */
 void thread_pool_free(thread_pool_t *thread_pool) {
+
+    // disable addition of new tasks
+    thread_pool->shutting_down = 1;
 
     // reset workers count to prevent workers self killing while cancelling them
     pthread_mutex_lock(&mutex);
@@ -224,25 +301,23 @@ void thread_pool_free(thread_pool_t *thread_pool) {
     pthread_mutex_unlock(&mutex);
 
     // join workers to release their resources
-    for(int i=0; i < workers_count; i++) {
+    for(int i=0; i < workers_count; i++)
         pthread_cancel(thread_pool->workers[i]);
+
+    for(int i=0; i < workers_count; i++)
         pthread_join(thread_pool->workers[i], NULL);
-    }
-    // deallocate internal array of workers
-    free(thread_pool->workers);
 
     // release resources occupied by removed worker threads by joining them
     join_deleted_workers(thread_pool);
+
+    // deallocate internal array of workers
+    free(thread_pool->workers);
     // deallocate internal list of deleted workers
     free_doubly_linked_list(thread_pool->deleted_workers);
-
     //deallocate internal task queue
     task_queue_free(thread_pool->task_queue);
-
-    // reset remaining attributes of thread pool
-    thread_pool->workers_limit_min = 0;
-    thread_pool->workers_limit_max = 0;
-    thread_pool->worker_ms_timeout = 0;
-
+    // deallocate thread pool
     free(thread_pool);
+
+    pthread_mutex_destroy(&mutex);
 }
