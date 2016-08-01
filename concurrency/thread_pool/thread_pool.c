@@ -72,6 +72,8 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
 // worker
 static void *worker(thread_pool_t *thread_pool) {
 
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+    pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
 
     // infinite loop consecutively executing available tasks
     while(1) {
@@ -89,7 +91,7 @@ static void *worker(thread_pool_t *thread_pool) {
                 // there is too many starving workers waiting for tasks, kill current worker
                 remove_worker(thread_pool, pthread_self());
                 // pthread exit will pop cleanup handler and execute it (i.e. unlock mutex)
-                pthread_exit(NULL);
+                pthread_exit(PTHREAD_CANCELED);
             } else {
                 // min number of workers in thread pool, current worker cannot be killed
                 pthread_cleanup_pop(0);
@@ -102,7 +104,6 @@ static void *worker(thread_pool_t *thread_pool) {
         // 4. free task
         task_free(task);
     }
-
 }
 
 // thread pool operations
