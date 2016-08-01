@@ -289,7 +289,7 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
  * pending tasks in the queue, rather cancel worker threads
  * in the nearest possible cancellation point.
  */
-void thread_pool_free(thread_pool_t *thread_pool) {
+void thread_pool_force_free(thread_pool_t *thread_pool) {
 
     // disable addition of new tasks
     thread_pool->shutting_down = 1;

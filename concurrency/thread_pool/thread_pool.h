@@ -22,6 +22,6 @@ void thread_pool_execute(thread_pool_t *thread_pool, task_t *task);
 void thread_pool_run(thread_pool_t *thread_pool, runner_t runner, runner_attr_t runner_attr, runner_res_handler_t runner_res_handler);
 result_t thread_pool_adjust_size(thread_pool_t *thread_pool);
 void thread_pool_shutdown(thread_pool_t *thread_pool);
-void thread_pool_free(thread_pool_t *thread_pool);
+void thread_pool_force_free(thread_pool_t *thread_pool);
 
 #endif //REMOTECONTROLLERAPI_SERVER_THREAD_POOL_H
