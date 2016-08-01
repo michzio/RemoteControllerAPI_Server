@@ -28,6 +28,11 @@ struct task {
 static pthread_mutex_t mutex;
 static pthread_cond_t conditional_variable;
 
+static void cleanup_unlock_mutex(void *p)
+{
+    pthread_mutex_unlock(p);
+}
+
 // task queue operations
 
 void task_queue_init(task_queue_t **task_queue) {
@@ -83,8 +88,11 @@ void enqueue_task(task_queue_t *task_queue, task_t *task) {
  */
 task_t *dequeue_task(task_queue_t *task_queue) {
 
+    task_t *task;
+
     // 1. take mutex
     pthread_mutex_lock(&mutex);
+    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &mutex); // cleanup handler for the case of thread cancellation
 
     // 2. while task queue is empty
     while (task_queue->task_count == 0) {
@@ -94,12 +102,13 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     }
 
     // 4. dequeue task
-    task_t *task = fifo_dequeue(task_queue->fifo, NULL);
+    task = fifo_dequeue(task_queue->fifo, NULL);
     task_queue->task_count--; // decrement num of tasks
 
     printf("thread: %p has taken task from the queue.\n", pthread_self());
 
     // 5. release mutex
+    pthread_cleanup_pop(0);
     pthread_mutex_unlock(&mutex);
 
     return task;
@@ -118,8 +127,11 @@ static void set_timespec_from_timeout(struct timespec *timespec, int ms_timeout)
 
 task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
 
+    task_t *task;
+
     // 1. take mutex
     pthread_mutex_lock(&mutex);
+    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &mutex); // cleanup handler for the case of thread cancellation
 
     // 2. while task queue is empty
     while (task_queue->task_count == 0) {
@@ -136,19 +148,19 @@ task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
     }
 
     // 4. dequeue task
-    task_t *task = fifo_dequeue(task_queue->fifo, NULL);
+    task = fifo_dequeue(task_queue->fifo, NULL);
     task_queue->task_count--; // decrement num of tasks
 
     printf("thread: %p has taken task from the queue.\n", pthread_self());
 
     // 5. release mutex
+    pthread_cleanup_pop(0);
     pthread_mutex_unlock(&mutex);
 
     return task;
-
 }
 
-int task_count(task_queue_t *task_queue) {
+int task_queue_count(task_queue_t *task_queue) {
     return task_queue->task_count;
 }
 
@@ -176,6 +188,21 @@ void task_init(task_t **task) {
     (*task)->runner = NULL;
     (*task)->runner_res = NULL;
     (*task)->runner_res_handler = NULL;
+}
+
+/**
+ * function fills task with runner, runner attributes and runner result handler
+ */
+void task_fill(task_t *task, runner_t runner, runner_attr_t runner_attr, runner_res_handler_t runner_res_handler) {
+
+    if(task == NULL)  {
+        fprintf(stderr, "task_fill: task argument is NULL!\n");
+        return;
+    }
+
+    task->runner = runner;
+    task->runner_attr = runner_attr;
+    task->runner_res_handler = runner_res_handler;
 }
 
 /**

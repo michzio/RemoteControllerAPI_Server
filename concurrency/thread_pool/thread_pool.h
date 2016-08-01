@@ -20,7 +20,7 @@ result_t thread_pool_init_default(thread_pool_t **thread_pool);
 result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const size_t max_size, const int worker_ms_timeout);
 void thread_pool_execute(thread_pool_t *thread_pool, task_t *task);
 void thread_pool_run(thread_pool_t *thread_pool, runner_t runner, runner_attr_t runner_attr, runner_res_handler_t runner_res_handler);
-void thread_pool_adjust_size(thread_pool_t *thread_pool);
+result_t thread_pool_adjust_size(thread_pool_t *thread_pool);
 void thread_pool_free(thread_pool_t *thread_pool);
 
 #endif //REMOTECONTROLLERAPI_SERVER_THREAD_POOL_H
