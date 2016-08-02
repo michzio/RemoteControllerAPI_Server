@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdbool.h>
+#include <signal.h>
 #include "thread_pool.h"
 #include "../../common/array_helper.h"
 #include "../../config.h"
@@ -29,6 +30,11 @@ struct thread_pool {
 
 // synchronization of access to thread pool (modification of workers and its counter)
 static pthread_mutex_t mutex;
+// synchronization of access to thread pool's is_paused flag used while pausing and resuming worker threads
+static pthread_mutex_t pause_threads_mutex;
+static pthread_cond_t pause_threads_cond;
+
+static bool is_paused = 0;       // flag indicating if thread pool workers are paused or not
 
 static void cleanup_unlock_mutex(void *p)
 {
@@ -71,11 +77,38 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
     pthread_mutex_unlock(&mutex);
 }
 
+static void pause_thread_signal_handler(void ) {
+
+    pthread_mutex_lock(&pause_threads_mutex);
+
+    is_paused = 1;
+
+    while (is_paused != 0)
+        pthread_cond_wait(&pause_threads_cond, &pause_threads_mutex);
+
+    pthread_mutex_unlock(&pause_threads_mutex);
+}
+
+static void register_worker_signal_handler(void) {
+
+    struct sigaction sigact;
+
+    sigemptyset(&sigact.sa_mask);
+    sigact.sa_flags = 0;
+    sigact.sa_handler = pause_thread_signal_handler;
+
+    if (sigaction(SIGUSR1, &sigact, NULL) == -1) {
+        fprintf(stderr, "worker(): cannot handle SIGUSR1.\n");
+    }
+}
+
 // worker
 static void *worker(thread_pool_t *thread_pool) {
 
     pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
+
+    register_worker_signal_handler();
 
     // infinite loop consecutively executing available tasks
     while(1) {
@@ -131,9 +164,12 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     (*thread_pool)->workers_limit_max = max_size;
     (*thread_pool)->worker_ms_timeout = worker_ms_timeout;
     (*thread_pool)->shutting_down = 0;
+    is_paused = 0;
 
     // init synchronization objects: mutex
     pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&pause_threads_mutex, NULL);
+    pthread_cond_init(&pause_threads_cond, NULL);
 
     // create worker threads
     pthread_attr_t pthread_attr;
@@ -236,6 +272,31 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
     return SUCCESS;
 }
 
+/* function pause all threads in thread pool */
+void thread_pool_pause(thread_pool_t* thread_pool) {
+
+    pthread_mutex_lock(&mutex); // to prevent modification of workers array, and workers counter
+
+    for (int i=0; i < thread_pool->workers_count; i++) {
+        pthread_kill(thread_pool->workers[i], SIGUSR1);
+    }
+
+    pthread_mutex_unlock(&mutex);
+}
+
+/* function resume all threads in thread pool */
+void thread_pool_resume(thread_pool_t *thread_pool) {
+
+    // take mutex to change thread pool's is_paused flag
+    pthread_mutex_lock(&pause_threads_mutex);
+
+    is_paused = 0;
+    pthread_cond_signal(&pause_threads_cond);
+
+    // release mutex
+    pthread_mutex_unlock(&pause_threads_mutex);
+}
+
 /**
  * function shutdowns gracefully thread pool
  * waiting until all pending tasks will be
@@ -249,6 +310,8 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
  * resources associated with thread pool.
  */
 void thread_pool_shutdown(thread_pool_t *thread_pool) {
+
+    if(is_paused) thread_pool_resume(thread_pool);
 
     pthread_mutex_lock(&mutex); // lock mutex to stop removing workers
 
@@ -281,6 +344,8 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     free(thread_pool);
 
     pthread_mutex_destroy(&mutex);
+    pthread_mutex_destroy(&pause_threads_mutex);
+    pthread_cond_destroy(&pause_threads_cond);
 }
 
 /**
@@ -290,6 +355,8 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
  * in the nearest possible cancellation point.
  */
 void thread_pool_force_free(thread_pool_t *thread_pool) {
+
+    if(is_paused) thread_pool_resume(thread_pool);
 
     // disable addition of new tasks
     thread_pool->shutting_down = 1;
@@ -320,4 +387,6 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
     free(thread_pool);
 
     pthread_mutex_destroy(&mutex);
+    pthread_mutex_destroy(&pause_threads_mutex);
+    pthread_cond_destroy(&pause_threads_cond);
 }
