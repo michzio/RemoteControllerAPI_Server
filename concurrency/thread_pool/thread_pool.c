@@ -12,8 +12,8 @@
 #include "../../config.h"
 #include "../../collections/doubly_linked_list.h"
 
-const size_t default_pool_size = 10;        // default num of workers if not specified by user
-const size_t default_max_pool_size = 20;    // max num of workers if not specified by user
+const size_t default_pool_size = 8;        // default num of workers if not specified by user
+const size_t default_max_pool_size = 16;    // max num of workers if not specified by user
 const int default_worker_ms_timeout = 1000; // 1000 mili seconds of timeout
 
 struct thread_pool {
@@ -77,19 +77,25 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
     pthread_mutex_unlock(&mutex);
 }
 
-static void pause_thread_signal_handler(void ) {
+static void pause_thread_signal_handler(int arg) {
 
     pthread_mutex_lock(&pause_threads_mutex);
 
     is_paused = 1;
 
+    if(DEBUG)
+        fprintf(stderr, "worker thread: %p has been paused...\n", pthread_self());
+
     while (is_paused != 0)
         pthread_cond_wait(&pause_threads_cond, &pause_threads_mutex);
+
+    if(DEBUG)
+        fprintf(stderr, "worker thread: %p has been resumed...\n", pthread_self());
 
     pthread_mutex_unlock(&pause_threads_mutex);
 }
 
-static void register_worker_signal_handler(void) {
+static void register_worker_signal_handler() {
 
     struct sigaction sigact;
 
@@ -160,13 +166,17 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
 
     // allocation of memory for workers array
     (*thread_pool)->workers = (pthread_t *) malloc(sizeof(pthread_t) * max_size);
+    (*thread_pool)->workers_count = 0;
     (*thread_pool)->workers_limit_min = size;
     (*thread_pool)->workers_limit_max = max_size;
     (*thread_pool)->worker_ms_timeout = worker_ms_timeout;
     (*thread_pool)->shutting_down = 0;
     is_paused = 0;
 
-    // init synchronization objects: mutex
+    // allocation of memory for deleted workers linked list
+    list_init(&((*thread_pool)->deleted_workers), NULL);
+
+    // init synchronization objects: mutex, pause threads mutex, pause threads cond var
     pthread_mutex_init(&mutex, NULL);
     pthread_mutex_init(&pause_threads_mutex, NULL);
     pthread_cond_init(&pause_threads_cond, NULL);
@@ -337,7 +347,7 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     // deallocate internal array of workers
     free(thread_pool->workers);
     // deallocate internal list of deleted workers
-    free_doubly_linked_list(thread_pool->deleted_workers);
+    list_free(thread_pool->deleted_workers);
     //deallocate internal task queue
     task_queue_free(thread_pool->task_queue);
     // deallocate thread pool
@@ -380,7 +390,7 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
     // deallocate internal array of workers
     free(thread_pool->workers);
     // deallocate internal list of deleted workers
-    free_doubly_linked_list(thread_pool->deleted_workers);
+    list_free(thread_pool->deleted_workers);
     //deallocate internal task queue
     task_queue_free(thread_pool->task_queue);
     // deallocate thread pool

@@ -11,7 +11,7 @@ static doubly_linked_list_t *list;
 
 static void test_create(void) {
 
-    list_init(&list);
+    list_init(&list, NULL);
 
     for(int i=0; i<10; i++) {
         char *str = malloc(256);
@@ -19,8 +19,30 @@ static void test_create(void) {
         push_front(list, str, sizeof(str));
     }
 }
+
+static void test_create_with_allocator(void) {
+
+    allocator_t *allocator;
+    allocator_init(&allocator, string_allocate_handler, string_deallocate_handler);
+
+    list_init(&list, allocator);
+
+    for(int i=0; i<10; i++) {
+        char *str = malloc(256);
+        sprintf(str, "test %d", i);
+        push_front(list, str, sizeof(str));
+    }
+}
+
 static void test_clean(void) {
-    free_doubly_linked_list(list);
+
+    travers_forward(list, free); // deallocate all date stored in the list
+    list_free(list);
+}
+
+static void test_clean_with_allocator(void) {
+
+    list_free(list);
 }
 
 static void test_travers_forward(void) {
@@ -28,6 +50,12 @@ static void test_travers_forward(void) {
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
 }
+static void test_travers_forward_with_allocator(void) {
+    test_create_with_allocator();
+    printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
+    test_clean_with_allocator();
+}
+
 static void test_travers_backward(void) {
     test_create();
     printf("%s: ", __func__); travers_backward(list, print_string_data_handler); printf("\n");
@@ -54,7 +82,8 @@ static void test_insert_node_at_pos(void) {
     doubly_linked_node_t *new_node;
     char *data =  malloc(256);
     strcpy(data, "new node");
-    node_init(&new_node, data, sizeof(data));
+    node_init(&new_node);
+    wrap_data(list, new_node, data, sizeof(data));
     insert_node_at_pos(list, found_node, new_node);
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
@@ -72,7 +101,8 @@ static void test_push_node_front(void) {
     doubly_linked_node_t *front_node;
     char *data =  malloc(256);
     strcpy(data, "front node");
-    node_init(&front_node, data, sizeof(data));
+    node_init(&front_node);
+    wrap_data(list, front_node,  data, sizeof(data));
     push_node_front(list, front_node);
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
@@ -90,7 +120,8 @@ static void test_push_node_back(void) {
     doubly_linked_node_t *back_node;
     char *data =  malloc(256);
     strcpy(data, "back node");
-    node_init(&back_node, data, sizeof(data));
+    node_init(&back_node);
+    wrap_data(list, back_node, data, sizeof(data));
     push_node_back(list, back_node);
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
@@ -100,6 +131,9 @@ static void test_remove_node(void) {
     doubly_linked_node_t *old_node1 = find_first(list, "test 5", str_cmp_func);
     doubly_linked_node_t *old_node2 = find_first(list, "test 4", str_cmp_func);
     doubly_linked_node_t *old_node3 = find_first(list, "test 9", str_cmp_func);
+    free(unwrap_data(old_node1, NULL));
+    free(unwrap_data(old_node2, NULL));
+    free(unwrap_data(old_node3, NULL));
     remove_node(list, old_node1);
     remove_node(list, old_node2);
     remove_node(list, old_node3);
@@ -120,12 +154,14 @@ static void test_back(void) {
 }
 static void test_pop_front(void) {
     test_create();
+    free(unwrap_data(front(list), NULL));
     pop_front(list);
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
 }
 static void test_pop_back(void) {
     test_create();
+    free(unwrap_data(back(list), NULL));
     pop_back(list);
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean();
@@ -133,6 +169,7 @@ static void test_pop_back(void) {
 
 static void run_tests(void) {
     test_travers_forward();
+    test_travers_forward_with_allocator();
     test_travers_backward();
     test_find_first();
     test_insert_at_pos();

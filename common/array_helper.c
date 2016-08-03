@@ -59,7 +59,7 @@ void array_print_int(const int *array, const size_t array_size) {
 
 void array_print(const void **array, const size_t array_size,  printer_t printer) {
     for (int i = 0; i < array_size; i++) {
-        string_printer(array[i]);
+        printer(array[i]);
         printf(", ");
     }
     printf("\n");

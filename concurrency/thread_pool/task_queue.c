@@ -102,7 +102,7 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     }
 
     // 4. dequeue task
-    task = fifo_dequeue(task_queue->fifo, NULL);
+    task = (task_t *) fifo_dequeue(task_queue->fifo, NULL);
     task_queue->task_count--; // decrement num of tasks
 
     printf("thread: %p has taken task from the queue.\n", pthread_self());
@@ -128,6 +128,8 @@ static void set_timespec_from_timeout(struct timespec *timespec, int ms_timeout)
 task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
 
     task_t *task;
+    struct timespec timespec;
+    set_timespec_from_timeout(&timespec, ms_timeout);
 
     // 1. take mutex
     pthread_mutex_lock(&mutex);
@@ -135,18 +137,14 @@ task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
 
     // 2. while task queue is empty
     while (task_queue->task_count == 0) {
-
-        struct timespec timespec;
-        set_timespec_from_timeout(&timespec, ms_timeout);
-
         printf("thread: %p is timed waiting on the queue for new tasks.\n", pthread_self());
         // 3. wait for new tasks on conditional variable (mutex released, and if signaled granted again)
         if(pthread_cond_timedwait(&conditional_variable, &mutex, &timespec) == ETIMEDOUT) {
             fprintf(stderr, "thread: %p timed out.\n", pthread_self());
+            pthread_mutex_unlock(&mutex);
             return NULL;
         }
     }
-
     // 4. dequeue task
     task = fifo_dequeue(task_queue->fifo, NULL);
     task_queue->task_count--; // decrement num of tasks
