@@ -21,11 +21,6 @@ struct doubly_linked_list {
     allocator_t *allocator;         // allocator can be null, or set as allocator_t struct that enables to allocate/deallocate nodes
 };
 
-struct allocator {
-    allocate_handler_t allocate;        // function allocating node as owning data (memcpy data to node)
-    deallocate_handler_t deallocate;    // function deallocating node owning data (free data with node)
-};
-
 /**
  * while initializing a list you can pass optional allocator.
  * @allocator is the struct containing allocate_handler and
@@ -49,7 +44,7 @@ void travers_forward(const doubly_linked_list_t *list, data_handler_t handle_dat
         fprintf(stderr, "Doubly linked list is empty!");
     }
     do {
-        handle_data(node->data);
+        handle_data(node->data, node->data_size);
         node = node->next;
     } while (node != list->head);
 }
@@ -61,7 +56,7 @@ void travers_backward(const doubly_linked_list_t *list, data_handler_t handle_da
         fprintf(stderr, "Doubly linked list is empty!");
     }
     do {
-        handle_data(node->data);
+        handle_data(node->data, node->data_size);
         node = node->prev;
     } while (node != list->tail);
 }
@@ -241,89 +236,49 @@ void *unwrap_data(doubly_linked_node_t *node, size_t *data_size) {
     if(data_size != NULL) *data_size = node->data_size; // return size of data through pointer argument
     return node->data;
 }
+
+/**
+ * function wrap data into list node. It takes data and its size.
+ * if there is allocator defined and list is the owner of data
+ * stored in the node we should properly allocate this data
+ * with allocator. on the other hand if client is the owner of data
+ * we just store pointer to the data and leaves to the client
+ * proper allocation/deallocation of this data.
+ * regardless of data ownership store its size in the node.
+ */
 void wrap_data(doubly_linked_list_t *list, doubly_linked_node_t *node, void *data, size_t data_size) {
 
-    if(list->allocator != NULL) { // when list is owning data
-        list->allocator->allocate(node, data, data_size);
+    // store data size in the node
+    node->data_size = data_size;
+
+    if(list->allocator != NULL) {
+        // when list is owning data allocate it with allocator
+        allocate_handler_t allocate = allocator_allocate(list->allocator);
+        allocate(&node->data, data, data_size);
     } else {
-        node->data = data; // when client is owning data
-        node->data_size = data_size;
+        // when client is owning data only store pointer to it
+        node->data = data;
     }
 }
 
+/**
+ * function deallocates given list node. if there is allocator
+ * defined and list is the owner of data stored in the node
+ * we should properly deallocate this data with allocator struct.
+ * on the other hand if client is the owner of data we skip this
+ * step, as the client is the only responsible for dealloaction
+ * of this data. regardless of data ownership we always free node struct.
+ */
 void node_free(doubly_linked_list_t *list, doubly_linked_node_t *node) {
 
-    if(list->allocator != NULL) { // when list is owning data
-        list->allocator->deallocate(node);
-    } else { // when client is owning data
-        free(node);
-        node = NULL;
+    // when list is owning data free it
+    if(list->allocator != NULL) {
+        deallocate_handler_t deallocate = allocator_deallocate(list->allocator);
+        deallocate(&node->data);
     }
-}
+    // when client is owning data it is responsible for its deallocation
 
-// allocator operations
-result_t allocator_init(allocator_t **allocator, allocate_handler_t allocate_handler, deallocate_handler_t deallocate_handler) {
-
-    if(allocate_handler == NULL) {
-        fprintf(stderr, "allocate handler is empty, could not initialize allocator.\n");
-        allocator = NULL;
-        return FAILURE;
-    }
-    if(deallocate_handler == NULL) {
-        fprintf(stderr, "deallocate handler is empty, could not initialize allocator.\n");
-        allocator = NULL;
-        return FAILURE;
-    }
-
-    // allocating memory for nodes allocator struct
-    *allocator = malloc(sizeof(allocator_t));
-
-    (*allocator)->allocate = allocate_handler;
-    (*allocator)->deallocate = deallocate_handler;
-
-    return SUCCESS;
-}
-
-allocate_handler_t allocator_allocate(allocator_t *allocator) {
-
-    if(allocator->allocate == NULL) {
-        fprintf(stderr, "allocate handler not available in given allocator.\n");
-        return NULL;
-    }
-    return allocator->allocate;
-}
-
-deallocate_handler_t allocator_deallocate(allocator_t *allocator) {
-
-    if(allocator->deallocate == NULL) {
-        fprintf(stderr, "deallocate handler not available in given allocator.\n");
-        return NULL;
-    }
-    return allocator->deallocate;
-}
-
-void allocator_free(allocator_t *allocator) {
-
-    free(allocator);
-    allocator = NULL;
-}
-
-// handlers
-// data handlers
-void print_string_data_handler(void *data) {
-    printf("%s, ", (char *) data);
-}
-
-// allocator handlers
-void string_allocate_handler(doubly_linked_node_t *node, void *data, size_t data_size) {
-
-    node->data_size = data_size;
-    node->data = (char *) malloc(sizeof(data_size));
-    memcpy(node->data, (char *) data, data_size);
-}
-
-void string_deallocate_handler(doubly_linked_node_t *node) {
-
-    free(node->data);
+    // regardless of data ownership free node
     free(node);
+    node = NULL;
 }

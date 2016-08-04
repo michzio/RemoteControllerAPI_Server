@@ -19,8 +19,8 @@ THREAD_POOL_DIR = concurrency/thread_pool
 
 all: $(TARGET)
 
-$(TARGET): config.h server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o array_helper.o comparer.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o array_helper.o comparer.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o -lpthread
+$(TARGET): config.h server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o -lpthread
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c
@@ -61,11 +61,17 @@ thread_pool.o: $(THREAD_POOL_DIR)/thread_pool.c $(THREAD_POOL_DIR)/thread_pool.h
 address_helper.o: common/address_helper.c common/address_helper.h
 	$(CC) $(CFLAGS) -c common/address_helper.c
 
+allocator.o: common/allocator.c common/allocator.h
+	$(CC) $(CFLAGS) -c common/allocator.c 
+
 array_helper.o: common/array_helper.c common/array_helper.h 
 	$(CC) $(CFLAGS) -c common/array_helper.c 
 
 comparer.o: common/comparer.c common/comparer.h
 	$(CC) $(CFLAGS) -c common/comparer.c 
+
+data_handler.o: common/data_handler.c common/data_handler.h
+	$(CC) $(CFLAGS) -c common/data_handler.c
 
 fifo_queue.o: common/fifo_queue.c common/fifo_queue.h
 	$(CC) $(CFLAGS) -c common/fifo_queue.c
@@ -92,4 +98,4 @@ test_thread_pool.o: test/test_thread_pool.c test/test_thread_pool.h
 	$(CC) $(CFLAGS) -c test/test_thread_pool.c 
 
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o array_helper.o comparer.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o
+	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o thread.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o

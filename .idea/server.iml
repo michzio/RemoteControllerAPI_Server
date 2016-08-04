@@ -21,15 +21,19 @@
       <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/thread_pool.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/thread_pool.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/thread_pool/task_queue.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/common/types.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/data_handler.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/comparer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/address_helper.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/types.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/fifo_queue.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/comparer.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/array_helper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/fifo_queue.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/common/array_helper.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/allocator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common/address_helper.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/data_handler.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/array_helper.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/allocator.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/collections/doubly_linked_list.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/collections/doubly_linked_list.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />

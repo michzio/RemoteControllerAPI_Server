@@ -15,20 +15,14 @@
 
 #include "../common/comparer.h"
 #include "../common/types.h"
+#include "../common/allocator.h"
+#include "../common/data_handler.h"
 
 struct doubly_linked_node;
 typedef struct doubly_linked_node doubly_linked_node_t;
 
 struct doubly_linked_list;
 typedef struct doubly_linked_list doubly_linked_list_t;
-
-typedef void (*data_handler_t)(void *);
-
-struct allocator;
-typedef struct allocator allocator_t;
-
-typedef void (*allocate_handler_t)(doubly_linked_node_t *node, void *data, size_t data_size);
-typedef void (*deallocate_handler_t)(doubly_linked_node_t *node);
 
 // list operations
 void list_init(doubly_linked_list_t **list, allocator_t *allocator);
@@ -53,19 +47,5 @@ void node_init(doubly_linked_node_t **node);
 void *unwrap_data(doubly_linked_node_t *node, size_t *data_size);
 void wrap_data(doubly_linked_list_t *list, doubly_linked_node_t *node, void *data, size_t data_size);
 void node_free(doubly_linked_list_t *list, doubly_linked_node_t *node);
-
-// allocator operations
-result_t allocator_init(allocator_t **allocator, allocate_handler_t allocate_handler, deallocate_handler_t deallocate_handler);
-allocate_handler_t allocator_allocate(allocator_t *allocator);
-deallocate_handler_t allocator_deallocate(allocator_t *allocator);
-void allocator_free(allocator_t *allocator);
-
-// handlers
-// data handlers
-void print_string_data_handler(void *);
-
-// allocator handlers
-void string_allocate_handler(doubly_linked_node_t *node, void *data, size_t data_size);
-void string_deallocate_handler(doubly_linked_node_t *node);
 
 #endif //REMOTECONTROLLERAPI_SERVER_DOUBLY_LINKED_LIST_H
