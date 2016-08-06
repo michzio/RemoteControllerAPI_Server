@@ -5,6 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_ALLOCATOR_H
 #define REMOTECONTROLLERAPI_SERVER_ALLOCATOR_H
 
+#include "types.h"
 #include <ntsid.h>
 
 struct allocator;

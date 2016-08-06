@@ -38,6 +38,11 @@ result_t allocator_init(allocator_t **allocator, allocate_handler_t allocate_han
 
 allocate_handler_t allocator_allocate(allocator_t *allocator) {
 
+    if(allocator == NULL) {
+        fprintf(stderr, "allocator param is empty!\n");
+        return  NULL;
+    }
+
     if(allocator->allocate == NULL) {
         fprintf(stderr, "allocate handler not available in given allocator.\n");
         return NULL;
@@ -46,6 +51,11 @@ allocate_handler_t allocator_allocate(allocator_t *allocator) {
 }
 
 deallocate_handler_t allocator_deallocate(allocator_t *allocator) {
+
+    if(allocator == NULL) {
+        fprintf(stderr, "allocator param is empty!\n");
+        return  NULL;
+    }
 
     if(allocator->deallocate == NULL) {
         fprintf(stderr, "deallocate handler not available in given allocator.\n");
@@ -63,7 +73,7 @@ void allocator_free(allocator_t *allocator) {
 // allocator handlers
 void string_allocate_handler(void **data_store, void *data, size_t data_size) {
 
-    *data_store = (char *) malloc(sizeof(data_size));
+    *data_store = (char *) malloc(data_size);
     memcpy(*data_store, (char *) data, data_size);
 }
 

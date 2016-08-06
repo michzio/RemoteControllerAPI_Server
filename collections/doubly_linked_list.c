@@ -37,6 +37,11 @@ void list_init(doubly_linked_list_t **list, allocator_t *allocator) {
     (*list)->allocator = allocator;
 }
 
+allocator_t *list_allocator(doubly_linked_list_t *list) {
+
+    return list->allocator;
+}
+
 void travers_forward(const doubly_linked_list_t *list, data_handler_t handle_data) {
 
     doubly_linked_node_t *node = list->head;

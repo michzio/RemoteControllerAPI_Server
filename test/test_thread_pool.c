@@ -9,22 +9,36 @@
 #include "../concurrency/thread_pool/thread_pool.h"
 #include "test_thread_pool.h"
 
-static thread_pool_t *thread_pool;
-
+// short task runner
 static runner_res_t short_task_runner(runner_attr_t arg) {
 
-    printf("worker thread: %p running task: %d...\n", pthread_self(), *((int *)arg));
-    sleep(1);
+    sleep(8-*((int *)arg)); // 1 second
+    printf("worker thread: %p running short task: %d...\n", pthread_self(), *((int *)arg));
 
     return arg;
 }
-
 static void short_task_res_handler(runner_res_t arg) {
 
-    printf("worker thread: %p handling results of task runner for task: %d...\n", pthread_self(), *((int *)arg));
+    printf("worker thread: %p handling results of task runner for short task: %d...\n", pthread_self(), *((int *)arg));
     free(arg);
 }
 
+// long task runner
+static runner_res_t long_task_runner(runner_attr_t arg) {
+
+    printf("worker thread: %p running long task: %d...\n", pthread_self(), *((int *) arg));
+
+    return arg;
+}
+static void long_task_res_handler(runner_res_t arg) {
+
+    printf("worker thread: %p handling results of task runner for long task: %d...\n", pthread_self(), *((int *)arg));
+    free(arg);
+}
+/*******************************************************************************************************************/
+
+// thread pool object
+static thread_pool_t *thread_pool;
 
 static void test_create(void) {
 
@@ -36,10 +50,9 @@ static void test_clean(void) {
     thread_pool_force_free(thread_pool);
 }
 
+// tests
 static void test_thread_pool_execute(void) {
     test_create();
-
-    sleep(1); // wait 1 sec
 
     // execute short tasks
     // number of tasks equal number of worker threads
@@ -54,6 +67,8 @@ static void test_thread_pool_execute(void) {
 
         thread_pool_execute(thread_pool, task);
     }
+
+    sleep(4);
 
     test_clean();
 }
@@ -84,6 +99,7 @@ static void test_thread_pool_shutdown(void) {
 }
 
 static void test_thread_pool_force_free(void) {
+    test_create();
 
     // custom clean of thread pool via force free
 }
@@ -92,9 +108,9 @@ static void run_tests(void) {
     test_thread_pool_execute();
    // test_thread_pool_run();
    // test_thread_pool_adjust_size();
-   //  test_thread_pool_pause_and_resume();
-   //  test_thread_pool_shutdown();
-   //  test_thread_pool_force_free();
+   // test_thread_pool_pause_and_resume();
+   // test_thread_pool_shutdown();
+   // test_thread_pool_force_free();
 }
 
 test_thread_pool_t test_thread_pool = { .run_tests = run_tests };

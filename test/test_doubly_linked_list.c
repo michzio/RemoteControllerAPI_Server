@@ -37,7 +37,7 @@ static void test_create_with_allocator(void) {
 
 static void test_clean(void) {
 
-    travers_forward(list, free); // deallocate all date stored in the list
+    travers_forward(list, free_data_handler); // deallocate all date stored in the list
     list_free(list);
 }
 

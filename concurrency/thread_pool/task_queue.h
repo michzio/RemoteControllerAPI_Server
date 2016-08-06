@@ -5,6 +5,8 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_TASK_QUEUE_H
 #define REMOTECONTROLLERAPI_SERVER_TASK_QUEUE_H
 
+#include "../../common/allocator.h"
+
 // TASK QUEUE
 struct task_queue;
 typedef struct task_queue task_queue_t;

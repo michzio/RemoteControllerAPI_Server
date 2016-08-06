@@ -26,6 +26,7 @@ typedef struct doubly_linked_list doubly_linked_list_t;
 
 // list operations
 void list_init(doubly_linked_list_t **list, allocator_t *allocator);
+allocator_t *list_allocator(doubly_linked_list_t *list);
 void travers_forward(const doubly_linked_list_t *list, data_handler_t data_handler);
 void travers_backward(const doubly_linked_list_t *list, data_handler_t data_handler);
 doubly_linked_node_t *find_first(const doubly_linked_list_t *list, const void *data, compare_func_t cmp_func);

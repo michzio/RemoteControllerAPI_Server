@@ -72,6 +72,7 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
         worker_thread = (pthread_t) unwrap_data(node, NULL);
         pop_back(thread_pool->deleted_workers);
         pthread_join(worker_thread, NULL); // joining deleted worker threads
+        free(worker_thread);
     }
 
     pthread_mutex_unlock(&mutex);
@@ -321,6 +322,9 @@ void thread_pool_resume(thread_pool_t *thread_pool) {
  */
 void thread_pool_shutdown(thread_pool_t *thread_pool) {
 
+    int workers_count;
+    pthread_t *workers;
+
     if(is_paused) thread_pool_resume(thread_pool);
 
     pthread_mutex_lock(&mutex); // lock mutex to stop removing workers
@@ -328,8 +332,8 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     join_deleted_workers(thread_pool);
 
     // get remaining worker threads to remove
-    int workers_count = thread_pool->workers_count;
-    pthread_t *workers = malloc(sizeof(pthread_t) * workers_count);
+    workers_count = thread_pool->workers_count;
+    workers = malloc(sizeof(pthread_t) * workers_count);
     for(int i=0; i<workers_count; i++) {
         workers[i] = thread_pool->workers[i];
     }
@@ -341,10 +345,12 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     pthread_mutex_unlock(&mutex); // unlock mutex to start removing all starving workers
 
     // join remaining worker threads
-    for(int i=0; i< workers_count; i++)
+    for(int i=0; i<workers_count; i++)
         pthread_join(workers[i], NULL);
 
     // deallocate internal array of workers
+    for(int i=0; i<workers_count; i++)
+        free(thread_pool->workers[i]);
     free(thread_pool->workers);
     // deallocate internal list of deleted workers
     list_free(thread_pool->deleted_workers);
@@ -366,6 +372,8 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
  */
 void thread_pool_force_free(thread_pool_t *thread_pool) {
 
+    int workers_count;
+
     if(is_paused) thread_pool_resume(thread_pool);
 
     // disable addition of new tasks
@@ -373,15 +381,15 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
 
     // reset workers count to prevent workers self killing while cancelling them
     pthread_mutex_lock(&mutex);
-    int workers_count = thread_pool->workers_count;
+    workers_count = thread_pool->workers_count;
     thread_pool->workers_count = 0;
     pthread_mutex_unlock(&mutex);
 
-    // join workers to release their resources
-    for(int i=0; i < workers_count; i++)
+    for(int i=0; i<workers_count; i++)
         pthread_cancel(thread_pool->workers[i]);
 
-    for(int i=0; i < workers_count; i++)
+    // join workers to release their resources
+    for(int i=0; i<workers_count; i++)
         pthread_join(thread_pool->workers[i], NULL);
 
     // release resources occupied by removed worker threads by joining them
