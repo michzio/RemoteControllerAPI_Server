@@ -15,7 +15,7 @@
 static task_queue_t *task_queue;
 static pthread_t worker[NUM_WORKERS];
 
-static pthread_mutex_t runner_mutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t runner_mutex;
 
 static runner_res_t runner(runner_attr_t attr) {
     // some task runner
@@ -38,6 +38,7 @@ static int enqueue_count = 0;
 
 static void test_create(void) {
 
+    pthread_mutex_init(&runner_mutex, NULL);
     task_queue_init(&task_queue);
 }
 
@@ -53,6 +54,7 @@ static void test_clean(void) {
     assert_equal_int(runner_attr, min(dequeue_count, enqueue_count), "test_task_queue - result: ");
 
     task_queue_free(task_queue);
+    pthread_mutex_destroy(&runner_mutex);
 }
 
 static void *test_enqueue(void *arg) {

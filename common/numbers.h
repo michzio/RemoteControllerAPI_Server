@@ -7,5 +7,6 @@
 
 int max(const int a, const int b);
 int min(const int a, const int b);
+int range_rand(int min_num, int max_num);
 
 #endif //REMOTECONTROLLERAPI_SERVER_NUMBERS_H
