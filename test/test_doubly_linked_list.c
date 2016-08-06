@@ -31,6 +31,7 @@ static void test_create_with_allocator(void) {
         char *str = malloc(256);
         sprintf(str, "test %d", i);
         push_front(list, str, strlen(str));
+        free(str);
     }
 }
 
@@ -271,6 +272,46 @@ static void test_pop_back_with_allocator(void) {
     printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
     test_clean_with_allocator();
 }
+static void test_pop_front_all() {
+    test_create();
+    while(front(list)) {
+        free(unwrap_data(front(list), NULL));
+        pop_front(list);
+    }
+    printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
+    assert_null(front(list), "test_pop_front_all - head is null");
+    assert_null(back(list), "test_pop_front_all - tail is null");
+    test_clean();
+}
+static void test_pop_front_all_with_allocator() {
+    test_create_with_allocator();
+    while(front(list))
+        pop_front(list);
+    printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
+    assert_null(front(list), "test_pop_front_all_with_allocator - head is null");
+    assert_null(back(list), "test_pop_front_all_with_allocator - tail is null");
+    test_clean_with_allocator();
+}
+static void test_pop_back_all() {
+    test_create();
+    while(back(list)) {
+        free(unwrap_data(back(list), NULL));
+        pop_back(list);
+    }
+    printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
+    assert_null(front(list), "test_pop_back_all - head is null");
+    assert_null(back(list), "test_pop_back_all - tail is null");
+    test_clean();
+}
+static void test_pop_back_all_with_allocator() {
+    test_create_with_allocator();
+    while(back(list))
+        pop_back(list);
+    printf("%s: ", __func__); travers_forward(list, print_string_data_handler); printf("\n");
+    assert_null(front(list), "test_pop_back_all_with_allocator - head is null");
+    assert_null(back(list), "test_pop_back_all_with_allocator - tail is null");
+    test_clean_with_allocator();
+}
 static void run_tests(void) {
     test_travers_forward();
     test_travers_forward_with_allocator();
@@ -300,6 +341,10 @@ static void run_tests(void) {
     test_pop_front_with_allocator();
     test_pop_back();
     test_pop_back_with_allocator();
+    test_pop_front_all();
+    test_pop_front_all_with_allocator();
+    test_pop_back_all();
+    test_pop_back_all_with_allocator();
 }
 
 test_doubly_linked_list_t test_doubly_linked_list = { .run_tests = run_tests };

@@ -23,8 +23,10 @@ void thread_pool_run(thread_pool_t *thread_pool, runner_t runner, runner_attr_t 
 result_t thread_pool_adjust_size(thread_pool_t *thread_pool);
 void thread_pool_pause(thread_pool_t *thread_pool);
 void thread_pool_resume(thread_pool_t *thread_pool);
-void thread_pool_set_size(const size_t min_size, const size_t max_size);
-void thread_pool_set_timeout(const int worker_ms_timeout);
+void thread_pool_set_size(thread_pool_t *thread_pool, const size_t min_size, const size_t max_size);
+void thread_pool_set_timeout(thread_pool_t *thread_pool, const int worker_ms_timeout);
+int thread_pool_workers_count(thread_pool_t *thread_pool);
+int thread_pool_workers_timeout(thread_pool_t *thread_pool);
 void thread_pool_shutdown(thread_pool_t *thread_pool);
 void thread_pool_force_free(thread_pool_t *thread_pool);
 

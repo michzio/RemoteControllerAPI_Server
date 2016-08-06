@@ -7,10 +7,12 @@
 #include <pthread.h>
 #include <stdbool.h>
 #include <signal.h>
+#include <errno.h>
 #include "thread_pool.h"
 #include "../../common/array_helper.h"
 #include "../../config.h"
 #include "../../collections/doubly_linked_list.h"
+#include "../../common/numbers.h"
 
 const size_t default_pool_size = 8;        // default num of workers if not specified by user
 const size_t default_max_pool_size = 16;    // max num of workers if not specified by user
@@ -20,6 +22,7 @@ struct thread_pool {
     task_queue_t *task_queue;   // shared queue storing tasks to be run by workers
     pthread_t *workers;         // worker threads running tasks from queue
     int workers_count;          // current number of workers
+    int workers_running_count;  // number of workers currently running a task
     int workers_limit_min;      // min number of workers in the pool
     int workers_limit_max;      // max number of workers in the pool
     int worker_ms_timeout;      // worker max time in ms to wait for new task until it will be killed
@@ -41,12 +44,17 @@ static void cleanup_unlock_mutex(void *p)
     pthread_mutex_unlock(p);
 }
 
+static void cleanup_workers_running_count(void *p)
+{
+    pthread_mutex_lock(&mutex); ((thread_pool_t *)p)->workers_running_count--; pthread_mutex_unlock(&mutex);
+}
+
 static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_thread) {
 
     unsigned int worker_idx;
 
     // 1. find index of worker in workers array
-    worker_idx = array_find( (const void **) thread_pool->workers, thread_pool->workers_count, worker_thread, (int (*)(const void *, const void *)) pthread_equal);
+    worker_idx = array_find( (const void **) thread_pool->workers, thread_pool->workers_count, worker_thread, pthread_cmp_func );
     // 2. remove element based on it's index, and move remaining elements to get rid of the hole
     array_remove( (void **) thread_pool->workers, thread_pool->workers_count, worker_idx);
     // 3. modify workers counter
@@ -72,7 +80,6 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
         worker_thread = (pthread_t) unwrap_data(node, NULL);
         pop_back(thread_pool->deleted_workers);
         pthread_join(worker_thread, NULL); // joining deleted worker threads
-        free(worker_thread);
     }
 
     pthread_mutex_unlock(&mutex);
@@ -142,7 +149,11 @@ static void *worker(thread_pool_t *thread_pool) {
             }
         }
         // 3. do task
+        pthread_mutex_lock(&mutex); thread_pool->workers_running_count++; pthread_mutex_unlock(&mutex);
+        pthread_cleanup_push(cleanup_workers_running_count, thread_pool);
         task_run(task);
+        pthread_cleanup_pop(0);
+        pthread_mutex_lock(&mutex); thread_pool->workers_running_count--; pthread_mutex_unlock(&mutex);
         // 4. free task
         task_free(task);
     }
@@ -168,6 +179,7 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     // allocation of memory for workers array
     (*thread_pool)->workers = (pthread_t *) malloc(sizeof(pthread_t) * max_size);
     (*thread_pool)->workers_count = 0;
+    (*thread_pool)->workers_running_count = 0;
     (*thread_pool)->workers_limit_min = size;
     (*thread_pool)->workers_limit_max = max_size;
     (*thread_pool)->worker_ms_timeout = worker_ms_timeout;
@@ -256,9 +268,12 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
     pthread_mutex_lock(&mutex);
 
     int task_count = task_queue_count(thread_pool->task_queue);
-    if(task_count > thread_pool->workers_limit_max) task_count = thread_pool->workers_limit_max;
+    int workers_deficit = task_count - (thread_pool->workers_count - thread_pool->workers_running_count);
+    int workers_space = thread_pool->workers_limit_max - thread_pool->workers_count;
 
-    int demand = task_count - thread_pool->workers_count;
+    int task_demand = min(workers_deficit, workers_space);  // demand that results from number of tasks in the queue
+    int resize_demand = thread_pool->workers_limit_min - thread_pool->workers_count; // demand that results from set_size() call
+    int demand = max(task_demand, resize_demand);
     int workers_count = thread_pool->workers_count;
 
     // create additional worker threads
@@ -306,6 +321,60 @@ void thread_pool_resume(thread_pool_t *thread_pool) {
 
     // release mutex
     pthread_mutex_unlock(&pause_threads_mutex);
+}
+
+void thread_pool_set_size(thread_pool_t *thread_pool, const size_t min_size, const size_t max_size) {
+
+    if(min_size > max_size) {
+        fprintf(stderr, "min size cannot be greater than max size!\n");
+        return;
+    }
+    if(min_size < 0) {
+        fprintf(stderr, "size cannot be less than 0!\n");
+        return;
+    }
+
+    pthread_mutex_lock(&mutex);
+    if(max_size > thread_pool->workers_limit_max) {
+        // reallocates workers array to fit new max size
+        thread_pool->workers = realloc(thread_pool->workers, max_size * sizeof(pthread_t));
+        if( thread_pool->workers == NULL && errno == ENOMEM) {
+            fprintf(stderr, "Resizing thread pool failed! New max size > current max size and reallocation of workers array failed with ENOMEM.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    thread_pool->workers_limit_max = max_size;
+    thread_pool->workers_limit_min = min_size;
+    pthread_mutex_unlock(&mutex);
+}
+
+void thread_pool_set_timeout(thread_pool_t *thread_pool, const int worker_ms_timeout) {
+
+    pthread_mutex_lock(&mutex);
+    thread_pool->worker_ms_timeout = worker_ms_timeout;
+    pthread_mutex_unlock(&mutex);
+}
+
+int thread_pool_workers_count(thread_pool_t *thread_pool) {
+
+    int workers_count;
+
+    pthread_mutex_lock(&mutex);
+    workers_count = thread_pool->workers_count;
+    pthread_mutex_unlock(&mutex);
+
+    return workers_count;
+}
+
+int thread_pool_workers_timeout(thread_pool_t *thread_pool) {
+
+    int workers_timeout;
+
+    pthread_mutex_lock(&mutex);
+    workers_timeout = thread_pool->worker_ms_timeout;
+    pthread_mutex_unlock(&mutex);
+
+    return  workers_timeout;
 }
 
 /**

@@ -41,7 +41,7 @@ result_t array_remove_int(int *array, const size_t array_size, const unsigned in
 
 result_t array_remove(void **array, const size_t array_size, const unsigned int elem_idx) {
 
-    if(elem_idx > array_size || array == 0)
+    if(elem_idx > array_size || array == NULL)
         return FAILURE;
 
     for(int i = elem_idx; i < (array_size-1); i++)

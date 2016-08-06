@@ -47,6 +47,7 @@ void travers_forward(const doubly_linked_list_t *list, data_handler_t handle_dat
     doubly_linked_node_t *node = list->head;
     if(node == NULL) {
         fprintf(stderr, "Doubly linked list is empty!");
+        return;
     }
     do {
         handle_data(node->data, node->data_size);
@@ -59,6 +60,7 @@ void travers_backward(const doubly_linked_list_t *list, data_handler_t handle_da
     doubly_linked_node_t *node = list->tail;
     if(node == NULL) {
         fprintf(stderr, "Doubly linked list is empty!");
+        return;
     }
     do {
         handle_data(node->data, node->data_size);
