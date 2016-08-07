@@ -68,12 +68,12 @@ static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_thread) {
     }
 }
 
-static void join_deleted_workers(thread_pool_t *thread_pool) {
+static void join_deleted_workers(thread_pool_t *thread_pool, int no_mutex) {
 
     pthread_t worker_thread;
     doubly_linked_node_t *node;
 
-    pthread_mutex_lock(&mutex);
+    if(!no_mutex) pthread_mutex_lock(&mutex);
 
     while( (node = back(thread_pool->deleted_workers)) != NULL )
     {
@@ -82,7 +82,7 @@ static void join_deleted_workers(thread_pool_t *thread_pool) {
         pthread_join(worker_thread, NULL); // joining deleted worker threads
     }
 
-    pthread_mutex_unlock(&mutex);
+    if(!no_mutex) pthread_mutex_unlock(&mutex);
 }
 
 static void pause_thread_signal_handler(int arg) {
@@ -94,7 +94,7 @@ static void pause_thread_signal_handler(int arg) {
     if(DEBUG)
         fprintf(stderr, "worker thread: %p has been paused...\n", pthread_self());
 
-    while (is_paused != 0)
+    while (is_paused)
         pthread_cond_wait(&pause_threads_cond, &pause_threads_mutex);
 
     if(DEBUG)
@@ -262,7 +262,7 @@ void thread_pool_run(thread_pool_t *thread_pool, runner_t runner, runner_attr_t 
 result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
 
     // release resources occupied by removed worker threads by joining them
-    join_deleted_workers(thread_pool);
+    join_deleted_workers(thread_pool, 0);
 
     // if needed create more worker threads to execute tasks
     pthread_mutex_lock(&mutex);
@@ -317,20 +317,31 @@ void thread_pool_resume(thread_pool_t *thread_pool) {
     pthread_mutex_lock(&pause_threads_mutex);
 
     is_paused = 0;
+    pthread_cond_broadcast(&pause_threads_cond);
+
+    // release mutex
+    pthread_mutex_unlock(&pause_threads_mutex);
+}
+
+/* function resume only one thread in thread pool */
+void thread_pool_resume_one(thread_pool_t *thread_pool) {
+
+    // take mutex to change thread pool's is_paused flag
+    pthread_mutex_lock(&pause_threads_mutex);
+
+    is_paused = 0;
     pthread_cond_signal(&pause_threads_cond);
 
     // release mutex
     pthread_mutex_unlock(&pause_threads_mutex);
 }
 
+
+
 void thread_pool_set_size(thread_pool_t *thread_pool, const size_t min_size, const size_t max_size) {
 
     if(min_size > max_size) {
         fprintf(stderr, "min size cannot be greater than max size!\n");
-        return;
-    }
-    if(min_size < 0) {
-        fprintf(stderr, "size cannot be less than 0!\n");
         return;
     }
 
@@ -398,7 +409,7 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
 
     pthread_mutex_lock(&mutex); // lock mutex to stop removing workers
 
-    join_deleted_workers(thread_pool);
+    join_deleted_workers(thread_pool, 1);
 
     // get remaining worker threads to remove
     workers_count = thread_pool->workers_count;
@@ -418,8 +429,6 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
         pthread_join(workers[i], NULL);
 
     // deallocate internal array of workers
-    for(int i=0; i<workers_count; i++)
-        free(thread_pool->workers[i]);
     free(thread_pool->workers);
     // deallocate internal list of deleted workers
     list_free(thread_pool->deleted_workers);
@@ -462,7 +471,7 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
         pthread_join(thread_pool->workers[i], NULL);
 
     // release resources occupied by removed worker threads by joining them
-    join_deleted_workers(thread_pool);
+    join_deleted_workers(thread_pool, 0);
 
     // deallocate internal array of workers
     free(thread_pool->workers);

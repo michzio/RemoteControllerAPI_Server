@@ -23,11 +23,21 @@ static pthread_mutex_t runner_mutex;
 static runner_res_t task_runner(runner_attr_t arg) {
 
     int sleep_timeout = DEFAULT_MIN_SIZE-*((int *)arg);
+    sleep_timeout = (sleep_timeout < 0) ? 0 : sleep_timeout;
     sleep(sleep_timeout); // [seconds]
     printf("worker thread: %p running task: %d...\n", pthread_self(), *((int *)arg));
 
     return arg;
 }
+
+static runner_res_t long_task_runner(runner_attr_t arg) {
+
+    sleep(8); // [seconds]
+    printf("worker thread: %p running task: %d...\n", pthread_self(), *((int *)arg));
+
+    return arg;
+}
+
 static void task_res_handler(runner_res_t arg) {
 
     pthread_mutex_lock(&runner_mutex);
@@ -136,7 +146,7 @@ static void test_thread_pool_adjust_size(void) {
     // run more tasks than workers
     for(int i=0; i<DEFAULT_MAX_SIZE; i++) {
         int *task_attr = malloc(sizeof(int));
-        *task_attr = 0;
+        *task_attr = i;
         thread_pool_run(thread_pool, task_runner, task_attr, task_res_handler);
     }
 
@@ -158,6 +168,8 @@ static void test_thread_pool_workers_self_termination(void) {
 
     int workers_count = 0;
 
+    printf("%s: \n", __func__);
+
     // create more workers than needed to execute all tasks
     test_create();
 
@@ -166,14 +178,14 @@ static void test_thread_pool_workers_self_termination(void) {
 
     for(int i=0; i<DEFAULT_MIN_SIZE/2; i++) {
         int *task_num = malloc(sizeof(int));
-        *task_num = 0;
+        *task_num = i;
         thread_pool_run(thread_pool, task_runner, task_num, task_res_handler);
     }
 
     // number of workers have to be greater than minimal limit
     thread_pool_set_size(thread_pool, DEFAULT_MIN_SIZE/2, DEFAULT_MAX_SIZE);
 
-    sleep(1); // wait 1 sec, as it may take up to 1 sec worker threads to self terminate
+    sleep(2); // wait 2 sec, as it may take up to 1 sec worker threads to self terminate
 
     workers_count = thread_pool_workers_count(thread_pool);
     assert_equal_int(workers_count, DEFAULT_MIN_SIZE/2, "test_thread_pool_workers_self_termination");
@@ -183,7 +195,155 @@ static void test_thread_pool_workers_self_termination(void) {
 }
 
 static void test_thread_pool_pause_and_resume(void) {
+
+    int after_pause_count;
+    int after_pause_sum;
+    int before_resume_one_count;
+    int before_resume_one_sum;
+    int before_resume_count;
+    int before_resume_sum;
+
+    printf("%s: \n", __func__);
+
     test_create();
+
+    for(int i=0; i<DEFAULT_MIN_SIZE; i++) {
+        int *task_num = malloc(sizeof(int));
+        *task_num = i;
+        thread_pool_run(thread_pool, task_runner, task_num, task_res_handler);
+    }
+
+    sleep(DEFAULT_MIN_SIZE/2);
+
+    thread_pool_pause(thread_pool);
+    /*********************************************
+     * here all running workers should be on hold
+     */
+    after_pause_count = runner_counter;
+    after_pause_sum = runner_sum;
+
+    printf("*********************** SLEEPING **************************\n");
+    sleep(10); // wait 10 seconds until resume
+
+    before_resume_one_count = runner_counter;
+    before_resume_one_sum = runner_sum;
+    /*
+     * resuming workers...
+     **********************************************/
+    thread_pool_resume_one(thread_pool);
+    printf("*********************** SLEEPING **************************\n");
+    sleep(5);
+    before_resume_count = runner_counter;
+    before_resume_sum = runner_sum;
+    thread_pool_resume(thread_pool);
+
+    sleep(1);
+
+    test_clean();
+
+    // print test results
+    assert_equal_int(after_pause_count, before_resume_one_count, "test_thread_pool_pause_and_resume - runners counter (one resumed)");
+    printf("runners counter just after pause: %d\n", after_pause_count);
+    printf("runners counter just before one resume: %d\n", before_resume_one_count);
+    assert_equal_int(after_pause_sum, before_resume_one_sum, "test_thread_pool_pause_and_resume - runners sum (one resumed)");
+    printf("runners sum just after pause: %d\n", after_pause_sum);
+    printf("runners sum just before one resume: %d\n", before_resume_one_sum);
+    assert_in_range( (before_resume_count - after_pause_count), 0, 1, "test_thread_pool_pause_and_resume - runners counter (all resumed)");
+    printf("runners counter just after pause: %d\n", after_pause_count);
+    printf("runners counter just before one resume: %d\n", before_resume_one_count);
+    printf("runners counter just before all resume: %d\n", before_resume_count);
+}
+
+void test_thread_pool_set_timeout(void) {
+
+    int workers_count = 0;
+    int old_workers_count = 0;
+
+    printf("%s: \n", __func__);
+
+    test_create();
+
+    workers_count = thread_pool_workers_count(thread_pool);
+    printf("workers count - initial: %d\n", workers_count);
+    printf("old workers count: %d, new workers count: %d\n", old_workers_count, workers_count);
+
+    // 0ms timeout cause threads never timeout, and never die!
+    thread_pool_set_timeout(thread_pool, 0);
+
+    old_workers_count = workers_count;
+    workers_count = thread_pool_workers_count(thread_pool);
+    assert_equal_int(old_workers_count, workers_count, "test_thread_pool_set_timeout - workers count (timeout=0,count=min)");
+    printf("old workers count: %d, new workers count: %d\n", old_workers_count, workers_count);
+
+    sleep(2);
+
+    // now normally starving threads will be self terminating
+    thread_pool_set_size(thread_pool, 0, DEFAULT_MAX_SIZE);
+
+    sleep(10);
+
+    old_workers_count = workers_count;
+    workers_count = thread_pool_workers_count(thread_pool);
+    assert_equal_int(old_workers_count, workers_count, "test_thread_pool_set_timeout - workers count (timeout=0, min=0, count>min)");
+    printf("old workers count: %d, new workers count: %d\n", old_workers_count, workers_count);
+
+    // 10ms timeout cause fast dying of threads
+    thread_pool_set_timeout(thread_pool, 10);
+
+    // add tasks to unblock threads infinitely waiting on conditional variable
+    for(int i=0; i<DEFAULT_MIN_SIZE; i++) {
+        int *task_num = malloc(sizeof(int));
+        *task_num = i;
+        thread_pool_run(thread_pool, task_runner, task_num, task_res_handler);
+    }
+
+    sleep(10);
+
+    old_workers_count = workers_count;
+    workers_count = thread_pool_workers_count(thread_pool);
+    assert_equal_int(0, workers_count, "test_thread_pool_set_timeout - workers count (timeout=10, min=0, count>min)");
+    printf("old workers count: %d, new workers count: %d\n", old_workers_count, workers_count);
+
+    test_clean();
+}
+
+static void test_thread_pool_workers_count(void) {
+
+    int workers_count = 0;
+
+    test_create();
+
+    workers_count = thread_pool_workers_count(thread_pool);
+    assert_equal_int(DEFAULT_MIN_SIZE, workers_count, "test_thread_pool_workers_count - initial");
+    printf("initial workers count: %d\n", workers_count);
+
+    // resize thread_pool
+    thread_pool_set_size(thread_pool, DEFAULT_MAX_SIZE, DEFAULT_MAX_SIZE);
+    thread_pool_adjust_size(thread_pool);
+
+    workers_count = thread_pool_workers_count(thread_pool);
+    assert_equal_int(DEFAULT_MAX_SIZE, workers_count, "test_thread_pool_workers_count - resized");
+    printf("resized workers count: %d\n", workers_count);
+
+    test_clean();
+}
+
+static void test_thread_pool_workers_timeout(void) {
+
+    int workers_timeout = -1;
+
+    test_create();
+
+    workers_timeout = thread_pool_workers_timeout(thread_pool);
+    assert_equal_int(1000 /* [ms] */, workers_timeout, "test_thread_pool_workers_timeout - initial");
+    printf("initial workers timeout: %d\n", workers_timeout);
+
+    // change workers timeout in thread pool
+    thread_pool_set_timeout(thread_pool, 0 /* [ms] */);
+
+    workers_timeout = thread_pool_workers_timeout(thread_pool);
+    assert_equal_int(0 /* [ms] */, workers_timeout, "test_thread_pool_workers_timeout - changed");
+    printf("changed workers timeout: %d\n ", workers_timeout);
 
     test_clean();
 }
@@ -191,25 +351,58 @@ static void test_thread_pool_pause_and_resume(void) {
 static void test_thread_pool_shutdown(void) {
     test_create();
 
-    // custom clean of thread pool via shutdown gracefully
+    for(int i=0; i<DEFAULT_MIN_SIZE; i++) {
+        int *task_num = malloc(sizeof(int));
+        *task_num = i;
+        thread_pool_run(thread_pool, long_task_runner, task_num, task_res_handler);
+    }
 
+    printf("******************* START SHUTTING DOWN ************************\n");
+
+    // custom clean of thread pool via shutdown gracefully
+    thread_pool_shutdown(thread_pool);
+    pthread_mutex_destroy(&runner_mutex);
+
+    printf("******************* SHUTTED DOWN *******************************\n");
+
+    // long tasks should be able to complete before thread pool shuts down gracefully. test it.
+    assert_equal_int(DEFAULT_MIN_SIZE, runner_counter, "test_thread_pool_shutdown");
+    printf("runner counter: %d\n", runner_counter);
+    printf("runner sum: %d\n", runner_sum);
 }
 
 static void test_thread_pool_force_free(void) {
     test_create();
 
+    for(int i=0; i<DEFAULT_MIN_SIZE; i++) {
+        int *task_num = malloc(sizeof(int));
+        *task_num = i;
+        thread_pool_run(thread_pool, long_task_runner, task_num, task_res_handler);
+    }
+
     // custom clean of thread pool via force free
+    thread_pool_force_free(thread_pool);
+    pthread_mutex_destroy(&runner_mutex);
+
+    // long tasks shouldn't be completed before thread pool is forcefully freed. test it.
+    assert_equal_int(0, runner_counter, "test_thread_pool_force_free");
+    printf("runner counter: %d\n", runner_counter);
+    printf("runner sum: %d\n", runner_sum);
+
 }
 
 static void run_tests(void) {
     srand(time(NULL));
-    //test_thread_pool_execute();
-    //test_thread_pool_run();
+    test_thread_pool_execute();
+    test_thread_pool_run();
     test_thread_pool_adjust_size();
-    //test_thread_pool_workers_self_termination();
-    //test_thread_pool_pause_and_resume();
-    //test_thread_pool_shutdown();
-    //test_thread_pool_force_free();
+    test_thread_pool_workers_self_termination();
+    test_thread_pool_pause_and_resume();
+    test_thread_pool_set_timeout();
+    test_thread_pool_workers_count();
+    test_thread_pool_workers_timeout();
+    test_thread_pool_shutdown();
+    test_thread_pool_force_free();
 }
 
 test_thread_pool_t test_thread_pool = { .run_tests = run_tests };
