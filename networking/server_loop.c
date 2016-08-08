@@ -48,10 +48,18 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t hand
 result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
 
     int cs_fd;
+    threads_manager_t *threads_manager;
 
     printf("Waiting for new connections on the main thread...\n");
 
+    // initialize threads manager and set max number of child threads that can be concurrently running
+    threads_manager_init(&threads_manager, 10);
+
     while(1) {
+
+        // check if number of child threads exceeded specified limit and wait until new thread can be created
+        wait_new_thread_is_allowed(threads_manager);
+
         cs_fd = accept_new_connection(ps_fd);
 
         if(cs_fd == FAILURE) {
@@ -62,8 +70,17 @@ result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t con
         }
 
         // handle new connection on concurrent thread
-        connection_thread(cs_fd, conn_handler);
+        connection_thread(threads_manager, conn_handler, cs_fd);
     }
+
+    threads_manager_free(threads_manager);
+}
+
+result_t thread_pool_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
+
+    // TODO
+
+    return SUCCESS;
 }
 
 result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
@@ -102,6 +119,13 @@ result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t hand
 }
 
 result_t concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
+
+    // TODO
+
+    return SUCCESS;
+}
+
+result_t thread_pool_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
 
     // TODO
 

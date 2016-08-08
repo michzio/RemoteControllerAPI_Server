@@ -12,6 +12,12 @@
 #include "../networking/datagram.h"
 #include "../networking/passive_connection.h"
 
+struct threads_manager;
+typedef struct threads_manager threads_manager_t;
+
+// threads manager operations
+
+
 // connection thread
 struct conn_thread_runner_attr;
 typedef struct conn_thread_runner_attr conn_thread_runner_attr_t;
