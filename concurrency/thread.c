@@ -5,14 +5,8 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "thread.h"
-
-struct threads_manager {
-    pthread_t *threads;
-    size_t count;
-    size_t max_limit;
-};
-
 
 /**
  * wrapping all arguments needed

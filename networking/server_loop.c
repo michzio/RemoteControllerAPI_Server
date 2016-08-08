@@ -57,9 +57,6 @@ result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t con
 
     while(1) {
 
-        // check if number of child threads exceeded specified limit and wait until new thread can be created
-        wait_new_thread_is_allowed(threads_manager);
-
         cs_fd = accept_new_connection(ps_fd);
 
         if(cs_fd == FAILURE) {
@@ -70,7 +67,7 @@ result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t con
         }
 
         // handle new connection on concurrent thread
-        connection_thread(threads_manager, conn_handler, cs_fd);
+        wait_for_connection_thread(threads_manager, conn_handler, cs_fd);
     }
 
     threads_manager_free(threads_manager);

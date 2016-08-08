@@ -10,6 +10,7 @@
 #include <string.h>
 #include "task_queue.h"
 #include "../../common/fifo_queue.h"
+#include "../../common/time.h"
 
 // TASK QUEUE
 struct task_queue {
@@ -130,17 +131,6 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     pthread_mutex_unlock(&mutex);
 
     return task;
-}
-
-static void set_timespec_from_timeout(struct timespec *timespec, int ms_timeout) {
-
-    struct timeval timeval;
-    gettimeofday(&timeval, NULL);
-
-    timespec->tv_sec = time(NULL) + ms_timeout/1000;
-    timespec->tv_nsec = timeval.tv_usec * 1000 + 1000 * 1000 * (ms_timeout % 1000);
-    timespec->tv_sec += timespec->tv_nsec / (1000 * 1000 * 1000);
-    timespec->tv_nsec %= (1000 * 1000 * 1000);
 }
 
 task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
