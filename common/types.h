@@ -11,4 +11,6 @@ typedef enum {
     CONTINUE = -2,
 } result_t;
 
+typedef void (*callback_t)(void *);
+
 #endif //REMOTECONTROLLERAPI_SERVER_TYPES_H

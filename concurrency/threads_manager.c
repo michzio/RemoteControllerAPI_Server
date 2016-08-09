@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include "../common/types.h"
 #include "threads_manager.h"
+#include "../common/time.h"
 
 struct threads_manager {
     pthread_t *threads;
@@ -42,7 +43,9 @@ result_t wait_for_connection_thread(threads_manager_t *threads_manager, connecti
     while(threads_manager->count == threads_manager->max_limit)
         pthread_cond_wait(&conditional_variable, &mutex);
 
+    // create new connection thread
 
+    threads_manager->count++;
 
     pthread_mutex_unlock(&mutex);
 
@@ -54,28 +57,43 @@ result_t wait_for_datagram_thread(threads_manager_t *threads_manager, datagram_h
     while(threads_manager->count == threads_manager->max_limit)
         pthread_cond_wait(&conditional_variable, &mutex);
 
+    // create new datagram thread
 
+    threads_manager->count++;
 
     pthread_mutex_unlock(&mutex);
 
 }
 result_t timed_wait_for_connection_thread(threads_manager_t *threads_manager, const int ms_timeout, connection_handler_t conn_handler, sock_fd_t conn_sock_fd) {
 
+    struct timespec timespec;
+    set_timespec_from_timeout(&timespec, ms_timeout);
+
     pthread_mutex_lock(&mutex);
 
     while(threads_manager->count == threads_manager->max_limit)
-        pthread_cond_timedwait(&conditional_variable, &mutex);
+        pthread_cond_timedwait(&conditional_variable, &mutex, &timespec);
 
+    // create new connection thread
+
+    threads_manager->count++;
 
     pthread_mutex_unlock(&mutex);
 
 }
 result_t timed_wait_for_datagram_thread(threads_manager_t *threads_manager, const int ms_timeout, datagram_handler_t datagram_handler, sock_fd_t sock_fd, const struct sockaddr *peer_addr, const char *datagram) {
 
+    struct timespec timespec;
+    set_timespec_from_timeout(&timespec, ms_timeout);
+
     pthread_mutex_lock(&mutex);
 
     while(threads_manager->count == threads_manager->max_limit)
-        pthread_cond_timedwait(&conditional_variable, &mutex);
+        pthread_cond_timedwait(&conditional_variable, &mutex, &timespec);
+
+    // create new datagram thread
+
+    threads_manager->count++;
 
     pthread_mutex_unlock(&mutex);
 
