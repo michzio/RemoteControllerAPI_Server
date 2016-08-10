@@ -16,6 +16,7 @@ struct conn_thread_runner_attr {
     connection_handler_t conn_handler;
     sock_fd_t conn_sock_fd;
     callback_t callback;
+    callback_attr_t callback_attr;
 };
 /**
  * runner function used to wrap invocation of connection handler
@@ -24,7 +25,7 @@ struct conn_thread_runner_attr {
 runner_res_t connection_thread_runner(conn_thread_runner_attr_t *attr) {
     result_t res = attr->conn_handler(attr->conn_sock_fd);
     if(attr->callback != NULL)
-        attr->callback( (void *) &res);
+        attr->callback(attr->callback_attr, (void *) &res);
     conn_thread_runner_attr_free(attr);
     return NULL;
 }
@@ -40,6 +41,7 @@ struct datagram_thread_runner_attr {
     struct sockaddr *peer_addr;
     char *datagram;
     callback_t callback;
+    callback_attr_t callback_attr;
 };
 /**
  * runner function used to wrap invocation of datagram handler
@@ -48,7 +50,7 @@ struct datagram_thread_runner_attr {
 runner_res_t datagram_thread_runner(datagram_thread_runner_attr_t *attr) {
     result_t res = attr->datagram_handler(attr->sock_fd, attr->peer_addr, attr->datagram);
     if(attr->callback != NULL)
-        attr->callback( (void *) &res);
+        attr->callback(attr->callback_attr, (void *) &res);
     datagram_thread_runner_attr_free(attr);
     return NULL;
 }
@@ -62,12 +64,13 @@ result_t conn_thread_runner_attr_init(conn_thread_runner_attr_t **runner_attr) {
     }
     return SUCCESS;
 }
-void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, sock_fd_t conn_sock_fd, callback_t callback) {
+void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, sock_fd_t conn_sock_fd, callback_t callback, callback_attr_t callback_attr) {
 
     memset(runner_attr, 0, sizeof(*runner_attr));
     runner_attr->conn_handler = conn_handler;
     runner_attr->conn_sock_fd = conn_sock_fd;
     runner_attr->callback = callback;
+    runner_attr->callback_attr = callback_attr;
 }
 void conn_thread_runner_attr_free(conn_thread_runner_attr_t *runner_attr) {
 
@@ -83,7 +86,7 @@ result_t datagram_thread_runner_attr_init(datagram_thread_runner_attr_t **runner
     }
     return SUCCESS;
 }
-void datagram_thread_runner_attr_fill(datagram_thread_runner_attr_t *runner_attr, datagram_handler_t datagram_handler, sock_fd_t sock_fd, struct sockaddr *peer_addr, char *datagram, callback_t callback) {
+void datagram_thread_runner_attr_fill(datagram_thread_runner_attr_t *runner_attr, datagram_handler_t datagram_handler, sock_fd_t sock_fd, struct sockaddr *peer_addr, char *datagram, callback_t callback, callback_attr_t callback_attr) {
 
     memset(runner_attr, 0, sizeof(*runner_attr));
     runner_attr->datagram_handler = datagram_handler;
@@ -91,6 +94,7 @@ void datagram_thread_runner_attr_fill(datagram_thread_runner_attr_t *runner_attr
     runner_attr->peer_addr = peer_addr;
     runner_attr->datagram = datagram;
     runner_attr->callback = callback;
+    runner_attr->callback_attr = callback_attr;
 }
 void datagram_thread_runner_attr_free(datagram_thread_runner_attr_t *runner_attr) {
 

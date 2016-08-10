@@ -29,13 +29,14 @@ struct thread_pool {
 
     doubly_linked_list_t *deleted_workers; // deleted worker threads that should be joined to release resources
     bool shutting_down;          // flag indicating if thread pool is shutting down currently or not
+
+    // synchronization of access to thread pool (modification of workers and its counter)
+    pthread_mutex_t mutex;
 };
 
-// synchronization of access to thread pool (modification of workers and its counter)
-static pthread_mutex_t mutex;
 // synchronization of access to thread pool's is_paused flag used while pausing and resuming worker threads
-static pthread_mutex_t pause_threads_mutex;
-static pthread_cond_t pause_threads_cond;
+pthread_mutex_t pause_threads_mutex;
+pthread_cond_t pause_threads_cond;
 
 static bool is_paused = 0;       // flag indicating if thread pool workers are paused or not
 
@@ -46,7 +47,9 @@ static void cleanup_unlock_mutex(void *p)
 
 static void cleanup_workers_running_count(void *p)
 {
-    pthread_mutex_lock(&mutex); ((thread_pool_t *)p)->workers_running_count--; pthread_mutex_unlock(&mutex);
+    thread_pool_t *thread_pool = (thread_pool_t *)p;
+
+    pthread_mutex_lock(&thread_pool->mutex); thread_pool->workers_running_count--; pthread_mutex_unlock(&thread_pool->mutex);
 }
 
 static void remove_worker(thread_pool_t *thread_pool, pthread_t worker_thread) {
@@ -73,7 +76,7 @@ static void join_deleted_workers(thread_pool_t *thread_pool, int no_mutex) {
     pthread_t worker_thread;
     doubly_linked_node_t *node;
 
-    if(!no_mutex) pthread_mutex_lock(&mutex);
+    if(!no_mutex) pthread_mutex_lock(&thread_pool->mutex);
 
     while( (node = back(thread_pool->deleted_workers)) != NULL )
     {
@@ -82,7 +85,7 @@ static void join_deleted_workers(thread_pool_t *thread_pool, int no_mutex) {
         pthread_join(worker_thread, NULL); // joining deleted worker threads
     }
 
-    if(!no_mutex) pthread_mutex_unlock(&mutex);
+    if(!no_mutex) pthread_mutex_unlock(&thread_pool->mutex);
 }
 
 static void pause_thread_signal_handler(int arg) {
@@ -134,8 +137,8 @@ static void *worker(thread_pool_t *thread_pool) {
             task = dequeue_task(thread_pool->task_queue);
         // 2. check task availability, if waiting for task too long, kill worker
         if(task == NULL) {
-            pthread_mutex_lock(&mutex);
-            pthread_cleanup_push(cleanup_unlock_mutex, (void *) &mutex);
+            pthread_mutex_lock(&thread_pool->mutex);
+            pthread_cleanup_push(cleanup_unlock_mutex, (void *) &thread_pool->mutex);
             if(thread_pool->workers_count > thread_pool->workers_limit_min) {
                 // there is too many starving workers waiting for tasks, kill current worker
                 remove_worker(thread_pool, pthread_self());
@@ -144,16 +147,16 @@ static void *worker(thread_pool_t *thread_pool) {
             } else {
                 // min number of workers in thread pool, current worker cannot be killed
                 pthread_cleanup_pop(0);
-                pthread_mutex_unlock(&mutex);
+                pthread_mutex_unlock(&thread_pool->mutex);
                 continue;
             }
         }
         // 3. do task
-        pthread_mutex_lock(&mutex); thread_pool->workers_running_count++; pthread_mutex_unlock(&mutex);
+        pthread_mutex_lock(&thread_pool->mutex); thread_pool->workers_running_count++; pthread_mutex_unlock(&thread_pool->mutex);
         pthread_cleanup_push(cleanup_workers_running_count, thread_pool);
         task_run(task);
         pthread_cleanup_pop(0);
-        pthread_mutex_lock(&mutex); thread_pool->workers_running_count--; pthread_mutex_unlock(&mutex);
+        pthread_mutex_lock(&thread_pool->mutex); thread_pool->workers_running_count--; pthread_mutex_unlock(&thread_pool->mutex);
         // 4. free task
         task_free(task);
     }
@@ -190,7 +193,7 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     list_init(&((*thread_pool)->deleted_workers), NULL);
 
     // init synchronization objects: mutex, pause threads mutex, pause threads cond var
-    pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&(*thread_pool)->mutex, NULL);
     pthread_mutex_init(&pause_threads_mutex, NULL);
     pthread_cond_init(&pause_threads_cond, NULL);
 
@@ -200,7 +203,7 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
     // pthread_attr_setdetachstate(&pthread_attr, PTHREAD_CREATE_DETACHED); // worker threads will be created detached --> DEPRECATED
 
     // protect initial creation of worker threads, in order to not corrupt thread pool
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&(*thread_pool)->mutex);
 
     for (int i = 0; i < size; i++) {
         if (pthread_create(&((*thread_pool)->workers[i]), &pthread_attr, (void *(*)(void *)) worker,
@@ -220,7 +223,7 @@ result_t thread_pool_init(thread_pool_t **thread_pool, const size_t size, const 
         array_print((const void **) (*thread_pool)->workers, (*thread_pool)->workers_count, pointer_printer);
     }
 
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&(*thread_pool)->mutex);
 
     return SUCCESS;
 }
@@ -265,7 +268,7 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
     join_deleted_workers(thread_pool, 0);
 
     // if needed create more worker threads to execute tasks
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
 
     int task_count = task_queue_count(thread_pool->task_queue);
     int workers_deficit = task_count - (thread_pool->workers_count - thread_pool->workers_running_count);
@@ -293,7 +296,7 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
         array_print((const void **) thread_pool->workers, thread_pool->workers_count, pointer_printer);
     }
 
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 
     return SUCCESS;
 }
@@ -301,13 +304,13 @@ result_t thread_pool_adjust_size(thread_pool_t *thread_pool) {
 /* function pause all threads in thread pool */
 void thread_pool_pause(thread_pool_t* thread_pool) {
 
-    pthread_mutex_lock(&mutex); // to prevent modification of workers array, and workers counter
+    pthread_mutex_lock(&thread_pool->mutex); // to prevent modification of workers array, and workers counter
 
     for (int i=0; i < thread_pool->workers_count; i++) {
         pthread_kill(thread_pool->workers[i], SIGUSR1);
     }
 
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 }
 
 /* function resume all threads in thread pool */
@@ -345,7 +348,7 @@ void thread_pool_set_size(thread_pool_t *thread_pool, const size_t min_size, con
         return;
     }
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
     if(max_size > thread_pool->workers_limit_max) {
         // reallocates workers array to fit new max size
         thread_pool->workers = realloc(thread_pool->workers, max_size * sizeof(pthread_t));
@@ -356,23 +359,23 @@ void thread_pool_set_size(thread_pool_t *thread_pool, const size_t min_size, con
     }
     thread_pool->workers_limit_max = max_size;
     thread_pool->workers_limit_min = min_size;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 }
 
 void thread_pool_set_timeout(thread_pool_t *thread_pool, const int worker_ms_timeout) {
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
     thread_pool->worker_ms_timeout = worker_ms_timeout;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 }
 
 int thread_pool_workers_count(thread_pool_t *thread_pool) {
 
     int workers_count;
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
     workers_count = thread_pool->workers_count;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 
     return workers_count;
 }
@@ -381,9 +384,9 @@ int thread_pool_workers_timeout(thread_pool_t *thread_pool) {
 
     int workers_timeout;
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
     workers_timeout = thread_pool->worker_ms_timeout;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 
     return  workers_timeout;
 }
@@ -407,7 +410,7 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
 
     if(is_paused) thread_pool_resume(thread_pool);
 
-    pthread_mutex_lock(&mutex); // lock mutex to stop removing workers
+    pthread_mutex_lock(&thread_pool->mutex); // lock mutex to stop removing workers
 
     join_deleted_workers(thread_pool, 1);
 
@@ -422,7 +425,7 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     thread_pool->workers_limit_min = 0; // enable deletion of all worker threads - NO min limit
     thread_pool->worker_ms_timeout = 10; // short time of waiting for tasks
 
-    pthread_mutex_unlock(&mutex); // unlock mutex to start removing all starving workers
+    pthread_mutex_unlock(&thread_pool->mutex); // unlock mutex to start removing all starving workers
 
     // join remaining worker threads
     for(int i=0; i<workers_count; i++)
@@ -432,12 +435,14 @@ void thread_pool_shutdown(thread_pool_t *thread_pool) {
     free(thread_pool->workers);
     // deallocate internal list of deleted workers
     list_free(thread_pool->deleted_workers);
-    //deallocate internal task queue
+    // deallocate internal task queue
     task_queue_free(thread_pool->task_queue);
+    // destroy internal synchronization objects
+    pthread_mutex_destroy(&thread_pool->mutex);
     // deallocate thread pool
     free(thread_pool);
 
-    pthread_mutex_destroy(&mutex);
+    // destroy remaining global synchronization objects
     pthread_mutex_destroy(&pause_threads_mutex);
     pthread_cond_destroy(&pause_threads_cond);
 }
@@ -458,10 +463,10 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
     thread_pool->shutting_down = 1;
 
     // reset workers count to prevent workers self killing while cancelling them
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&thread_pool->mutex);
     workers_count = thread_pool->workers_count;
     thread_pool->workers_count = 0;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&thread_pool->mutex);
 
     for(int i=0; i<workers_count; i++)
         pthread_cancel(thread_pool->workers[i]);
@@ -479,10 +484,12 @@ void thread_pool_force_free(thread_pool_t *thread_pool) {
     list_free(thread_pool->deleted_workers);
     //deallocate internal task queue
     task_queue_free(thread_pool->task_queue);
+    // destroy internal synchronization objects
+    pthread_mutex_destroy(&thread_pool->mutex);
     // deallocate thread pool
     free(thread_pool);
 
-    pthread_mutex_destroy(&mutex);
+    // destroy remaining global synchronization objects
     pthread_mutex_destroy(&pause_threads_mutex);
     pthread_cond_destroy(&pause_threads_cond);
 }

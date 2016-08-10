@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     //test_doubly_linked_list.run_tests();
     //test_fifo_queue.run_tests();
     //test_array_helper.run_tests();
-    //test_task_queue.run_tests();
+    test_task_queue.run_tests();
     test_thread_pool.run_tests();
     //start_server();
 

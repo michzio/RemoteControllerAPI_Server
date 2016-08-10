@@ -16,6 +16,10 @@
 struct task_queue {
     fifo_queue_t *fifo;
     int task_count;
+
+    // synchronization of access to queue
+    pthread_mutex_t mutex;
+    pthread_cond_t conditional_variable;
 };
 
 // TASK
@@ -25,10 +29,6 @@ struct task {
     runner_res_t runner_res;
     runner_res_handler_t runner_res_handler;
 };
-
-// synchronization of access to queue
-static pthread_mutex_t mutex;
-static pthread_cond_t conditional_variable;
 
 // task allocator handlers
 static void task_allocate_handler(void **data_store, void *data, size_t data_size) {
@@ -64,8 +64,8 @@ void task_queue_init(task_queue_t **task_queue) {
     (*task_queue)->task_count = 0;
 
     // init synchronization objects: mutex, conditional variable
-    pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&conditional_variable, NULL);
+    pthread_mutex_init(&(*task_queue)->mutex, NULL);
+    pthread_cond_init(&(*task_queue)->conditional_variable, NULL);
 }
 
 /**
@@ -78,7 +78,7 @@ void task_queue_init(task_queue_t **task_queue) {
 void enqueue_task(task_queue_t *task_queue, task_t *task) {
 
     // 1. take mutex
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&task_queue->mutex);
 
     // 2. enqueue new task
     fifo_enqueue(task_queue->fifo, task, sizeof(task_t));
@@ -87,10 +87,10 @@ void enqueue_task(task_queue_t *task_queue, task_t *task) {
     printf("thread: %p has added task to the queue.\n", pthread_self());
 
     // 3. signal waiting threads (workers) that new task has been enqueued
-    pthread_cond_signal(&conditional_variable);
+    pthread_cond_signal(&task_queue->conditional_variable);
 
     // 4. release mutex
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&task_queue->mutex);
 }
 
 /**
@@ -110,14 +110,14 @@ task_t *dequeue_task(task_queue_t *task_queue) {
     task_t *task;
 
     // 1. take mutex
-    pthread_mutex_lock(&mutex);
-    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &mutex); // cleanup handler for the case of thread cancellation
+    pthread_mutex_lock(&task_queue->mutex);
+    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &task_queue->mutex); // cleanup handler for the case of thread cancellation
 
     // 2. while task queue is empty
     while (task_queue->task_count == 0) {
         printf("thread: %p is waiting on the queue for new tasks.\n", pthread_self());
         // 3. wait for new tasks on conditional variable (mutex released, and if signaled granted again)
-        pthread_cond_wait(&conditional_variable, &mutex);
+        pthread_cond_wait(&task_queue->conditional_variable, &task_queue->mutex);
     }
 
     // 4. dequeue task
@@ -128,7 +128,7 @@ task_t *dequeue_task(task_queue_t *task_queue) {
 
     // 5. release mutex
     pthread_cleanup_pop(0);
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&task_queue->mutex);
 
     return task;
 }
@@ -140,14 +140,14 @@ task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
     set_timespec_from_timeout(&timespec, ms_timeout);
 
     // 1. take mutex
-    pthread_mutex_lock(&mutex);
-    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &mutex); // cleanup handler for the case of thread cancellation
+    pthread_mutex_lock(&task_queue->mutex);
+    pthread_cleanup_push(cleanup_unlock_mutex, (void *) &task_queue->mutex); // cleanup handler for the case of thread cancellation
 
     // 2. while task queue is empty
     while (task_queue->task_count == 0) {
         printf("thread: %p is timed waiting on the queue for new tasks.\n", pthread_self());
         // 3. wait for new tasks on conditional variable (mutex released, and if signaled granted again)
-        if(pthread_cond_timedwait(&conditional_variable, &mutex, &timespec) == ETIMEDOUT) {
+        if(pthread_cond_timedwait(&task_queue->conditional_variable, &task_queue->mutex, &timespec) == ETIMEDOUT) {
             fprintf(stderr, "thread: %p timed out.\n", pthread_self());
             goto UNLOCK_AND_RETURN;
         }
@@ -162,7 +162,7 @@ task_t *dequeue_task_timed(task_queue_t *task_queue, int ms_timeout) {
     UNLOCK_AND_RETURN:
     // 5. release mutex
     pthread_cleanup_pop(0);
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&task_queue->mutex);
 
     return task;
 }
@@ -177,13 +177,12 @@ void task_queue_free(task_queue_t *task_queue) {
     fifo_free(task_queue->fifo);
     // reset task queue counter
     task_queue->task_count = 0;
+    // destroy mutex and conditional variable
+    pthread_mutex_destroy(&task_queue->mutex);
+    pthread_cond_destroy(&task_queue->conditional_variable);
     // free task queue
     free(task_queue);
     task_queue = NULL;
-
-    // destroy mutex and conditional variable
-    pthread_mutex_destroy(&mutex);
-    pthread_cond_destroy(&conditional_variable);
 }
 
 // task operations
