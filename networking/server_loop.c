@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <stdlib.h>
 #include "server_loop.h"
 #include "../concurrency/thread.h"
 #include "../concurrency/threads_manager.h"
@@ -22,9 +23,10 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t hand
 
     int cs_fd;
 
-    printf("Waiting for new connections on the main thread...\n");
-
     while(1) {
+
+        printf("Waiting for new connections on the main thread...\n");
+
         cs_fd = accept_new_connection(ps_fd);
 
         if(cs_fd == FAILURE) {
@@ -52,9 +54,9 @@ result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t con
     int cs_fd;
     pthread_t conn_thread;
 
-    printf("Waiting for new connections on the main thread...\n");
-
     while(1) {
+
+        printf("Waiting for new connections on the main thread...\n");
 
         cs_fd = accept_new_connection(ps_fd);
 
@@ -80,12 +82,12 @@ result_t managed_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handl
     int cs_fd;
     threads_manager_t *threads_manager;
 
-    printf("Waiting for new connections on the main thread...\n");
-
     // initialize threads manager and set max number of child threads that can be concurrently running
     threads_manager_init(&threads_manager, 10);
 
     while(1) {
+
+        printf("Waiting for new connections on the main thread...\n");
 
         cs_fd = accept_new_connection(ps_fd);
 
@@ -113,12 +115,12 @@ result_t thread_pool_stream_server_loop(sock_fd_t ps_fd, connection_handler_t co
     int cs_fd;
     thread_pool_t *thread_pool;
 
-    printf("Waiting for new connections on the main thread...\n");
-
     // initialize thread pool and set its size
     thread_pool_init(&thread_pool, 5, 10, 3000 /* [ms] */);
 
     while(1) {
+
+        printf("Waiting for new connections on the main thread...\n");
 
         cs_fd = accept_new_connection(ps_fd);
 
@@ -161,9 +163,10 @@ result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t hand
     struct sockaddr_storage peer_addr;
     socklen_t peer_addr_len = sizeof(peer_addr);
 
-    printf("Waiting for new datagrams on the main thread...\n");
-
     while(1) {
+
+        printf("Waiting for new datagrams on the main thread...\n");
+
         if( (n_recv = recvfrom(ps_fd, buf, sizeof(buf)-1, 0, (struct sockaddr *) &peer_addr, &peer_addr_len)) < 0 ) {
             fprintf(stderr, "recvfrom: %s\n", strerror(errno));
             return FAILURE;
@@ -181,19 +184,140 @@ result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t hand
 
 result_t concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
 
-    // TODO
+    char buf[MAX_BUF_SIZE];
+    int n_recv; // number of bytes received
+    struct sockaddr_storage peer_addr;
+    socklen_t peer_addr_len = sizeof(peer_addr);
 
-    return SUCCESS;
+    pthread_t thread;
+
+    while(1) {
+
+        printf("Waiting for new datagrams on the main thread...\n");
+
+        if( (n_recv = recvfrom(ps_fd, buf, sizeof(buf)-1, 0, (struct sockaddr *) &peer_addr, &peer_addr_len)) < 0 ) {
+            fprintf(stderr, "recvfrom: %s\n", strerror(errno));
+            return FAILURE;
+        }
+        buf[n_recv] = '\0';
+
+        // handle datagram on concurrent thread
+        char *datagram = malloc(sizeof(MAX_BUF_SIZE));
+            if(datagram == NULL) {
+                fprintf(stderr, "malloc: failed to allocate datagram!\n");
+                return FAILURE;
+            } else {
+                memcpy(datagram, buf, MAX_BUF_SIZE);
+            }
+        struct sockaddr_storage *sender_addr = malloc(sizeof(*sender_addr));
+            if(sender_addr == NULL) {
+                fprintf(stderr, "malloc: failed to allocate sender_addr!\n");
+                return FAILURE;
+            } else {
+                memcpy(sender_addr, &peer_addr, sizeof(peer_addr));
+            }
+        if( (thread = datagram_thread(datagram_handler, ps_fd, sender_addr, datagram)) == NULL ) {
+            fprintf(stderr, "datagram_thread: failed!\n");
+            continue;
+        }
+        pthread_detach(thread); // don't care later about joining (releasing) datagram thread
+    }
 }
 
 result_t managed_concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
 
-    return SUCCESS;
+    char buf[MAX_BUF_SIZE];
+    int n_recv; // number of bytes received
+    struct sockaddr_storage peer_addr;
+    socklen_t peer_addr_len = sizeof(peer_addr);
+
+    threads_manager_t *threads_manager;
+
+    // initialize threads manager and set max number of child threads that can be concurrently running
+    threads_manager_init(&threads_manager, 10);
+
+    while(1) {
+
+        printf("Waiting for new datagrams on the main thread...\n");
+
+        if( (n_recv = recvfrom(ps_fd, buf, sizeof(buf)-1, 0, (struct sockaddr *) &peer_addr, &peer_addr_len)) < 0 ) {
+            fprintf(stderr, "recvfrom: %s\n", strerror(errno));
+            break;
+        }
+        buf[n_recv] = '\0';
+
+        // handle datagram on concurrent managed thread
+        char *datagram = malloc(sizeof(MAX_BUF_SIZE));
+            if(datagram == NULL) {
+                fprintf(stderr, "malloc: failed to allocate datagram!\n");
+                break;
+            } else {
+                memcpy(datagram, buf, MAX_BUF_SIZE);
+            }
+        struct sockaddr_storage *sender_addr = malloc(sizeof(*sender_addr));
+            if(sender_addr == NULL) {
+                fprintf(stderr, "malloc: failed to allocate sender_addr!\n");
+                break;
+            } else {
+                memcpy(sender_addr, &peer_addr, sizeof(peer_addr));
+            }
+        if(timed_wait_for_datagram_thread(threads_manager, 3000 /* [ms] */,  datagram_handler, ps_fd, sender_addr, datagram) == FAILURE) {
+            fprintf(stderr, "timed_wait_for_datagram_thread: timed out not obtaining thread for datagram handling.\n");
+            continue;
+        }
+    }
+
+    threads_manager_free(threads_manager);
+    return FAILURE;
 }
 
 result_t thread_pool_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler) {
 
-    // TODO
+    char buf[MAX_BUF_SIZE];
+    int n_recv; // number of bytes received
+    struct sockaddr_storage peer_addr;
+    socklen_t peer_addr_len = sizeof(peer_addr);
 
-    return SUCCESS;
+    thread_pool_t *thread_pool;
+
+    // initialize thread pool and set its size
+    thread_pool_init(&thread_pool, 5, 10, 3000 /* [ms] */);
+
+    while(1) {
+
+        printf("Waiting for new datagrams on the main thread...\n");
+
+        if( (n_recv = recvfrom(ps_fd, buf, sizeof(buf)-1, 0, (struct sockaddr *) &peer_addr, &peer_addr_len)) < 0 ) {
+            fprintf(stderr, "recvfrom: %s\n", strerror(errno));
+            break;
+        }
+        buf[n_recv] = '\0';
+
+        // handle datagram by thread pool's worker thread
+        char *datagram = malloc(sizeof(MAX_BUF_SIZE));
+            if(datagram == NULL) {
+                fprintf(stderr, "malloc: failed to allocate datagram!\n");
+                break;
+            } else {
+                memcpy(datagram, buf, MAX_BUF_SIZE);
+            }
+        struct sockaddr_storage *sender_addr = malloc(sizeof(*sender_addr));
+            if(sender_addr == NULL) {
+                fprintf(stderr, "malloc: failed to allocate sender_addr!\n");
+                break;
+            } else {
+                memcpy(sender_addr, &peer_addr, sizeof(peer_addr));
+            }
+        datagram_thread_runner_attr_t *datagram_thread_runner_attr;
+        datagram_thread_runner_attr_init(&datagram_thread_runner_attr);
+        datagram_thread_runner_attr_fill(datagram_thread_runner_attr, datagram_handler, ps_fd, sender_addr, datagram, NULL, NULL);
+
+        thread_pool_run(thread_pool, (runner_t) datagram_thread_runner, (runner_attr_t) datagram_thread_runner_attr, NULL);
+
+        // adjust thread pool actual size to number of added connection handling tasks
+        thread_pool_adjust_size(thread_pool);
+    }
+
+    thread_pool_force_free(thread_pool);
+    return FAILURE;
 }
