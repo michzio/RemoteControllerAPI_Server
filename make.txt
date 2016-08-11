@@ -19,8 +19,8 @@ THREAD_POOL_DIR = concurrency/thread_pool
 
 all: $(TARGET)
 
-$(TARGET): config.h server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o -lpthread
+$(TARGET): config.h server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o test_threads_manager.o
+	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o test_threads_manager.o -lpthread
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c
@@ -109,5 +109,8 @@ test_task_queue.o: test/test_task_queue.c test/test_task_queue.h
 test_thread_pool.o: test/test_thread_pool.c test/test_thread_pool.h
 	$(CC) $(CFLAGS) -c test/test_thread_pool.c 
 
+test_threads_manager.o: test/test_threads_manager.c test/test_threads_manager.h
+	$(CC) $(CFLAGS) -c test/test_threads_manager.c 
+
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o
+	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_task_queue.o test_thread_pool.o test_threads_manager.o

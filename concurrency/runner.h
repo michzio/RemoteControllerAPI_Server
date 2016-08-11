@@ -32,4 +32,13 @@ result_t datagram_thread_runner_attr_init(datagram_thread_runner_attr_t **runner
 void datagram_thread_runner_attr_fill(datagram_thread_runner_attr_t *runner_attr, datagram_handler_t datagram_handler, sock_fd_t sock_fd, struct sockaddr *peer_addr, char *datagram, callback_t callback, callback_attr_t callback_attr);
 void datagram_thread_runner_attr_free(datagram_thread_runner_attr_t *runner_attr);
 
+// managed thread runner ( runner_t and runner_attr_t wrapper to enable usage with threads managed by threads manager)
+struct managed_thread_runner_attr;
+typedef struct managed_thread_runner_attr managed_thread_runner_attr_t;
+runner_res_t managed_thread_runner(managed_thread_runner_attr_t *attr);
+
+result_t managed_thread_runner_attr_init(managed_thread_runner_attr_t **managed_thread_runner_attr);
+void managed_thread_runner_attr_fill(managed_thread_runner_attr_t *managed_thread_runner_attr, runner_t runner, runner_attr_t runner_attr, callback_t callback, callback_attr_t callback_attr);
+void managed_thread_runner_attr_free(managed_thread_runner_attr_t *managed_thread_runner_attr);
+
 #endif //REMOTECONTROLLERAPI_SERVER_RUNNER_H
