@@ -12,6 +12,7 @@
 result_t rpc_service_connection_handler(sock_fd_t sock_fd);
 result_t event_service_connection_handler(sock_fd_t sock_fd);
 result_t echo_service_connection_handler(sock_fd_t sock_fd); // only for testing
+result_t echo_service_request_handler(sock_fd_t sock_fd); // only for testing
 
 // UDP
 result_t echo_service_datagram_handler(sock_fd_t sock_fd, const struct sockaddr *peer_addr, const char *datagram);

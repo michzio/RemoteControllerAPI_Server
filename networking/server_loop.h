@@ -18,7 +18,7 @@ result_t iterative_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn
 result_t concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler);
 result_t managed_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler);
 result_t thread_pool_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler);
-result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler);
+result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, request_handler_t request_handler);
 
 // UDP
 result_t iterative_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t datagram_handler);

@@ -67,7 +67,7 @@ result_t echo_thread_pool_stream_server(void) {
 
 result_t echo_pseudo_concurrent_stream_server(void) {
 
-    if(create_stream_server(PORT, pseudo_concurrent_stream_server_loop, echo_service_connection_handler) == FAILURE) {
+    if(create_stream_server(PORT, pseudo_concurrent_stream_server_loop, echo_service_request_handler) == FAILURE) {
         fprintf(stderr, "create_stream_server: failed!\n");
         return FAILURE;
     }

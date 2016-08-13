@@ -9,6 +9,7 @@ typedef enum {
     SUCCESS = 0,
     FAILURE = -1,
     CONTINUE = -2,
+    CLOSED = -3,
 } result_t;
 
 typedef void *callback_attr_t;

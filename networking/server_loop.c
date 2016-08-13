@@ -146,11 +146,51 @@ result_t thread_pool_stream_server_loop(sock_fd_t ps_fd, connection_handler_t co
     return FAILURE;
 }
 
-result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, connection_handler_t conn_handler) {
+/**
+ * request_handler_t has the same prototype as connection_handler_t,
+ * but in contrast to connection_handler_t it is intended for
+ * handling just a single request from a client instead of all connection
+ * consisting of multiple client requests.
+ */
+result_t pseudo_concurrent_stream_server_loop(sock_fd_t ps_fd, request_handler_t handle_conn_request) {
 
-    // TODO
+    int max_fd;
+    sock_fd_t cs_fd;            // new connection socket file descriptor
+    fd_set all_fds, read_fds;   // all available file descriptors, read file descriptors used to find ready to read fds with select() function
 
-    return SUCCESS;
+    // 1. initialize file descriptors set
+    max_fd = ps_fd;
+    FD_ZERO(&all_fds);
+    FD_SET(ps_fd, &all_fds);
+
+    while (1) {
+        // 2. wait for ready to read file descriptors
+        memcpy(&read_fds, &all_fds, sizeof(all_fds));
+        if( select(max_fd+1, &read_fds, NULL, NULL, 0) < 0 ) {
+            fprintf(stderr, "select: failed with %s\n", strerror(errno));
+            return FAILURE;
+        }
+
+        // 3. is new connection available?
+        if(FD_ISSET(ps_fd, &read_fds)) {
+            if( (cs_fd = accept_new_connection(ps_fd)) == FAILURE ) {
+                fprintf(stderr, "accept_new_connection: failed!\n");
+                return FAILURE;
+            }
+            FD_SET(cs_fd, &all_fds);
+            if(cs_fd > max_fd) max_fd = cs_fd;
+        }
+
+        // 4. handle requests on currently available connections
+        for(cs_fd = 0; cs_fd < max_fd; cs_fd++) {
+            if(cs_fd != ps_fd && FD_ISSET(cs_fd, &read_fds)) {
+                if( handle_conn_request(cs_fd) == CLOSED ) {
+                    fprintf(stderr, "connection socket: %d has been closed.\n", cs_fd);
+                    FD_CLR(cs_fd, &all_fds);
+                }
+            }
+        }
+    }
 }
 
 #define MAX_BUF_SIZE 256
@@ -216,7 +256,7 @@ result_t concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t dat
             } else {
                 memcpy(sender_addr, &peer_addr, sizeof(peer_addr));
             }
-        if( (thread = datagram_thread(datagram_handler, ps_fd, sender_addr, datagram)) == NULL ) {
+        if( (thread = datagram_thread(datagram_handler, ps_fd, (struct sockaddr *) sender_addr, datagram)) == NULL ) {
             fprintf(stderr, "datagram_thread: failed!\n");
             continue;
         }
@@ -261,7 +301,7 @@ result_t managed_concurrent_datagram_server_loop(sock_fd_t ps_fd, datagram_handl
             } else {
                 memcpy(sender_addr, &peer_addr, sizeof(peer_addr));
             }
-        if(timed_wait_for_datagram_thread(threads_manager, 3000 /* [ms] */,  datagram_handler, ps_fd, sender_addr, datagram) == FAILURE) {
+        if(timed_wait_for_datagram_thread(threads_manager, 3000 /* [ms] */,  datagram_handler, ps_fd, (struct sockaddr *) sender_addr, datagram) == FAILURE) {
             fprintf(stderr, "timed_wait_for_datagram_thread: timed out not obtaining thread for datagram handling.\n");
             continue;
         }
@@ -310,7 +350,7 @@ result_t thread_pool_datagram_server_loop(sock_fd_t ps_fd, datagram_handler_t da
             }
         datagram_thread_runner_attr_t *datagram_thread_runner_attr;
         datagram_thread_runner_attr_init(&datagram_thread_runner_attr);
-        datagram_thread_runner_attr_fill(datagram_thread_runner_attr, datagram_handler, ps_fd, sender_addr, datagram, NULL, NULL);
+        datagram_thread_runner_attr_fill(datagram_thread_runner_attr, datagram_handler, ps_fd, (struct sockaddr *) sender_addr, datagram, NULL, NULL);
 
         thread_pool_run(thread_pool, (runner_t) datagram_thread_runner, (runner_attr_t) datagram_thread_runner_attr, NULL);
 
