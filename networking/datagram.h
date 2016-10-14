@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_DATAGRAM_H
 #define REMOTECONTROLLERAPI_SERVER_DATAGRAM_H
 
-#include "../common/address_helper.h"
+#include "../../networking/helpers/address_helper.h"
 #include "passive_socket.h"
 
 typedef  result_t (*datagram_handler_t) (sock_fd_t, const struct sockaddr *, const char *);

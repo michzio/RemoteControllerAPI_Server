@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
 #include "runner.h"
 
 // connection thread runner
@@ -26,6 +28,9 @@ runner_res_t connection_thread_runner(conn_thread_runner_attr_t *attr) {
     result_t res = attr->conn_handler(attr->conn_sock_fd);
     if(attr->callback != NULL)
         attr->callback(attr->callback_attr, (void *) &res);
+    if( close(attr->conn_sock_fd) < 0 ) {
+        fprintf(stderr, "close: %s\n", strerror(errno));
+    }
     conn_thread_runner_attr_free(attr);
     return NULL;
 }
@@ -52,31 +57,6 @@ runner_res_t datagram_thread_runner(datagram_thread_runner_attr_t *attr) {
     if(attr->callback != NULL)
         attr->callback(attr->callback_attr, (void *) &res);
     datagram_thread_runner_attr_free(attr);
-    return NULL;
-}
-
-// managed thread runner
-/**
- * wrapping runner_t and runner_attr_t into single structure to enable usage with
- * threads managed by threads manager
- */
-struct managed_thread_runner_attr {
-    runner_t runner;
-    runner_attr_t runner_attr;
-    callback_t callback;
-    callback_attr_t callback_attr;
-};
-/**
- * managed thread runner function used to wrap invocation of generic runner
- * function with runner_attr as its only param to make possible usage
- * of runner_t and runner_attr_t with managed threads and threads manager object
- */
-runner_res_t managed_thread_runner(managed_thread_runner_attr_t *attr) {
-
-    runner_res_t runner_res = attr->runner(attr->runner_attr);
-    if(attr->callback != NULL)
-        attr->callback(attr->callback_attr, (void *) runner_res);
-    managed_thread_runner_attr_free(attr);
     return NULL;
 }
 
@@ -116,8 +96,8 @@ void datagram_thread_runner_attr_fill(datagram_thread_runner_attr_t *runner_attr
     memset(runner_attr, 0, sizeof(*runner_attr));
     runner_attr->datagram_handler = datagram_handler;
     runner_attr->sock_fd = sock_fd;
-    runner_attr->peer_addr = peer_addr;
-    runner_attr->datagram = datagram;
+    runner_attr->peer_addr = malloc(sizeof(*peer_addr)); memcpy(runner_attr->peer_addr, peer_addr, sizeof(*peer_addr));
+    runner_attr->datagram = malloc(sizeof(char)*(strlen(datagram)+1));  memcpy(runner_attr->datagram, datagram, strlen(datagram)+1);
     runner_attr->callback = callback;
     runner_attr->callback_attr = callback_attr;
 }
@@ -126,26 +106,4 @@ void datagram_thread_runner_attr_free(datagram_thread_runner_attr_t *runner_attr
     free(runner_attr->peer_addr);
     free(runner_attr->datagram);
     free(runner_attr);
-}
-
-// managed thread runner attributes operations
-result_t managed_thread_runner_attr_init(managed_thread_runner_attr_t **managed_thread_runner_attr) {
-
-    if( ( *managed_thread_runner_attr = malloc(sizeof(managed_thread_runner_attr_t)) ) == NULL ) {
-        fprintf(stderr, "malloc: failed to allocate managed_thread_runner_attr.\n");
-        return FAILURE;
-    }
-    return SUCCESS;
-}
-void managed_thread_runner_attr_fill(managed_thread_runner_attr_t *managed_thread_runner_attr, runner_t runner, runner_attr_t runner_attr, callback_t callback, callback_attr_t callback_attr) {
-
-    memset(managed_thread_runner_attr, 0, sizeof(*managed_thread_runner_attr));
-    managed_thread_runner_attr->runner = runner;
-    managed_thread_runner_attr->runner_attr = runner_attr;
-    managed_thread_runner_attr->callback = callback;
-    managed_thread_runner_attr->callback_attr = callback_attr;
-}
-void managed_thread_runner_attr_free(managed_thread_runner_attr_t *managed_thread_runner_attr) {
-
-    free(managed_thread_runner_attr);
 }

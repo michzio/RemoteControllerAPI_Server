@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_DATAGRAM_SERVER_H
 #define REMOTECONTROLLERAPI_SERVER_DATAGRAM_SERVER_H
 
-#include "../common/address_helper.h"
+#include "../../networking/helpers/address_helper.h"
 
 // ECHO UDP SERVER
 result_t echo_datagram_server(void); // only for testing

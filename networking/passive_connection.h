@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_PASSIVE_CONNECTION_H
 #define REMOTECONTROLLERAPI_SERVER_PASSIVE_CONNECTION_H
 
-#include "../common/address_helper.h"
+#include "../../networking/helpers/address_helper.h"
 #include "passive_socket.h"
 
 #define BACKLOG 10  // number of pending connections that can be waiting on the listen queue on tcp socket

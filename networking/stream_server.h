@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_STREAM_SERVER_H
 #define REMOTECONTROLLERAPI_SERVER_STREAM_SERVER_H
 
-#include "../common/address_helper.h"
+#include "../../networking/helpers/address_helper.h"
 
 // RPC TCP SERVER
 result_t rpc_stream_server(void);

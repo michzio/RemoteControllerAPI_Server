@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_SERVER_LOOP_H
 #define REMOTECONTROLLERAPI_SERVER_SERVER_LOOP_H
 
-#include "../common/address_helper.h"
+#include "../../networking/helpers/address_helper.h"
 #include "passive_socket.h"
 #include "passive_connection.h"
 #include "datagram.h"

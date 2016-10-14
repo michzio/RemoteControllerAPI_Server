@@ -3,6 +3,9 @@
 # the compiler: gcc for C program, define as g++ for C++ 
 CC = gcc  
 
+# the static library archiver 
+AR = ar rcs
+
 # compiler flags: 
 # -g enable debugging 
 # -Wall turn on all warnings 
@@ -11,19 +14,41 @@ CC = gcc
 # -std=c99 use newer version
 CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -std=c99
 
+# libraries 
+# custom
+NETWORKING_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/libnetworking.a 
+CONCURRENCY_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/libconcurrency.a 
+COMMON_FUNCTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/libcommon_functions.a
+COLLECTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/libcollections.a
+COMPARERS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/libcomparers.a
+UNIT_TESTS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/unit_tests/libunit_tests.a
+
 # the build target executable: 
 TARGET = server
+LIBRARY = librc_server.a
 
-# directories aliases 
-THREAD_POOL_DIR = concurrency/thread_pool
+# source files 
+SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o
+
+# test source files 
+TEST_SOURCE_FILES = test_server_loop.o
 
 all: $(TARGET)
 
-$(TARGET): config.h server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_server_loops.o test_task_queue.o test_thread_pool.o test_threads_manager.o
-	$(CC) $(CFLAGS) -o server main.c server.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_server_loops.o test_task_queue.o test_thread_pool.o test_threads_manager.o -lpthread
+$(TARGET): main.c $(LIBRARY) $(TEST_SOURCE_FILES)
+	$(CC) $(CFLAGS) -o $(TARGET) main.c $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(COMPARERS_LIBRARY) $(TEST_SOURCE_FILES) $(UNIT_TESTS_LIBRARY) -lpthread
 
-server.o: server.c server.h
-	$(CC) $(CFLAGS) -c server.c
+$(LIBRARY): $(SOURCE_FILES)
+	$(AR) $(LIBRARY) $(SOURCE_FILES)
+
+runner.o: concurrency/runner.c concurrency/runner.h
+	$(CC) $(CFLAGS) -c concurrency/runner.c  
+
+thread.o: concurrency/thread.c concurrency/thread.h 
+	$(CC) $(CFLAGS) -c concurrency/thread.c
+
+threads_manager.o: concurrency/threads_manager.c concurrency/threads_manager.h
+	$(CC) $(CFLAGS) -c concurrency/threads_manager.c 
 
 datagram.o: networking/datagram.c networking/datagram.h
 	$(CC) $(CFLAGS) -c networking/datagram.c
@@ -49,71 +74,11 @@ service.o: networking/service.c networking/service.h
 stream_server.o: networking/stream_server.c networking/stream_server.h
 	$(CC) $(CFLAGS) -c networking/stream_server.c
 
-runner.o: concurrency/runner.c concurrency/runner.h
-	$(CC) $(CFLAGS) -c concurrency/runner.c  
+server.o: server.c server.h
+	$(CC) $(CFLAGS) -c server.c
 
-thread.o: concurrency/thread.c concurrency/thread.h 
-	$(CC) $(CFLAGS) -c concurrency/thread.c 
-
-threads_manager.o: concurrency/threads_manager.c concurrency/threads_manager.h
-	$(CC) $(CFLAGS) -c concurrency/threads_manager.c 
-
-task_queue.o: $(THREAD_POOL_DIR)/task_queue.c $(THREAD_POOL_DIR)/task_queue.h
-	$(CC) $(CFLAGS) -c $(THREAD_POOL_DIR)/task_queue.c
-
-thread_pool.o: $(THREAD_POOL_DIR)/thread_pool.c $(THREAD_POOL_DIR)/thread_pool.h 
-	$(CC) $(CFLAGS) -c $(THREAD_POOL_DIR)/thread_pool.c
-
-address_helper.o: common/address_helper.c common/address_helper.h
-	$(CC) $(CFLAGS) -c common/address_helper.c
-
-allocator.o: common/allocator.c common/allocator.h
-	$(CC) $(CFLAGS) -c common/allocator.c 
-
-array_helper.o: common/array_helper.c common/array_helper.h 
-	$(CC) $(CFLAGS) -c common/array_helper.c 
-
-comparer.o: common/comparer.c common/comparer.h
-	$(CC) $(CFLAGS) -c common/comparer.c 
-
-data_handler.o: common/data_handler.c common/data_handler.h
-	$(CC) $(CFLAGS) -c common/data_handler.c
-
-fifo_queue.o: common/fifo_queue.c common/fifo_queue.h
-	$(CC) $(CFLAGS) -c common/fifo_queue.c
-
-numbers.o: common/numbers.c common/numbers.h
-	$(CC) $(CFLAGS) -c common/numbers.c
-
-time.o: common/time.c common/time.h 
-	$(CC) $(CFLAGS) -c common/time.c 
-
-doubly_linked_list.o: collections/doubly_linked_list.c collections/doubly_linked_list.h 
-	$(CC) $(CFLAGS) -c collections/doubly_linked_list.c 
-
-assertion.o: test/assertion.c test/assertion.h 
-	$(CC) $(CFLAGS) -c test/assertion.c
-
-test_array_helper.o: test/test_array_helper.c test/test_array_helper.h 
-	$(CC) $(CFLAGS) -c test/test_array_helper.c 
-
-test_doubly_linked_list.o: test/test_doubly_linked_list.c test/test_doubly_linked_list.h
-	$(CC) $(CFLAGS) -c test/test_doubly_linked_list.c
-
-test_fifo_queue.o: test/test_fifo_queue.c test/test_fifo_queue.h
-	$(CC) $(CFLAGS) -c test/test_fifo_queue.c 
-
-test_server_loops.o: test/test_server_loops.c test/test_server_loops.h 
-	$(CC) $(CFLAGS) -c test/test_server_loops.c 
-
-test_task_queue.o: test/test_task_queue.c test/test_task_queue.h
-	$(CC) $(CFLAGS) -c test/test_task_queue.c 
-
-test_thread_pool.o: test/test_thread_pool.c test/test_thread_pool.h
-	$(CC) $(CFLAGS) -c test/test_thread_pool.c 
-
-test_threads_manager.o: test/test_threads_manager.c test/test_threads_manager.h
-	$(CC) $(CFLAGS) -c test/test_threads_manager.c 
+test_server_loop.o: test/test_server_loop.c test/test_server_loop.h 
+	$(CC) $(CFLAGS) -c test/test_server_loop.c 
 
 clean:
-	$(RM) $(TARGET) $(TARGET).o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o runner.o thread.o threads_manager.o task_queue.o thread_pool.o address_helper.o allocator.o array_helper.o comparer.o data_handler.o fifo_queue.o numbers.o time.o doubly_linked_list.o assertion.o test_array_helper.o test_doubly_linked_list.o test_fifo_queue.o test_server_loops.o test_task_queue.o test_thread_pool.o test_threads_manager.o
+	$(RM) $(TARGET) $(LIBRARY) $(SOURCE_FILES) $(TEST_SOURCE_FILES)

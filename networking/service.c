@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "service.h"
+#include "../../unit_tests/common/terminal.h"
 
 // TCP
 result_t rpc_service_connection_handler(sock_fd_t sock_fd) {
@@ -32,13 +33,17 @@ result_t echo_service_connection_handler(sock_fd_t sock_fd) {
     while(1) {
 
         if ((n_recv = recv(sock_fd, buf, sizeof(buf) - 1, 0)) <= 0) {
+            if(n_recv == 0) {
+                printf("echo connection is closing...\n");
+                return CLOSED;
+            }
             perror("recv");
             return FAILURE;
         }
 
         buf[n_recv] = '\0';
 
-        printf("server: received '%s'\n", buf);
+        printf(ANSI_COLOR_BLUE "server: received '%s'" ANSI_COLOR_RESET "\n", buf);
 
         if ((n_sent = send(sock_fd, buf, strlen(buf), 0)) < 0) {
             perror("send");
@@ -63,13 +68,17 @@ result_t echo_service_request_handler(sock_fd_t sock_fd) {
     int n_sent; // number of bytes sent
 
     if ((n_recv = recv(sock_fd, buf, sizeof(buf) - 1, 0)) <= 0) {
+        if(n_recv == 0) {
+            printf("echo connection is closing...\n");
+            return CLOSED;
+        }
         perror("recv");
         return FAILURE;
     }
 
     buf[n_recv] = '\0';
 
-    printf("server: received '%s'\n", buf);
+    printf(ANSI_COLOR_BLUE "server: received '%s'" ANSI_COLOR_RESET "\n", buf);
 
     if ((n_sent = send(sock_fd, buf, strlen(buf), 0)) < 0) {
         perror("send");
@@ -84,7 +93,7 @@ result_t echo_service_datagram_handler(sock_fd_t sock_fd, const struct sockaddr 
 
     int n_sent; // number of bytes sent
 
-    printf("server: received '%s'\n", datagram);
+    printf(ANSI_COLOR_BLUE "server: received '%s'" ANSI_COLOR_RESET "\n", datagram);
 
     char *ip_address;
     int port;
