@@ -3,7 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/test/test_server_loop.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_transfer.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_server_loop.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_transfer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/threads_manager.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concurrency/runner.h" isTestSource="false" />

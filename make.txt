@@ -31,7 +31,7 @@ LIBRARY = librc_server.a
 SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o
 
 # test source files 
-TEST_SOURCE_FILES = test_server_loop.o
+TEST_SOURCE_FILES = test_server_loop.o test_transfer.o
 
 all: $(TARGET)
 
@@ -79,6 +79,9 @@ server.o: server.c server.h
 
 test_server_loop.o: test/test_server_loop.c test/test_server_loop.h 
 	$(CC) $(CFLAGS) -c test/test_server_loop.c 
+
+test_transfer.o: test/test_transfer.c test/test_transfer.h
+	$(CC) $(CFLAGS) -c test/test_transfer.c
 
 clean:
 	$(RM) $(TARGET) $(LIBRARY) $(SOURCE_FILES) $(TEST_SOURCE_FILES)
