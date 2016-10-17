@@ -14,7 +14,20 @@ AR = ar rcs
 # -std=c99 use newer version
 CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -std=c99
 
+# include headers 
+CFLAGS += -I/usr/local/include
+
 # libraries 
+# OpenCV
+OPENCV_LIBS = `pkg-config --cflags --libs opencv` 
+
+# OS X 
+OS_X_LIBS += -framework ApplicationServices 
+OS_X_LIBS += -framework Carbon
+OS_X_LIBS += -framework IOKit
+OS_X_LIBS += -framework AudioToolbox
+OS_X_LIBS += -framework IOSurface
+
 # custom
 NETWORKING_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/libnetworking.a 
 CONCURRENCY_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/libconcurrency.a 
@@ -22,6 +35,11 @@ COMMON_FUNCTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/
 COLLECTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/libcollections.a
 COMPARERS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/libcomparers.a
 UNIT_TESTS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/unit_tests/libunit_tests.a
+# custom OS X 
+AUTOMATION_SCRIPTS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/libautomation_scripts.a
+COCOA_HELPER_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/libcocoa_helper.a
+LIBPNG_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/liblibpng.a 
+ZLIB_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/libzlib.a
 
 # the build target executable: 
 TARGET = server
@@ -36,7 +54,7 @@ TEST_SOURCE_FILES = test_server_loop.o test_transfer.o
 all: $(TARGET)
 
 $(TARGET): main.c $(LIBRARY) $(TEST_SOURCE_FILES)
-	$(CC) $(CFLAGS) -o $(TARGET) main.c $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(COMPARERS_LIBRARY) $(TEST_SOURCE_FILES) $(UNIT_TESTS_LIBRARY) -lpthread
+	$(CC) $(CFLAGS) -o $(TARGET) main.c $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(COMPARERS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(OS_X_LIBS) $(COCOA_HELPER_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(TEST_SOURCE_FILES) $(UNIT_TESTS_LIBRARY) -lpthread $(OPENCV_LIBS)
 
 $(LIBRARY): $(SOURCE_FILES)
 	$(AR) $(LIBRARY) $(SOURCE_FILES)

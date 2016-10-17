@@ -17,6 +17,9 @@
 #include "../../networking/transfer/binary_transfer.h"
 #include "../../unit_tests/test/assertion.h"
 #include "../../unit_tests/common/terminal.h"
+#include "../../system/OS_X/automation_scripts/system/display.h"
+#include "../../common/libraries/png/png-encoding.h"
+#include "../../common/libraries/png/png-helper.h"
 
 #define TEST_PORT "3333"
 
@@ -267,6 +270,37 @@ static void test_cstring_transfer(void) {
     test_create_stream_server(cstring_transfer_handler);
 }
 
+static result_t png_transfer_handler(sock_fd_t cs_fd) {
+
+    result_t res = 0;
+
+    unsigned char *rgbaData = 0;
+    size_t rgbaDataLength = 0;
+    size_t width = 0, height = 0;
+
+    display_screen_snapshot_to_buffer(&rgbaData, &rgbaDataLength, &width, &height);
+    assert_not_null(rgbaData, "Screen shot taken, rgba data not null");
+
+    unsigned char *pngData = 0;
+    size_t pngDataLength = 0;
+
+    res = (result_t) writeRGBAintoPNGBuffer(rgbaData, width, height, PNG_BIT_DEPTH_8, &pngData, &pngDataLength);
+    assert_equal_int(res, SUCCESS, "RGBA encoded into PNG");
+
+    send_uint32(cs_fd, width);
+    send_uint32(cs_fd, height);
+    send_uint32(cs_fd, pngDataLength);
+    res = send_binary(cs_fd, PACKET_LENGTH, pngData, pngDataLength);
+    assert_equal_int(res, SUCCESS, "send PNG data to socket");
+
+    free(rgbaData);
+    free(pngData);
+}
+
+static void test_png_transfer(void) {
+    test_create_stream_server(png_transfer_handler);
+}
+
 static void run_tests(void) {
 
     printf( ANSI_COLOR_BLUE "Integration Test - requires to run: 'client' program only with 'test_client_transfer.run_tests()' \n" ANSI_COLOR_RESET);
@@ -280,6 +314,7 @@ static void run_tests(void) {
     test_int64_transfer();
     test_binary_transfer();
     test_cstring_transfer();
+    test_png_transfer();
 }
 
 test_server_transfer_t test_server_transfer = { .run_tests = run_tests };
