@@ -18,8 +18,10 @@
 #include "../../unit_tests/test/assertion.h"
 #include "../../unit_tests/common/terminal.h"
 #include "../../system/OS_X/automation_scripts/system/display.h"
+#include "../../system/OS_X/automation_scripts/system/display_stream.h"
 #include "../../common/libraries/png/png-encoding.h"
 #include "../../common/libraries/png/png-helper.h"
+#include "../../common/bitmaps.h"
 
 #define TEST_PORT "3333"
 
@@ -295,16 +297,72 @@ static result_t png_transfer_handler(sock_fd_t cs_fd) {
 
     free(rgbaData);
     free(pngData);
+
+    return SUCCESS;
 }
 
 static void test_png_transfer(void) {
     test_create_stream_server(png_transfer_handler);
 }
 
+
+static unsigned char *prevFrameBuffer = 0;
+
+static void transferDisplayStreamHandler(const void *handlerArgs, const unsigned char *frameBuffer, const size_t frameBufferLength,
+                                        const size_t frameWidth, const size_t frameHeight, const size_t bytesPerPixel) {
+
+    result_t res = 0;
+    sock_fd_t cs_fd = *((sock_fd_t *) handlerArgs);
+
+    if(prevFrameBuffer == 0) {
+        prevFrameBuffer = malloc(sizeof(unsigned char)*frameBufferLength*3/4);
+        memset(prevFrameBuffer, 0x00, frameBufferLength*3/4);
+    }
+
+    size_t newFrameBufferLength = 0;
+    unsigned char *newFrameBuffer = RGBABytesArraySkipAlpha(frameBuffer, frameBufferLength, &newFrameBufferLength);
+
+    unsigned char *xorFrameBuffer = bitwise_xor(prevFrameBuffer, newFrameBuffer, newFrameBufferLength);
+
+    unsigned char *pngData = 0;
+    size_t pngDataLength = 0;
+
+    res = (result_t) writeRGBintoPNGBuffer(xorFrameBuffer, frameWidth, frameHeight, PNG_BIT_DEPTH_8, &pngData, &pngDataLength);
+    assert_equal_int(res, SUCCESS, "RGBA data encoded into PNG");
+
+    send_uint32(cs_fd, frameWidth);
+    send_uint32(cs_fd, frameHeight);
+    send_uint32(cs_fd, pngDataLength);
+    res = send_binary(cs_fd, PACKET_LENGTH, pngData, pngDataLength);
+    assert_equal_int(res, SUCCESS, "send PNG data to socket");
+
+
+    free(pngData);
+    free(xorFrameBuffer);
+
+    memcpy(prevFrameBuffer, newFrameBuffer, newFrameBufferLength);
+}
+
+static result_t display_stream_transfer_handler(sock_fd_t cs_fd) {
+
+    size_t displayWidth = 0, displayHeight = 0;
+
+    display_get_pixel_size(&displayWidth, &displayHeight);
+    CGDisplayStreamRef displayStream = display_stream_init(displayWidth, displayHeight, transferDisplayStreamHandler, &cs_fd);
+    display_stream_start(displayStream);
+    sleep(30);
+    display_stream_stop(displayStream);
+    display_stream_free(displayStream);
+}
+
+static void test_display_stream_transfer(void) {
+    test_create_stream_server(display_stream_transfer_handler);
+}
+
 static void run_tests(void) {
 
     printf( ANSI_COLOR_BLUE "Integration Test - requires to run: 'client' program only with 'test_client_transfer.run_tests()' \n" ANSI_COLOR_RESET);
-    test_uint8_transfer();
+   /* test_uint8_transfer();
     test_uint16_transfer();
     test_uint32_transfer();
     test_uint64_transfer();
@@ -314,7 +372,8 @@ static void run_tests(void) {
     test_int64_transfer();
     test_binary_transfer();
     test_cstring_transfer();
-    test_png_transfer();
+    test_png_transfer(); */
+    test_display_stream_transfer();
 }
 
 test_server_transfer_t test_server_transfer = { .run_tests = run_tests };
