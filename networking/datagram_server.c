@@ -10,7 +10,7 @@
 
 // ECHO UDP SERVER
 result_t echo_datagram_server(void) {
-    return echo_datagram_server();
+    return echo_iterative_datagram_server();
 }
 
 result_t echo_iterative_datagram_server(void) {

@@ -6,11 +6,15 @@
 #include <unistd.h>
 #include <memory.h>
 #include <errno.h>
+#include <stdlib.h>
 #include "test_transfer.h"
 #include "../../common/types.h"
+#include "../../common/bitwise.h"
 #include "../../networking/common/network_types.h"
 #include "../networking/generic_server.h"
 #include "../../networking/transfer/integer_transfer.h"
+#include "../../networking/transfer/str_transfer.h"
+#include "../../networking/transfer/binary_transfer.h"
 #include "../../unit_tests/test/assertion.h"
 #include "../../unit_tests/common/terminal.h"
 
@@ -42,6 +46,8 @@ static result_t test_stream_server_handler(sock_fd_t ps_fd, connection_handler_t
         fprintf(stderr, "close: %s\n", strerror(errno));
         return FAILURE;
     }
+
+    return SUCCESS;
 }
 
 // generic method creating stream server with custom connection handler
@@ -213,6 +219,54 @@ static void test_int64_transfer(void) {
     test_create_stream_server(int64_transfer_handler);
 }
 
+#define BINARY_DATA_LENGTH 32
+
+static result_t binary_transfer_handler(sock_fd_t cs_fd) {
+
+    result_t res = 0;
+    unsigned char recvedBinaryData[BINARY_DATA_LENGTH];
+
+    res = recv_binary(cs_fd, 8, recvedBinaryData, BINARY_DATA_LENGTH);
+    assert_equal_int(res, SUCCESS, "Received binary data from socket");
+
+    printf(ANSI_COLOR_CYAN);
+    bytes_array_dump(recvedBinaryData, BINARY_DATA_LENGTH, 8);
+    printf(ANSI_COLOR_RESET);
+
+    res = send_binary(cs_fd, 8, recvedBinaryData, BINARY_DATA_LENGTH);
+    assert_equal_int(res, SUCCESS, "Sent binary data to socket");
+
+    return CLOSED;
+}
+
+static void test_binary_transfer(void) {
+    test_create_stream_server(binary_transfer_handler);
+}
+
+static result_t cstring_transfer_handler(sock_fd_t cs_fd) {
+
+    result_t res = 0;
+    char *recvedCString = 0;
+    size_t recvedCStringLen = 0;
+
+    res = recv_cstr(cs_fd, &recvedCString, &recvedCStringLen);
+    assert_equal_int(res, SUCCESS, "Received cstring from socket");
+
+    printf(ANSI_COLOR_CYAN "cstring received: %s\n" ANSI_COLOR_RESET, recvedCString);
+    printf(ANSI_COLOR_CYAN "cstring length: %lu\n" ANSI_COLOR_RESET, recvedCStringLen);
+
+    res = send_cstr(cs_fd, recvedCString, recvedCStringLen);
+    assert_equal_int(res, SUCCESS, "Sent cstring to socket");
+
+    free(recvedCString);
+
+    return CLOSED;
+}
+
+static void test_cstring_transfer(void) {
+    test_create_stream_server(cstring_transfer_handler);
+}
+
 static void run_tests(void) {
 
     printf( ANSI_COLOR_BLUE "Integration Test - requires to run: 'client' program only with 'test_client_transfer.run_tests()' \n" ANSI_COLOR_RESET);
@@ -224,6 +278,8 @@ static void run_tests(void) {
     test_int16_transfer();
     test_int32_transfer();
     test_int64_transfer();
+    test_binary_transfer();
+    test_cstring_transfer();
 }
 
 test_server_transfer_t test_server_transfer = { .run_tests = run_tests };
