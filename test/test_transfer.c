@@ -22,6 +22,7 @@
 #include "../../common/libraries/png/png-encoding.h"
 #include "../../common/libraries/png/png-helper.h"
 #include "../../common/bitmaps.h"
+#include "../../common/libraries/lz4/lz4.h"
 
 #define TEST_PORT "3333"
 
@@ -308,8 +309,8 @@ static void test_png_transfer(void) {
 
 static unsigned char *prevFrameBuffer = 0;
 
-static void transferDisplayStreamHandler(const void *handlerArgs, const unsigned char *frameBuffer, const size_t frameBufferLength,
-                                        const size_t frameWidth, const size_t frameHeight, const size_t bytesPerPixel) {
+static void transferPNGDisplayStreamHandler(const void *handlerArgs, const unsigned char *frameBuffer, const size_t frameBufferLength,
+                                            const size_t frameWidth, const size_t frameHeight, const size_t bytesPerPixel) {
 
     result_t res = 0;
     sock_fd_t cs_fd = *((sock_fd_t *) handlerArgs);
@@ -322,20 +323,18 @@ static void transferDisplayStreamHandler(const void *handlerArgs, const unsigned
     size_t newFrameBufferLength = 0;
     unsigned char *newFrameBuffer = RGBABytesArraySkipAlpha(frameBuffer, frameBufferLength, &newFrameBufferLength);
 
-    unsigned char *xorFrameBuffer = bitwise_xor(prevFrameBuffer, newFrameBuffer, newFrameBufferLength);
+    unsigned char *xorFrameBuffer = bitwise_xor64(prevFrameBuffer, newFrameBuffer, newFrameBufferLength);
 
     unsigned char *pngData = 0;
     size_t pngDataLength = 0;
-
     res = (result_t) writeRGBintoPNGBuffer(xorFrameBuffer, frameWidth, frameHeight, PNG_BIT_DEPTH_8, &pngData, &pngDataLength);
-    assert_equal_int(res, SUCCESS, "RGBA data encoded into PNG");
+    assert_equal_int(res, SUCCESS, "XORed RGBA data encoded into PNG");
 
     send_uint32(cs_fd, frameWidth);
     send_uint32(cs_fd, frameHeight);
     send_uint32(cs_fd, pngDataLength);
     res = send_binary(cs_fd, PACKET_LENGTH, pngData, pngDataLength);
-    assert_equal_int(res, SUCCESS, "send PNG data to socket");
-
+    assert_equal_int(res, SUCCESS, "sent PNG data to socket");
 
     free(pngData);
     free(xorFrameBuffer);
@@ -343,20 +342,84 @@ static void transferDisplayStreamHandler(const void *handlerArgs, const unsigned
     memcpy(prevFrameBuffer, newFrameBuffer, newFrameBufferLength);
 }
 
-static result_t display_stream_transfer_handler(sock_fd_t cs_fd) {
+static result_t display_stream_png_transfer_handler(sock_fd_t cs_fd) {
 
     size_t displayWidth = 0, displayHeight = 0;
 
     display_get_pixel_size(&displayWidth, &displayHeight);
-    CGDisplayStreamRef displayStream = display_stream_init(displayWidth, displayHeight, transferDisplayStreamHandler, &cs_fd);
+    CGDisplayStreamRef displayStream = display_stream_init(displayWidth, displayHeight, transferPNGDisplayStreamHandler, &cs_fd);
     display_stream_start(displayStream);
     sleep(30);
     display_stream_stop(displayStream);
     display_stream_free(displayStream);
 }
 
-static void test_display_stream_transfer(void) {
-    test_create_stream_server(display_stream_transfer_handler);
+static void test_display_stream_png_transfer(void) {
+    prevFrameBuffer = 0;
+    test_create_stream_server(display_stream_png_transfer_handler);
+}
+
+static unsigned char *lz4Data = 0;
+static int compressionBounds = 0;
+
+static void transferLZ4DisplayStreamHandler(const void *handlerArgs, const unsigned char *frameBuffer, const size_t frameBufferLength,
+                                            const size_t frameWidth, const size_t frameHeight, const size_t bytesPerPixel) {
+
+    result_t res = 0;
+    sock_fd_t cs_fd = *((sock_fd_t *) handlerArgs);
+
+    // XOR frame bitmap with previous frame bitmap
+    unsigned char *xorFrameBuffer = bitwise_xor64(prevFrameBuffer, frameBuffer, frameBufferLength);
+
+    // compress XORed data with LZ4
+    int lz4DataLength = 0;
+    if( (lz4DataLength = LZ4_compress_fast(xorFrameBuffer, lz4Data, frameBufferLength, compressionBounds+1, 1)) == 0 ) {
+        fprintf(stderr, "%s: Error at compression of data with LZ4\n", __func__);
+        return;
+    }
+    assert_greater_than(lz4DataLength, 0, "XORed RGB data compressed with LZ4");
+
+    send_uint32(cs_fd, lz4DataLength);
+    res = send_binary(cs_fd, PACKET_LENGTH, lz4Data, lz4DataLength);
+    assert_equal_int(res, SUCCESS, "sent LZ4 compressed data to socket");
+
+    free(xorFrameBuffer);
+    free(prevFrameBuffer);
+    prevFrameBuffer = frameBuffer;
+    //memcpy(prevFrameBuffer, frameBuffer, frameBufferLength);
+}
+
+static result_t display_stream_lz4_transfer_handler(sock_fd_t cs_fd) {
+
+    size_t displayWidth = 0, displayHeight = 0;
+    display_get_pixel_size(&displayWidth, &displayHeight);
+
+    send_uint32(cs_fd, displayWidth);
+    send_uint32(cs_fd, displayHeight);
+
+    // allocate required data structures
+    size_t frameBufferLength = displayHeight*displayWidth*4;
+    prevFrameBuffer = malloc(sizeof(unsigned char)*frameBufferLength);
+    memset(prevFrameBuffer, 0x00, frameBufferLength);
+    compressionBounds = LZ4_compressBound(frameBufferLength);
+    lz4Data = malloc(sizeof(unsigned char)*(compressionBounds + 1));
+
+    CGDisplayStreamRef  displayStream = display_stream_init(displayWidth, displayHeight, transferLZ4DisplayStreamHandler, &cs_fd);
+    display_stream_start(displayStream);
+    sleep(30);
+    display_stream_stop(displayStream);
+    display_stream_free(displayStream);
+
+    // deallocate data structures
+    free(prevFrameBuffer);
+    free(lz4Data);
+    compressionBounds = 0;
+}
+
+static void test_display_stream_lz4_transfer(void) {
+    prevFrameBuffer = 0;
+    lz4Data = 0;
+    test_create_stream_server(display_stream_lz4_transfer_handler);
 }
 
 static void run_tests(void) {
@@ -373,7 +436,9 @@ static void run_tests(void) {
     test_binary_transfer();
     test_cstring_transfer();
     test_png_transfer(); */
-    test_display_stream_transfer();
+    //test_display_stream_png_transfer();
+    test_display_stream_lz4_transfer();
+
 }
 
 test_server_transfer_t test_server_transfer = { .run_tests = run_tests };
