@@ -14,12 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30a41a37-e719-42de-8401-b68e64807243" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/librc_server.a" afterPath="$PROJECT_DIR$/librc_server.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server" afterPath="$PROJECT_DIR$/server" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.dSYM/Contents/Resources/DWARF/server" afterPath="$PROJECT_DIR$/server.dSYM/Contents/Resources/DWARF/server" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_transfer.o" afterPath="$PROJECT_DIR$/test_transfer.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_transfer.c" afterPath="$PROJECT_DIR$/test/test_transfer.c" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -474,14 +469,7 @@
       <workItem from="1473967320906" duration="2682000" />
       <workItem from="1474546290786" duration="1744000" />
       <workItem from="1476107176113" duration="15000" />
-      <workItem from="1476114723700" duration="88082000" />
-    </task>
-    <task id="LOCAL-00001" summary="create_socket() function - implemented to create server passive socket">
-      <created>1469120393439</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1469120393440</updated>
+      <workItem from="1476114723700" duration="88134000" />
     </task>
     <task id="LOCAL-00002" summary="create_passive_socket() function - updated">
       <created>1469130419623</created>
@@ -819,11 +807,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476821702214</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="test display stream updates transfer with lz4 compression and exclusion of heap allocation">
+      <created>1477063216973</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1477063216980</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92523000" />
+    <option name="totallyTimeSpent" value="92575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="512" y="126" width="915" height="665" extended-state="0" />
@@ -881,7 +876,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="array_helper.h, array_helper.c - implemented functions to find and remove elements in arrays of ints or arrays of pointers (void *)" />
     <MESSAGE value="array_helper.h, array_helper.c - fixed some bugs ex. const elem_t *elem param to const elem_t elem param" />
     <MESSAGE value="test_array_helper.h, test_array_helper.c - implemented, all tests passed" />
     <MESSAGE value="thread_pool.c - implemented, first full implementation, not tested&#10;task_queue.c - refactored, task_fill() method added, dequeue_task methods refactored to be pthread cancellable with releasing mutex i.e. pthread_cleanup_push(cleanup_unlock_mutex) and pthread_cleanup_pop()" />
@@ -906,7 +900,8 @@
     <MESSAGE value="server - changed partition of source code into libraries" />
     <MESSAGE value="test_transfer.h, test_transfer.c - first draft" />
     <MESSAGE value="test display stream transfer with lz4 compression and exclusion of heap allocation" />
-    <option name="LAST_COMMIT_MESSAGE" value="test display stream transfer with lz4 compression and exclusion of heap allocation" />
+    <MESSAGE value="test display stream updates transfer with lz4 compression and exclusion of heap allocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="test display stream updates transfer with lz4 compression and exclusion of heap allocation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
