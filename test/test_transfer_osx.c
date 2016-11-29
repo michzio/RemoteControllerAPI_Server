@@ -1,18 +1,20 @@
 //
 // Created by Michal Ziobro on 29.11.2016.
 //
-
 /**
  * This code is implemented only for Mac OS X.
  */
 #ifdef __APPLE__
 
-#include <stdio.h>
-#include "test_transfer.c"
+#include "test_transfer.h"
 #include "../../common/libraries/png/png-encoding.h"
 #include "../../common/libraries/png/png-helper.h"
 #include "../../common/bitmaps.h"
+#include "../../common/bitwise.h"
 #include "../../common/libraries/lz4/lz4.h"
+#include "../../networking/transfer/integer_transfer.h"
+#include "../../networking/transfer/binary_transfer.h"
+#include "../../unit_tests/test/assertion.h"
 #include "../../system/OS_X/automation_scripts/system/display.h"
 #include "../../system/OS_X/automation_scripts/system/display_stream.h"
 
@@ -216,4 +218,4 @@ static void test_display_stream_updates_lz4_transfer(void) {
     test_create_stream_server(display_stream_updates_lz4_transfer_handler);
 }
 
-#endif
+#endif // __APPLE__
