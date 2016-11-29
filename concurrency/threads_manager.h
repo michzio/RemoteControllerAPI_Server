@@ -5,7 +5,7 @@
 #ifndef REMOTECONTROLLERAPI_SERVER_THREADS_MANAGER_H
 #define REMOTECONTROLLERAPI_SERVER_THREADS_MANAGER_H
 
-#include <ntsid.h>
+#include <stdio.h>
 #include "../../common/types.h"
 #include "../networking/passive_connection.h"
 #include "../networking/datagram.h"

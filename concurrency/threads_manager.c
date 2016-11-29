@@ -2,7 +2,6 @@
 // Created by Michal Ziobro on 08/08/2016.
 //
 
-#include <ntsid.h>
 #include <stdlib.h>
 #include "threads_manager.h"
 #include "../concurrency/runner.h"
