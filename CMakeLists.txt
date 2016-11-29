@@ -86,6 +86,7 @@ target_link_libraries(RC_Server_Lib ${COMMON_FUNCTIONS_LIB_PATH})
 target_link_libraries(RC_Server_Lib ${COLLECTIONS_LIB_PATH})
 target_link_libraries(RC_Server_Lib ${LIBPNG_LIB_PATH})
 target_link_libraries(RC_Server_Lib ${ZLIB_PATH})
+target_link_libraries(RC_Server_Lib ${COMPARERS_LIB_PATH})
 if(APPLE)
     # link with custom OS X libraries
     target_link_libraries(RC_Server_Lib ${AUTOMATION_SCRIPTS_LIB_PATH})
@@ -107,6 +108,7 @@ target_link_libraries(RC_Server_Lib_Static ${COMMON_FUNCTIONS_LIB_PATH})
 target_link_libraries(RC_Server_Lib_Static ${COLLECTIONS_LIB_PATH})
 target_link_libraries(RC_Server_Lib_Static ${LIBPNG_LIB_PATH})
 target_link_libraries(RC_Server_Lib_Static ${ZLIB_PATH})
+target_link_libraries(RC_Server_Lib_Static ${COMPARERS_LIB_PATH})
 if(APPLE)
     # link with custom OS X libraries
     target_link_libraries(RC_Server_Lib_Static ${AUTOMATION_SCRIPTS_LIB_PATH})
@@ -123,7 +125,6 @@ target_link_libraries(RC_Server_Lib_Static ${OpenCV_LIBS})
 add_executable(RemoteControllerAPI_Server main.c ${TEST_SOURCE_FILES})
 set_target_properties(RemoteControllerAPI_Server PROPERTIES OUTPUT_NAME rc_server)
 target_link_libraries(RemoteControllerAPI_Server RC_Server_Lib_Static)
-target_link_libraries(RemoteControllerAPI_Server ${COMPARERS_LIB_PATH})
 target_link_libraries(RemoteControllerAPI_Server ${UNIT_TESTS_LIB_PATH})
 
 # install targets (executables, shared libraries, static libraries) in current project source directory

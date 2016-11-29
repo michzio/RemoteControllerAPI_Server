@@ -9,7 +9,7 @@
 #include <netdb.h>
 #include "../networking/helpers/address_helper.h"
 
-#define PORT "2016" // the port remote controller server will be listening for connections
+#define PORT "3333" // the port remote controller server will be listening for connections
 #define LOCALHOST "192.168.8.101"
 
 int start_server(void);

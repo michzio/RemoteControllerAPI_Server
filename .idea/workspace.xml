@@ -15,32 +15,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30a41a37-e719-42de-8401-b68e64807243" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake/FindOpenCV.cmake" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/test_transfer_osx.c" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/address_helper.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/datagram.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/datagram_server.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/generic_server.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/librc_server.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/passive_connection.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/passive_socket.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/runner.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server_loop.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/service.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/stream_server.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_server_loop.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_transfer.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/thread.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/threads_manager.o" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/server.iml" afterPath="$PROJECT_DIR$/.idea/server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/concurrency/threads_manager.c" afterPath="$PROJECT_DIR$/concurrency/threads_manager.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/concurrency/threads_manager.h" afterPath="$PROJECT_DIR$/concurrency/threads_manager.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.c" afterPath="$PROJECT_DIR$/main.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_transfer.c" afterPath="$PROJECT_DIR$/test/test_transfer.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.h" afterPath="$PROJECT_DIR$/server.h" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,22 +41,19 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="37" column="54" selection-start-line="37" selection-start-column="54" selection-end-line="37" selection-end-column="54" />
+            <state relative-caret-position="248">
+              <caret line="88" column="42" selection-start-line="88" selection-start-column="42" selection-end-line="88" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_transfer.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test_transfer.c">
+      <file leaf-file-name="make.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/make.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="277" column="6" selection-start-line="277" selection-start-column="6" selection-end-line="277" selection-end-column="6" />
-              <folding>
-                <element signature="e#50#68#0" expanded="true" />
-                <element signature="e#610#640#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="177">
+              <caret line="87" column="311" selection-start-line="87" selection-start-column="311" selection-end-line="87" selection-end-column="311" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,11 +61,41 @@
       <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+            <state relative-caret-position="187">
+              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stream_server.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -130,10 +135,8 @@
         <option value="$PROJECT_DIR$/concurrency/runner.h" />
         <option value="$PROJECT_DIR$/common/address_helper.h" />
         <option value="$PROJECT_DIR$/networking/service.c" />
-        <option value="$PROJECT_DIR$/networking/server_loop.c" />
         <option value="$PROJECT_DIR$/concurrency/thread.c" />
         <option value="$PROJECT_DIR$/test/test_server_loop.c" />
-        <option value="$PROJECT_DIR$/make.txt" />
         <option value="$PROJECT_DIR$/networking/passive_connection.h" />
         <option value="$PROJECT_DIR$/networking/datagram.h" />
         <option value="$PROJECT_DIR$/networking/datagram_server.h" />
@@ -145,15 +148,17 @@
         <option value="$PROJECT_DIR$/networking/passive_socket.h" />
         <option value="$PROJECT_DIR$/test/test_transfer.h" />
         <option value="$PROJECT_DIR$/server.c" />
-        <option value="$PROJECT_DIR$/server.h" />
         <option value="$PROJECT_DIR$/networking/datagram_server.c" />
         <option value="$PROJECT_DIR$/concurrency/threads_manager.h" />
         <option value="$PROJECT_DIR$/concurrency/threads_manager.c" />
         <option value="$PROJECT_DIR$/test/test_transfer_osx.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/test/test_transfer_osx.c" />
-        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/test/test_transfer.c" />
+        <option value="$PROJECT_DIR$/make.txt" />
+        <option value="$PROJECT_DIR$/networking/server_loop.c" />
+        <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/server.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -165,10 +170,10 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="116" />
-    <option name="y" value="68" />
-    <option name="width" value="1180" />
-    <option name="height" value="696" />
+    <option name="x" value="58" />
+    <option name="y" value="165" />
+    <option name="width" value="1348" />
+    <option name="height" value="694" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -220,7 +225,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../concurrency" />
     <property name="settings.editor.selected.configurable" value="pyconsole" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -234,7 +239,7 @@
       <recent name="$PROJECT_DIR$/concurrency" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Build All">
+  <component name="RunManager" selected="Application.Install_RemoteControllerAPI_Server">
     <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="RemoteControllerAPI_Server" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
@@ -404,24 +409,24 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="RC_Server_Lib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="RC_Server_Lib" CONFIG_NAME="Debug">
+    <configuration default="false" name="Install_RemoteControllerAPI_Server" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="Install_RemoteControllerAPI_Server" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RemoteControllerAPI_Server" RUN_TARGET_NAME="RemoteControllerAPI_Server">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="RC_Server_Lib_Static" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="RC_Server_Lib_Static" CONFIG_NAME="Debug">
+    <configuration default="false" name="RC_Server_Lib_Static" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="RC_Server_Lib_Static" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RemoteControllerAPI_Server" RUN_TARGET_NAME="RemoteControllerAPI_Server">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Install_RemoteControllerAPI_Server" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="Install_RemoteControllerAPI_Server" CONFIG_NAME="Debug">
+    <configuration default="false" name="RC_Server_Lib" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RemoteControllerAPI_Server" TARGET_NAME="RC_Server_Lib" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RemoteControllerAPI_Server" RUN_TARGET_NAME="RemoteControllerAPI_Server">
       <envs />
       <method />
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.RemoteControllerAPI_Server" />
       <item index="1" class="java.lang.String" itemvalue="Application.Build All" />
-      <item index="2" class="java.lang.String" itemvalue="Application.RC_Server_Lib" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Install_RemoteControllerAPI_Server" />
       <item index="3" class="java.lang.String" itemvalue="Application.RC_Server_Lib_Static" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Install_RemoteControllerAPI_Server" />
+      <item index="4" class="java.lang.String" itemvalue="Application.RC_Server_Lib" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -444,21 +449,7 @@
       <workItem from="1480424412054" duration="9785000" />
       <workItem from="1480447132940" duration="189000" />
       <workItem from="1480447800942" duration="141000" />
-      <workItem from="1480448185685" duration="343000" />
-    </task>
-    <task id="LOCAL-00003" summary="create_passive_socket() function - added printing address and port passive socket has been binded to.">
-      <created>1469204282984</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1469204282985</updated>
-    </task>
-    <task id="LOCAL-00004" summary="listen_connections() function implemented">
-      <created>1469213786519</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1469213786519</updated>
+      <workItem from="1480448185685" duration="4349000" />
     </task>
     <task id="LOCAL-00005" summary="helper.h, helper.c separated from server.h, server.c">
       <created>1469365963581</created>
@@ -789,25 +780,39 @@
       <option name="project" value="LOCAL" />
       <updated>1477063261387</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="test_transfer_osx.c - contains code extracted from test_transfer.c which is specific for OS X &#10;CMakeLists.txt - updated to support Windows Cygwin build">
+      <created>1480448643982</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1480448643982</updated>
+    </task>
+    <task id="LOCAL-00053" summary="make.txt - updated to support Windows Cygwin build">
+      <created>1480450778973</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1480450778973</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103169000" />
+    <option name="totallyTimeSpent" value="107175000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="116" y="68" width="1180" height="696" extended-state="0" />
-    <editor active="true" />
+    <frame x="58" y="165" width="1348" height="694" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.234676" sideWeight="0.6299639" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16259542" sideWeight="0.6299639" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24333926" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2228164" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23583461" sideWeight="0.496063" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706767" sideWeight="0.503937" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329235" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29307282" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36185384" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21052632" sideWeight="0.4914481" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.486631" sideWeight="0.4914481" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18213537" sideWeight="0.3700361" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32102728" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -851,8 +856,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="array_helper.h, array_helper.c - fixed some bugs ex. const elem_t *elem param to const elem_t elem param" />
-    <MESSAGE value="test_array_helper.h, test_array_helper.c - implemented, all tests passed" />
     <MESSAGE value="thread_pool.c - implemented, first full implementation, not tested&#10;task_queue.c - refactored, task_fill() method added, dequeue_task methods refactored to be pthread cancellable with releasing mutex i.e. pthread_cleanup_push(cleanup_unlock_mutex) and pthread_cleanup_pop()" />
     <MESSAGE value="thread_pool.c - refactored, added pthread_setcancelstate(), pthread_setcanceltype() calls in worker thread to enable DEFFERED cancellation of workers by pthread_cancel() calls while in thread_pool_free() method" />
     <MESSAGE value="thread_pool.c - refactored, added workers counter resetting to 0 before worker threads cancellation in order to not self terminate while cancelling it" />
@@ -876,14 +879,16 @@
     <MESSAGE value="test_transfer.h, test_transfer.c - first draft" />
     <MESSAGE value="test display stream transfer with lz4 compression and exclusion of heap allocation" />
     <MESSAGE value="test display stream updates transfer with lz4 compression and exclusion of heap allocation" />
-    <option name="LAST_COMMIT_MESSAGE" value="test display stream updates transfer with lz4 compression and exclusion of heap allocation" />
+    <MESSAGE value="test_transfer_osx.c - contains code extracted from test_transfer.c which is specific for OS X &#10;CMakeLists.txt - updated to support Windows Cygwin build" />
+    <MESSAGE value="make.txt - updated to support Windows Cygwin build" />
+    <option name="LAST_COMMIT_MESSAGE" value="make.txt - updated to support Windows Cygwin build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/networking/server_loop.c</url>
-          <line>296</line>
+          <line>297</line>
           <option name="timeStamp" value="333" />
         </line-breakpoint>
       </breakpoints>
@@ -899,7 +904,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/time.h" />
     <entry file="file://$PROJECT_DIR$/common/fifo_queue.h" />
     <entry file="file://$PROJECT_DIR$/common/fifo_queue.c" />
     <entry file="file://$PROJECT_DIR$/concurrency/thread_pool/thread_pool.h" />
@@ -975,13 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networking/generic_server.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
@@ -996,27 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/networking/server_loop.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2190">
-          <caret line="21" column="76" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
-          <folding>
-            <element signature="e#50#68#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networking/service.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-285">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1031,13 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/make.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="108" />
         </state>
       </provider>
     </entry>
@@ -1071,13 +1044,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../system/OS_X/automation_scripts/system/display_stream.h" />
-    <entry file="file://$PROJECT_DIR$/server.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networking/stream_server.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1140,8 +1106,24 @@
         <state relative-caret-position="85">
           <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
           <folding>
-            <element signature="e#123#7886#0" expanded="true" />
+            <element signature="e#123#7886#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/cygwin64/usr/include/sys/select.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/server_loop.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1150,26 +1132,58 @@
         <state relative-caret-position="144">
           <caret line="277" column="6" selection-start-line="277" selection-start-column="6" selection-end-line="277" selection-end-column="6" />
           <folding>
-            <element signature="e#50#68#0" expanded="true" />
-            <element signature="e#610#640#0" expanded="true" />
+            <element signature="e#50#68#0" expanded="false" />
+            <element signature="e#610#640#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+        <state relative-caret-position="187">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/make.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="87" column="311" selection-start-line="87" selection-start-column="311" selection-end-line="87" selection-end-column="311" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="37" column="54" selection-start-line="37" selection-start-column="54" selection-end-line="37" selection-end-column="54" />
+        <state relative-caret-position="248">
+          <caret line="88" column="42" selection-start-line="88" selection-start-column="42" selection-end-line="88" selection-end-column="42" />
           <folding />
         </state>
       </provider>

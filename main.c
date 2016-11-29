@@ -7,9 +7,9 @@ int main(int argc, char **argv) {
 
     printf("Remote Controller Server - desktop side, remotely controlled.\n");
 
-    test_server_transfer.run_tests();
+    //test_server_transfer.run_tests();
     //test_server_loop.run_tests();
-    //start_server();
+    start_server();
 
     return 0;
 }
