@@ -2,6 +2,7 @@
 // Created by Michal Ziobro on 26/07/2016.
 //
 
+#include <sys/select.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>

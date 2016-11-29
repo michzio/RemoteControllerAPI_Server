@@ -1,7 +1,7 @@
 # Makefile for UNIX        
 
 # the compiler: gcc for C program, define as g++ for C++ 
-CC = gcc  
+CC = gcc
 
 # the static library archiver 
 AR = ar rcs
@@ -14,47 +14,78 @@ AR = ar rcs
 # -std=c99 use newer version
 CFLAGS=-g -Wall -D__USE_FIXED_PROTOTYPES__ -std=c99
 
-# include headers 
-CFLAGS += -I/usr/local/include
-
 # libraries 
 # OpenCV
-OPENCV_LIBS = `pkg-config --cflags --libs opencv` 
+ifeq ($(OS),Windows_NT)
+	OPENCV_LIBS += C:/opencv/cygwin/lib/libopencv_core310.dll.a
+	OPENCV_LIBS += C:/opencv/cygwin/lib/libopencv_imgproc310.dll.a
+	OPENCV_LIBS += C:/opencv/cygwin/lib/libopencv_highgui310.dll.a
+else
+	OPENCV_LIBS = `pkg-config --cflags --libs opencv`
+endif
 
-# OS X 
-OS_X_LIBS += -framework ApplicationServices 
-OS_X_LIBS += -framework Carbon
-OS_X_LIBS += -framework IOKit
-OS_X_LIBS += -framework AudioToolbox
-OS_X_LIBS += -framework IOSurface
+ifneq ($(OS),Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        # OS X
+        OS_X_LIBS += -framework ApplicationServices
+        OS_X_LIBS += -framework Carbon
+        OS_X_LIBS += -framework IOKit
+        OS_X_LIBS += -framework AudioToolbox
+        OS_X_LIBS += -framework IOSurface
+    endif
+else
+    OS_X_LIBS =
+endif
 
 # custom
-NETWORKING_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/libnetworking.a 
-CONCURRENCY_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/libconcurrency.a 
-COMMON_FUNCTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/libcommon_functions.a
-COLLECTIONS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/libcollections.a
-COMPARERS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/libcomparers.a
-UNIT_TESTS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/unit_tests/libunit_tests.a
-# custom OS X 
-AUTOMATION_SCRIPTS_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/libautomation_scripts.a
-COCOA_HELPER_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/libcocoa_helper.a
-LIBPNG_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/liblibpng.a 
-ZLIB_LIBRARY = /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/libzlib.a
+NETWORKING_LIBRARY = ../networking/libnetworking.a
+CONCURRENCY_LIBRARY = ../concurrency/libconcurrency.a
+COMMON_FUNCTIONS_LIBRARY = ../common/libcommon_functions.a
+COLLECTIONS_LIBRARY = ../collections/libcollections.a
+COMPARERS_LIBRARY = ../comparers/libcomparers.a
+UNIT_TESTS_LIBRARY = ../unit_tests/libunit_tests.a
+LIBPNG_INCL_DIR = ../libpng-1.6.24
+LIBPNG_LIBRARY = $(LIBPNG_INCL_DIR)/liblibpng.a
+ZLIB_INCL_DIR = ../zlib-1.2.8
+ZLIB_LIBRARY = $(ZLIB_INCL_DIR)/libzlib.a
+
+ifneq ($(OS),Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        # custom OS X
+        AUTOMATION_SCRIPTS_LIBRARY = ../system/OS_X/automation_scripts/libautomation_scripts.a
+        COCOA_HELPER_LIBRARY = ../system/OS_X/cocoa_helper/libcocoa_helper.a
+    endif
+else
+    AUTOMATION_SCRIPTS_LIBRARY =
+    COCOA_HELPER_LIBRARY =
+endif
+
+# include headers
+INCL_DIRS += -I$(LIBPNG_INCL_DIR)
+INCL_DIRS += -I$(ZLIB_INCL_DIR)
+ifeq ($(OS),Windows_NT)
+    INCL_DIRS += -Ic:/opencv/build/include
+else
+    INCL_DIRS += -I/usr/local/include
+endif
+CFLAGS += $(INCL_DIRS)
 
 # the build target executable: 
-TARGET = server
+TARGET = rc_server
 LIBRARY = librc_server.a
 
 # source files 
 SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o
 
 # test source files 
-TEST_SOURCE_FILES = test_server_loop.o test_transfer.o
+TEST_SOURCE_FILES = test_server_loop.o test_transfer.o test_transfer_osx.o
 
 all: $(TARGET)
 
 $(TARGET): main.c $(LIBRARY) $(TEST_SOURCE_FILES)
-	$(CC) $(CFLAGS) -o $(TARGET) main.c $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(COMPARERS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(OS_X_LIBS) $(COCOA_HELPER_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(TEST_SOURCE_FILES) $(UNIT_TESTS_LIBRARY) -lpthread $(OPENCV_LIBS)
+	$(CC) $(CFLAGS) -o $(TARGET) main.c $(TEST_SOURCE_FILES) $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(COMPARERS_LIBRARY) $(UNIT_TESTS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(COCOA_HELPER_LIBRARY) $(OS_X_LIBS) $(OPENCV_LIBS)
 
 $(LIBRARY): $(SOURCE_FILES)
 	$(AR) $(LIBRARY) $(SOURCE_FILES)
@@ -101,5 +132,8 @@ test_server_loop.o: test/test_server_loop.c test/test_server_loop.h
 test_transfer.o: test/test_transfer.c test/test_transfer.h
 	$(CC) $(CFLAGS) -c test/test_transfer.c
 
+test_transfer_osx.o: test/test_transfer_osx.c
+	$(CC) $(CFLAGS) -c test/test_transfer_osx.c
+
 clean:
-	$(RM) $(TARGET) $(LIBRARY) $(SOURCE_FILES) $(TEST_SOURCE_FILES)
+	$(RM) $(TARGET) $(TARGET).exe $(LIBRARY) $(SOURCE_FILES) $(TEST_SOURCE_FILES)
