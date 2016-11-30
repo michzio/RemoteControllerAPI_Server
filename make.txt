@@ -132,7 +132,7 @@ test_server_loop.o: test/test_server_loop.c test/test_server_loop.h
 test_transfer.o: test/test_transfer.c test/test_transfer.h
 	$(CC) $(CFLAGS) -c test/test_transfer.c
 
-test_transfer_osx.o: test/test_transfer_osx.c
+test_transfer_osx.o: test/test_transfer_osx.c test/test_transfer.h
 	$(CC) $(CFLAGS) -c test/test_transfer_osx.c
 
 clean:

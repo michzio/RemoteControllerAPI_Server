@@ -1,6 +1,7 @@
 //
 // Created by Michal Ziobro on 29.11.2016.
 //
+
 /**
  * This code is implemented only for Mac OS X.
  */

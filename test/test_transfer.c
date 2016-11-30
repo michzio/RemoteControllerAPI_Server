@@ -3,6 +3,7 @@
 //
 
 #include "test_transfer.h"
+#include <stdlib.h>
 #include "../../common/bitwise.h"
 #include "../../networking/transfer/integer_transfer.h"
 #include "../../networking/transfer/str_transfer.h"
