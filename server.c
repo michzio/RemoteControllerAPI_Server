@@ -7,22 +7,14 @@
 #include "networking/datagram_server.h"
 
 
-int start_server(void) {
+int start_server(server_t server, server_info_t *server_info) {
 
-     echo_iterative_stream_server();
-    // echo_iterative_datagram_server();
-    // echo_concurrent_stream_server();
-    // echo_concurrent_datagram_server();
-    // echo_managed_concurrent_stream_server();
-    // echo_managed_concurrent_datagram_server();
-    // echo_thread_pool_stream_server();
-    // echo_thread_pool_datagram_server();
-    // echo_pseudo_concurrent_stream_server();
+    server(server_info);
 
     return SUCCESS;
 }
 
-int end_server() {
+int end_server(server_info_t *server_info) {
 
     return SUCCESS;
 }

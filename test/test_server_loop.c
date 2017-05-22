@@ -22,17 +22,22 @@ static void test_echo_server(server_t server, sock_type_t sock_type, const char 
     char *response;
     int pid;
 
+    server_info_t *server_info;
+    server_info_init(&server_info);
+    server_info_set_port(server_info, TEST_PORT);
+
     // create server process
     if( (pid = fork()) < 0 ) {
         fprintf(stderr, "fork: failed!\n");
         return;
     } else if( pid == 0 ) {
         // CHILD PROCESS
-        server();
+
+        server(server_info);
     }
     // PARENT PROCESS
     response = exec_cmd_f("printf '%s' | nc %s %s %s -w %d",
-                          message, (sock_type == SOCK_DGRAM) ? "-u" : "", LOCALHOST, PORT, DEFAULT_S_TIMEOUT);
+                          message, (sock_type == SOCK_DGRAM) ? "-u" : "", LOCALHOST, TEST_PORT, DEFAULT_S_TIMEOUT);
 
     printf(ANSI_COLOR_BLUE "client: got response '%s'" ANSI_COLOR_RESET "\n", response);
 

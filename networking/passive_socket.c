@@ -72,8 +72,6 @@ static result_t create_passive_socket(const char *port, sock_type_t sock_type, s
 
     *pasv_sock_fd = ps_fd; // return created passive socket file descriptor
 
-    print_socket_address(ps_fd, PASSIVE_SOCKET);
-
     return SUCCESS;
 }
 

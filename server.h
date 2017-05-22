@@ -8,11 +8,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include "../networking/helpers/address_helper.h"
+#include "networking/generic_server.h"
 
-#define PORT "3333" // the port remote controller server will be listening for connections
-#define LOCALHOST "192.168.8.101"
-
-int start_server(void);
-int end_server(void);
+int start_server(server_t server, server_info_t *server_info);
+int end_server(server_info_t *server_info);
 
 #endif /* REMOTECONTROLLERAPI_SERVER_SERVER_H */
