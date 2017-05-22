@@ -20,15 +20,28 @@ struct server_info {
 void server_info_init(server_info_t **info) {
 
     *info = malloc(sizeof(server_info_t));
+    (*info)->ip = NULL;
+    (*info)->port = NULL;
 }
 
 void server_info_set_port(server_info_t *info, const char *port) {
-    info->port = port;
+
+    if(info->port == NULL) {
+        info->port = malloc(sizeof(port));
+    } else {
+        info->port = realloc(info->port, sizeof(port));
+    }
+    strcpy(info->port, port);
 }
 
 void server_info_set_ip(server_info_t *info, const char *ip) {
 
-    info->ip = ip;
+    if(info->ip == NULL) {
+        info->ip = malloc(sizeof(ip));
+    } else {
+        info->ip = realloc(info->ip, sizeof(ip));
+    }
+    strcpy(info->ip, ip);
 }
 
 void server_info_set_sock(server_info_t *info, const sock_fd_t sockfd) {
@@ -45,7 +58,6 @@ result_t server_info_fill(server_info_t *info, const sock_fd_t sockfd) {
 
     if(get_current_address_and_port(sockfd, &ip_address, &port_number) == FAILURE) {
         fprintf(stderr, "get_current_address_and_port: faild!\n");
-        free(info->ip);
         return FAILURE;
     }
 
@@ -54,7 +66,9 @@ result_t server_info_fill(server_info_t *info, const sock_fd_t sockfd) {
     char *port = malloc(port_len);
     snprintf(port, port_len, "%d", port_number);
 
+    if(info->ip) free(info->ip);
     info->ip = ip_address;
+    if(info->port) free(info->port);
     info->port = port;
 
     return SUCCESS;
@@ -77,6 +91,8 @@ const sock_fd_t server_info_sock(const server_info_t *info) {
 
 void server_info_free(server_info_t *info) {
 
+    if(info->port) free(info->port);
+    if(info->ip) free(info->ip);
     free(info); info = NULL;
 }
 

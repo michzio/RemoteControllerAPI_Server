@@ -13,6 +13,10 @@ int main(int argc, char **argv) {
     //test_server_transfer.run_tests();
     //test_server_loop.run_tests();
 
+    char *ip_address;
+    get_current_address(AF_INET, &ip_address);
+    printf("Current device IP address: %s\n", ip_address);
+
     server_info_t *server_info;
     server_info_init(&server_info);
     server_info_set_port(server_info, PORT);
