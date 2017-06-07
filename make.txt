@@ -39,23 +39,33 @@ else
 endif
 
 # custom
-NETWORKING_LIBRARY = ../networking/libnetworking.a
-CONCURRENCY_LIBRARY = ../concurrency/libconcurrency.a
-COMMON_FUNCTIONS_LIBRARY = ../common/libcommon_functions.a
-COLLECTIONS_LIBRARY = ../collections/libcollections.a
-COMPARERS_LIBRARY = ../comparers/libcomparers.a
-UNIT_TESTS_LIBRARY = ../unit_tests/libunit_tests.a
+NETWORKING_INCL_DIR = ../networking
+CONCURRENCY_INCL_DIR = ../concurrency
+COMMON_FUNCTIONS_INCL_DIR = ../common
+COLLECTIONS_INCL_DIR = ../collections
+COMPARERS_INCL_DIR = ../comparers
+UNIT_TESTS_INCL_DIR = ../unit_tests
 LIBPNG_INCL_DIR = ../libpng-1.6.24
-LIBPNG_LIBRARY = $(LIBPNG_INCL_DIR)/liblibpng.a
 ZLIB_INCL_DIR = ../zlib-1.2.8
-ZLIB_LIBRARY = $(ZLIB_INCL_DIR)/libzlib.a
+
+NETWORKING_LIBRARY = $(NETWORKING_INCL_DIR)/output/debug/lib/static/libnetworking.a
+CONCURRENCY_LIBRARY = $(CONCURRENCY_INCL_DIR)/output/debug/lib/static/libconcurrency.a
+COMMON_FUNCTIONS_LIBRARY = $(COMMON_FUNCTIONS_INCL_DIR)/output/debug/lib/static/libcommon_functions.a
+COLLECTIONS_LIBRARY = $(COLLECTIONS_INCL_DIR)/output/debug/lib/static/libcollections.a
+COMPARERS_LIBRARY = $(COMPARERS_INCL_DIR)/output/debug/lib/static/libcomparers.a
+UNIT_TESTS_LIBRARY = $(UNIT_TESTS_INCL_DIR)/output/debug/lib/static/libunit_tests.a
+LIBPNG_LIBRARY = $(LIBPNG_INCL_DIR)/output/debug/lib/static/liblibpng.a
+ZLIB_LIBRARY = $(ZLIB_INCL_DIR)/output/debug/lib/static/libzlib.a
 
 ifneq ($(OS),Windows_NT)
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
         # custom OS X
-        AUTOMATION_SCRIPTS_LIBRARY = ../system/OS_X/automation_scripts/libautomation_scripts.a
-        COCOA_HELPER_LIBRARY = ../system/OS_X/cocoa_helper/libcocoa_helper.a
+        AUTOMATION_SCRIPTS_INCL_DIR = ../system/OS_X/automation_scripts
+        COCOA_HELPER_INCL_DIR = ../system/OS_X/cocoa_helper
+
+        AUTOMATION_SCRIPTS_LIBRARY = $(AUTOMATION_SCRIPTS_INCL_DIR)/output/debug/lib/static/libautomation_scripts.a
+        COCOA_HELPER_LIBRARY = $(COCOA_HELPER_INCL_DIR)/output/debug/lib/static/libcocoa_helper.a
     endif
 else
     AUTOMATION_SCRIPTS_LIBRARY =
@@ -75,6 +85,15 @@ CFLAGS += $(INCL_DIRS)
 # the build target executable: 
 TARGET = rc_server
 LIBRARY = librc_server.a
+SHARED_LIBRARY = librc_server.so
+
+# on macOS build .dylib shared library
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	DYNAMIC_LIBRARY= librc_server.dylib
+else 
+	DYNAMIC_LIBRARY=
+endif
 
 # source files 
 SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o
@@ -82,58 +101,75 @@ SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o 
 # test source files 
 TEST_SOURCE_FILES = test_server_loop.o test_transfer.o test_transfer_osx.o
 
-all: $(TARGET)
+# output directories 
+OUTPUT_DIR = output/debug
+OUTPUT_LIB_DIR = $(OUTPUT_DIR)/lib
+OUTPUT_STATIC_LIB_DIR = $(OUTPUT_LIB_DIR)/static
+OUTPUT_BIN_DIR = $(OUTPUT_DIR)/bin
+OUTPUT_TEST_DIR = $(OUTPUT_DIR)/test
 
-$(TARGET): main.c $(LIBRARY) $(TEST_SOURCE_FILES)
-	$(CC) $(CFLAGS) -o $(TARGET) main.c $(TEST_SOURCE_FILES) $(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(COMPARERS_LIBRARY) $(UNIT_TESTS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(COCOA_HELPER_LIBRARY) $(OS_X_LIBS) $(OPENCV_LIBS)
+all: directories libraries $(TARGET)
+
+# make output directories
+directories: 
+	@mkdir -p $(OUTPUT_DIR)
+	@mkdir -p $(OUTPUT_LIB_DIR)
+	@mkdir -p $(OUTPUT_STATIC_LIB_DIR)
+	@mkdir -p $(OUTPUT_BIN_DIR)
+	@mkdir -p $(OUTPUT_TEST_DIR)
+
+libraries: $(LIBRARY)
+
+$(TARGET): $(LIBRARY) $(TEST_SOURCE_FILES)
+	$(CC) $(CFLAGS) -o $(OUTPUT_BIN_DIR)/$(TARGET) main.c $(OUTPUT_TEST_DIR)/*.o $(OUTPUT_STATIC_LIB_DIR)/$(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(COMPARERS_LIBRARY) $(UNIT_TESTS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(COCOA_HELPER_LIBRARY) $(OS_X_LIBS) $(OPENCV_LIBS)
 
 $(LIBRARY): $(SOURCE_FILES)
-	$(AR) $(LIBRARY) $(SOURCE_FILES)
+	$(AR) $(OUTPUT_STATIC_LIB_DIR)/$(LIBRARY) $(OUTPUT_DIR)/*.o
 
 runner.o: concurrency/runner.c concurrency/runner.h
-	$(CC) $(CFLAGS) -c concurrency/runner.c  
+	$(CC) $(CFLAGS) -c concurrency/runner.c  -o $(OUTPUT_DIR)/runner.o
 
 thread.o: concurrency/thread.c concurrency/thread.h 
-	$(CC) $(CFLAGS) -c concurrency/thread.c
+	$(CC) $(CFLAGS) -c concurrency/thread.c -o $(OUTPUT_DIR)/thread.o
 
 threads_manager.o: concurrency/threads_manager.c concurrency/threads_manager.h
-	$(CC) $(CFLAGS) -c concurrency/threads_manager.c 
+	$(CC) $(CFLAGS) -c concurrency/threads_manager.c -o $(OUTPUT_DIR)/threads_manager.o
 
 datagram.o: networking/datagram.c networking/datagram.h
-	$(CC) $(CFLAGS) -c networking/datagram.c
+	$(CC) $(CFLAGS) -c networking/datagram.c -o $(OUTPUT_DIR)/datagram.o
 
 datagram_server.o: networking/datagram_server.c networking/datagram_server.h
-	$(CC) $(CFLAGS) -c networking/datagram_server.c
+	$(CC) $(CFLAGS) -c networking/datagram_server.c -o $(OUTPUT_DIR)/datagram_server.o
 
 generic_server.o: networking/generic_server.c networking/generic_server.h
-	$(CC) $(CFLAGS) -c networking/generic_server.c
+	$(CC) $(CFLAGS) -c networking/generic_server.c -o $(OUTPUT_DIR)/generic_server.o
 
 passive_connection.o: networking/passive_connection.c networking/passive_connection.h
-	$(CC) $(CFLAGS) -c networking/passive_connection.c
+	$(CC) $(CFLAGS) -c networking/passive_connection.c -o $(OUTPUT_DIR)/passive_connection.o
 
 passive_socket.o: networking/passive_socket.c networking/passive_socket.h
-	$(CC) $(CFLAGS) -c networking/passive_socket.c
+	$(CC) $(CFLAGS) -c networking/passive_socket.c -o $(OUTPUT_DIR)/passive_socket.o
 
 server_loop.o: networking/server_loop.c networking/server_loop.h
-	$(CC) $(CFLAGS) -c networking/server_loop.c
+	$(CC) $(CFLAGS) -c networking/server_loop.c -o $(OUTPUT_DIR)/server_loop.o
 
 service.o: networking/service.c networking/service.h
-	$(CC) $(CFLAGS) -c networking/service.c
+	$(CC) $(CFLAGS) -c networking/service.c -o $(OUTPUT_DIR)/service.o
 
 stream_server.o: networking/stream_server.c networking/stream_server.h
-	$(CC) $(CFLAGS) -c networking/stream_server.c
+	$(CC) $(CFLAGS) -c networking/stream_server.c -o $(OUTPUT_DIR)/stream_server.o
 
 server.o: server.c server.h
-	$(CC) $(CFLAGS) -c server.c
+	$(CC) $(CFLAGS) -c server.c -o $(OUTPUT_DIR)/server.o
 
 test_server_loop.o: test/test_server_loop.c test/test_server_loop.h 
-	$(CC) $(CFLAGS) -c test/test_server_loop.c 
+	$(CC) $(CFLAGS) -c test/test_server_loop.c -o $(OUTPUT_TEST_DIR)/test_server_loop.o
 
 test_transfer.o: test/test_transfer.c test/test_transfer.h
-	$(CC) $(CFLAGS) -c test/test_transfer.c
+	$(CC) $(CFLAGS) -c test/test_transfer.c -o $(OUTPUT_TEST_DIR)/test_transfer.o
 
 test_transfer_osx.o: test/test_transfer_osx.c test/test_transfer.h
-	$(CC) $(CFLAGS) -c test/test_transfer_osx.c
+	$(CC) $(CFLAGS) -c test/test_transfer_osx.c -o $(OUTPUT_TEST_DIR)/test_transfer_osx.o
 
 clean:
-	$(RM) $(TARGET) $(TARGET).exe $(LIBRARY) $(SOURCE_FILES) $(TEST_SOURCE_FILES)
+	$(RM) -rf $(OUTPUT_DIR)

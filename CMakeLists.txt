@@ -79,7 +79,7 @@ include_directories(${LIBPNG_PATH})
 include_directories(${ZLIB_PATH})
 
 add_library(RC_Server_Lib SHARED ${SOURCE_FILES})
-set_target_properties(RC_Server_Lib PROPERTIES OUTPUT_NAME rc_server_shared)
+set_target_properties(RC_Server_Lib PROPERTIES OUTPUT_NAME rc_server)
 target_link_libraries(RC_Server_Lib ${NETWORKING_LIB_PATH})
 target_link_libraries(RC_Server_Lib ${CONCURRENCY_LIB_PATH})
 target_link_libraries(RC_Server_Lib ${COMMON_FUNCTIONS_LIB_PATH})

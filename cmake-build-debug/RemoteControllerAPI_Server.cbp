@@ -88,7 +88,7 @@
 				</MakeCommands>
 			</Target>
 			<Target title="RC_Server_Lib">
-				<Option output="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/librc_server_shared.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option output="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/librc_server.dylib" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
@@ -112,7 +112,7 @@
 				</MakeCommands>
 			</Target>
 			<Target title="RC_Server_Lib/fast">
-				<Option output="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/librc_server_shared.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option output="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/librc_server.dylib" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="3"/>

@@ -11,8 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o"
   "CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o"
   "CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o"
-  "librc_server_shared.pdb"
-  "librc_server_shared.dylib"
+  "librc_server.pdb"
+  "librc_server.dylib"
 )
 
 # Per-language clean rules from dependency scanning.

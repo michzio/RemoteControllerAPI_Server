@@ -1,0 +1,3 @@
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/output/apple/bin/rc_server
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/output/apple/lib/librc_server.dylib
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/output/apple/lib/static/librc_server.a
