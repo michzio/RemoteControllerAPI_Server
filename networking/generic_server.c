@@ -8,93 +8,10 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <math.h>
+#include <fcntl.h>
 #include "generic_server.h"
+#include "../../collections/linked_list/linked_list.h"
 
-struct server_info {
-    char *port;
-    char *ip;
-    sock_fd_t sockfd;
-};
-
-// server_info_t operations
-void server_info_init(server_info_t **info) {
-
-    *info = malloc(sizeof(server_info_t));
-    (*info)->ip = NULL;
-    (*info)->port = NULL;
-}
-
-void server_info_set_port(server_info_t *info, const char *port) {
-
-    if(info->port == NULL) {
-        info->port = malloc(sizeof(port));
-    } else {
-        info->port = realloc(info->port, sizeof(port));
-    }
-    strcpy(info->port, port);
-}
-
-void server_info_set_ip(server_info_t *info, const char *ip) {
-
-    if(info->ip == NULL) {
-        info->ip = malloc(sizeof(ip));
-    } else {
-        info->ip = realloc(info->ip, sizeof(ip));
-    }
-    strcpy(info->ip, ip);
-}
-
-void server_info_set_sock(server_info_t *info, const sock_fd_t sockfd) {
-
-    info->sockfd = sockfd;
-}
-
-result_t server_info_fill(server_info_t *info, const sock_fd_t sockfd) {
-
-    info->sockfd = sockfd;
-
-    char *ip_address;
-    int port_number;
-
-    if(get_current_address_and_port(sockfd, &ip_address, &port_number) == FAILURE) {
-        fprintf(stderr, "get_current_address_and_port: faild!\n");
-        return FAILURE;
-    }
-
-    // converting integer port number into string equivalent
-    size_t port_len = (size_t)((ceil(log10(port_number))+1)*sizeof(char));
-    char *port = malloc(port_len);
-    snprintf(port, port_len, "%d", port_number);
-
-    if(info->ip) free(info->ip);
-    info->ip = ip_address;
-    if(info->port) free(info->port);
-    info->port = port;
-
-    return SUCCESS;
-}
-
-const char *server_info_port(const server_info_t *info) {
-
-    return info->port;
-}
-
-const char *server_info_ip(const server_info_t *info) {
-
-    return info->ip;
-}
-
-const sock_fd_t server_info_sock(const server_info_t *info) {
-
-    return info->sockfd;
-}
-
-void server_info_free(server_info_t *info) {
-
-    if(info->port) free(info->port);
-    if(info->ip) free(info->ip);
-    free(info); info = NULL;
-}
 
 result_t create_stream_server(server_info_t *info, stream_server_loop_t server_loop, connection_handler_t conn_handler) {
 
@@ -104,34 +21,53 @@ result_t create_stream_server(server_info_t *info, stream_server_loop_t server_l
 
     if(create_stream_pasv_sock(server_info_port(info), &ps_fd) == FAILURE) {
         fprintf(stderr, "create_stream_pasv_sock: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_CREATE_PASV_SOCK, "create_stream_pasv_sock: failed!");
         return FAILURE;
     }
 
     // for information & debugging purposes
     if(print_socket_address(ps_fd, PASSIVE_SOCKET) == FAILURE) {
         fprintf(stderr, "print_socket_address: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_PRINT_ADDRESS, "print_socket_address: failed!");
         return FAILURE;
     }
 
     if(server_info_fill(info, ps_fd) == FAILURE) {
         fprintf(stderr, "server_info_fill: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_INFO_FILL, "server_info_fill: failed!");
         return FAILURE;
     }
 
     if(listen_connections(ps_fd) == FAILURE) {
         fprintf(stderr, "listen_connections: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_LISTEN_CONN, "listen_connections: failed!");
         return FAILURE;
     }
 
-    if(server_loop(ps_fd, conn_handler) == FAILURE) {
-        fprintf(stderr, "server_loop: failed!\n");
-        return FAILURE;
+    server_info_server_start_event(info);
+
+    // set passive socket to non-blocking mode
+    // in order to enable lazy server closing
+    // and ordered force shut down of server
+    fcntl(ps_fd, F_SETFL, O_NONBLOCK);
+
+    switch(server_loop(info, conn_handler)) {
+        case FAILURE:
+            fprintf(stderr, "server_loop: failed!\n");
+            server_info_server_error_event(info, SERVER_ERROR_LOOP, "server_loop: failed!");
+            return FAILURE;
+        case FORCE_CLOSED:
+        default:
+            break;
     }
 
     if(close(ps_fd) < 0) {
         fprintf(stderr, "close: %s\n", strerror(errno));
+        server_info_server_error_event(info, SERVER_ERROR_CLOSE, strerror(errno));
         return FAILURE;
     }
+
+    server_info_server_end_event(info);
 
     return SUCCESS;
 }
@@ -144,29 +80,46 @@ result_t create_datagram_server(server_info_t *info, datagram_server_loop_t serv
 
     if(create_datagram_pasv_sock(server_info_port(info), &ps_fd) == FAILURE) {
         fprintf(stderr, "create_datagram_pasv_sock: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_CREATE_PASV_SOCK, "create_datagram_pasv_sock: failed!");
         return FAILURE;
     }
 
     // for information & debugging purposes
     if(print_socket_address(ps_fd, PASSIVE_SOCKET) == FAILURE) {
         fprintf(stderr, "print_socket_address: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_PRINT_ADDRESS, "print_socket_address: failed!");
         return FAILURE;
     }
 
     if(server_info_fill(info, ps_fd) == FAILURE) {
         fprintf(stderr, "server_info_fill: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_INFO_FILL, "server_info_fill: failed!");
         return FAILURE;
     }
 
-    if(server_loop(ps_fd, datagram_handler) == FAILURE) {
+    server_info_server_start_event(info);
+
+    // set passive socket to non-blocking mode
+    // in order to enable lazy server closing
+    fcntl(ps_fd, F_SETFL, O_NONBLOCK);
+
+    if(server_loop(info, datagram_handler) == FAILURE) {
         fprintf(stderr, "server_loop: failed!\n");
+        server_info_server_error_event(info, SERVER_ERROR_LOOP, "server_loop: failed!");
         return FAILURE;
     }
+
+    printf("Server loop stopped!\n");
 
     if(close(ps_fd) < 0) {
         fprintf(stderr, "close: %s\n", strerror(errno));
+        server_info_server_error_event(info, SERVER_ERROR_CLOSE, strerror(errno));
         return FAILURE;
     }
+
+    printf("Server passive socket: %d closed.\n", ps_fd);
+
+    server_info_server_end_event(info);
 
     return SUCCESS;
 }

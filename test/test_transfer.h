@@ -21,9 +21,9 @@ extern test_server_transfer_t test_server_transfer;
 #define TEST_PORT "3333"
 
 // custom server loop handler - without looping, just single connection handling for testing purposes
-static result_t test_stream_server_handler(sock_fd_t ps_fd, connection_handler_t handle_connection) {
+static result_t test_stream_server_handler(server_info_t *server_info, connection_handler_t handle_connection) {
 
-    int cs_fd = accept_new_connection(ps_fd);
+    int cs_fd = accept_new_connection(server_info_sock(server_info));
     if(cs_fd == FAILURE || cs_fd == CONTINUE) {
         fprintf(stderr, "accept_new_connection: failed!\n");
         return FAILURE;
@@ -31,7 +31,7 @@ static result_t test_stream_server_handler(sock_fd_t ps_fd, connection_handler_t
 
     printf("Handle connection on the main thread...\n");
 
-    switch (handle_connection(cs_fd)) {
+    switch (handle_connection(server_info, cs_fd)) {
         case FAILURE:
             fprintf(stderr, "handle_connection: failed!\n");
             break;

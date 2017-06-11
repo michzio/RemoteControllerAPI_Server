@@ -15,7 +15,7 @@ typedef struct conn_thread_runner_attr conn_thread_runner_attr_t;
 runner_res_t connection_thread_runner(conn_thread_runner_attr_t *attr);
 
 result_t conn_thread_runner_attr_init(conn_thread_runner_attr_t **runner_attr);
-void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, sock_fd_t conn_sock_fd, callback_t callback, callback_attr_t callback_attr);
+void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, server_info_t *server_info, sock_fd_t conn_sock_fd, callback_t callback, callback_attr_t callback_attr);
 void conn_thread_runner_attr_free(conn_thread_runner_attr_t *runner_attr);
 
 // datagram thread runner

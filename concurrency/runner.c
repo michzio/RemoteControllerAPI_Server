@@ -16,6 +16,7 @@
  */
 struct conn_thread_runner_attr {
     connection_handler_t conn_handler;
+    server_info_t *server_info;
     sock_fd_t conn_sock_fd;
     callback_t callback;
     callback_attr_t callback_attr;
@@ -25,11 +26,28 @@ struct conn_thread_runner_attr {
  * with its params in order to make it passable as thread's start routine
  */
 runner_res_t connection_thread_runner(conn_thread_runner_attr_t *attr) {
-    result_t res = attr->conn_handler(attr->conn_sock_fd);
+    result_t res = attr->conn_handler(attr->server_info, attr->conn_sock_fd);
     if(attr->callback != NULL)
         attr->callback(attr->callback_attr, (void *) &res);
+
+    switch(res) {
+        case FAILURE:
+            fprintf(stderr, "connection_handler: failed!\n");
+            // publish connection error event
+            server_info_connection_error_event(attr->server_info, attr->conn_sock_fd, CONN_ERROR_HANDLER, "connection_handler: failed!\n");
+            break;
+        case CLOSED:
+            printf("connection_handler: closed!\n");
+            // publish client disconnecting event
+            server_info_client_disconnecting_event(attr->server_info, attr->conn_sock_fd);
+            break;
+        default:
+            break;
+    }
+
     if( close(attr->conn_sock_fd) < 0 ) {
         fprintf(stderr, "close: %s\n", strerror(errno));
+        server_info_connection_error_event(attr->server_info, attr->conn_sock_fd, CONN_ERROR_CLOSE, strerror(errno));
     }
     conn_thread_runner_attr_free(attr);
     return NULL;
@@ -69,10 +87,11 @@ result_t conn_thread_runner_attr_init(conn_thread_runner_attr_t **runner_attr) {
     }
     return SUCCESS;
 }
-void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, sock_fd_t conn_sock_fd, callback_t callback, callback_attr_t callback_attr) {
+void conn_thread_runner_attr_fill(conn_thread_runner_attr_t *runner_attr, connection_handler_t conn_handler, server_info_t *server_info, sock_fd_t conn_sock_fd, callback_t callback, callback_attr_t callback_attr) {
 
     memset(runner_attr, 0, sizeof(*runner_attr));
     runner_attr->conn_handler = conn_handler;
+    runner_attr->server_info = server_info;
     runner_attr->conn_sock_fd = conn_sock_fd;
     runner_attr->callback = callback;
     runner_attr->callback_attr = callback_attr;

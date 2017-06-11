@@ -26,7 +26,9 @@ sock_fd_t accept_new_connection(sock_fd_t ps_fd) {
     socklen_t sockaddrlen = sizeof(sockaddr);
 
     if( (cs_fd = accept(ps_fd, &sockaddr, &sockaddrlen)) < 0 ) {
-        if(errno == EINTR) return CONTINUE;
+        if( (errno == EINTR) || (errno == EAGAIN) || (errno == EWOULDBLOCK)) {
+            return CONTINUE;
+        }
         fprintf(stderr, "accept: %s\n", strerror(errno));
         return FAILURE;
     }

@@ -473,6 +473,36 @@ networking/passive_socket.c.s:
 	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_socket.c.s
 .PHONY : networking/passive_socket.c.s
 
+networking/server_info.o: networking/server_info.c.o
+
+.PHONY : networking/server_info.o
+
+# target to build an object file
+networking/server_info.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o
+.PHONY : networking/server_info.c.o
+
+networking/server_info.i: networking/server_info.c.i
+
+.PHONY : networking/server_info.i
+
+# target to preprocess a source file
+networking/server_info.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.i
+.PHONY : networking/server_info.c.i
+
+networking/server_info.s: networking/server_info.c.s
+
+.PHONY : networking/server_info.s
+
+# target to generate assembly for a file
+networking/server_info.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.s
+.PHONY : networking/server_info.c.s
+
 networking/server_loop.o: networking/server_loop.c.o
 
 .PHONY : networking/server_loop.o
@@ -717,6 +747,9 @@ help:
 	@echo "... networking/passive_socket.o"
 	@echo "... networking/passive_socket.i"
 	@echo "... networking/passive_socket.s"
+	@echo "... networking/server_info.o"
+	@echo "... networking/server_info.i"
+	@echo "... networking/server_info.s"
 	@echo "... networking/server_loop.o"
 	@echo "... networking/server_loop.i"
 	@echo "... networking/server_loop.s"

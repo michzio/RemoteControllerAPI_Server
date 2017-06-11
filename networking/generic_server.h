@@ -8,21 +8,8 @@
 #include "../../networking/helpers/address_helper.h"
 #include "passive_connection.h"
 #include "server_loop.h"
-
-// server_info_t contains information about created server
-struct server_info;
-typedef struct server_info server_info_t;
-
-// server_info_t operations
-void server_info_init(server_info_t **info);
-void server_info_set_port(server_info_t *info, const char *port);
-void server_info_set_ip(server_info_t *info, const char *ip);
-void server_info_set_sock(server_info_t *info, const sock_fd_t sockfd);
-result_t server_info_fill(server_info_t *info, const sock_fd_t sockfd);
-const char *server_info_port(const server_info_t *info);
-const char *server_info_ip(const server_info_t *info);
-const sock_fd_t server_info_sock(const server_info_t *info);
-void server_info_free(server_info_t *info);
+#include "../../collections/linked_list/linked_list.h"
+#include "server_info.h"
 
 // server_t function implementing logic of specific server
 typedef result_t (*server_t)(server_info_t *info);

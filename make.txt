@@ -96,7 +96,7 @@ else
 endif
 
 # source files 
-SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o
+SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o server_info.o
 
 # test source files 
 TEST_SOURCE_FILES = test_server_loop.o test_transfer.o test_transfer_osx.o
@@ -158,6 +158,9 @@ service.o: networking/service.c networking/service.h
 
 stream_server.o: networking/stream_server.c networking/stream_server.h
 	$(CC) $(CFLAGS) -c networking/stream_server.c -o $(OUTPUT_DIR)/stream_server.o
+
+server_info.o: networking/server_info.c networking/server_info.h
+	$(CC) $(CFLAGS) -c networking/server_info.c -o $(OUTPUT_DIR)/server_info.o
 
 server.o: server.c server.h
 	$(CC) $(CFLAGS) -c server.c -o $(OUTPUT_DIR)/server.o

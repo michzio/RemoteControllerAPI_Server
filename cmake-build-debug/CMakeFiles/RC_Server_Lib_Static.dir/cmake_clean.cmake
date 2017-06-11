@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o"
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.o"
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o"
+  "CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o"
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o"
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o"
   "CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o"

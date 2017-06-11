@@ -201,9 +201,33 @@ CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o.provides: CMak
 CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o.provides.build: CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o
 
 
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o: ../networking/server_info.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c
+
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c > CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.i
+
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c -o CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.s
+
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.requires:
+
+.PHONY : CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.requires
+
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.provides: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.provides
+
+CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.provides.build: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o
+
+
 CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o: ../networking/server_loop.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.i: cmake_force
@@ -227,7 +251,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o.provides.build: C
 
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o: ../networking/datagram.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.i: cmake_force
@@ -251,7 +275,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o.provides.build: CMak
 
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o: ../networking/datagram_server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram_server.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.i: cmake_force
@@ -275,7 +299,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o.provides.buil
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o: ../concurrency/threads_manager.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/threads_manager.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.i: cmake_force
@@ -299,7 +323,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o.provides.bui
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o: ../concurrency/thread.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/thread.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.i: cmake_force
@@ -323,7 +347,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o.provides.build: CMake
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o: CMakeFiles/RC_Server_Lib_Static.dir/flags.make
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o: ../concurrency/runner.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/runner.c
 
 CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.i: cmake_force
@@ -353,6 +377,7 @@ RC_Server_Lib_Static_OBJECTS = \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o" \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.o" \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o" \
+"CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o" \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o" \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o" \
 "CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o" \
@@ -369,6 +394,7 @@ librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_connectio
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o
+librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o
@@ -377,7 +403,7 @@ librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/build.make
 librc_server.a: CMakeFiles/RC_Server_Lib_Static.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking C static library librc_server.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking C static library librc_server.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/RC_Server_Lib_Static.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RC_Server_Lib_Static.dir/link.txt --verbose=$(VERBOSE)
 
@@ -392,6 +418,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.di
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o.requires
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.o.requires
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o.requires
+CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o.requires
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o.requires
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o.requires
 CMakeFiles/RC_Server_Lib_Static.dir/requires: CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o.requires

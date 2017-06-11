@@ -10,21 +10,22 @@
 #include "networking/datagram_server.h"
 
 
-int start_server(server_t server, server_info_t *server_info) {
+result_t start_server(server_t server, server_info_t *server_info) {
 
-    server(server_info);
+    return server(server_info);
+}
+
+result_t end_server(server_info_t *server_info) {
+
+    server_info_set_shut_down(server_info, 1);
 
     return SUCCESS;
 }
 
-int end_server(server_info_t *server_info) {
+result_t shutdown_server(server_info_t *server_info) {
 
-    sock_fd_t ps_fd = server_info_sock(server_info);
-
-    if(close(ps_fd) < 0) {
-        fprintf(stderr, "close: %s\n", strerror(errno));
-        return FAILURE;
-    }
+    server_info_set_force_shut_down(server_info, 1);
+    server_info_shutdown_conn_socks(server_info);
 
     return SUCCESS;
 }

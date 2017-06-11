@@ -4,18 +4,21 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include "service.h"
 #include "../../unit_tests/common/terminal.h"
 
 // TCP
-result_t rpc_service_connection_handler(sock_fd_t sock_fd) {
+result_t rpc_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd) {
 
     // TODO
 
     return SUCCESS;
 }
 
-result_t event_service_connection_handler(sock_fd_t sock_fd) {
+result_t event_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd) {
 
     // TODO
 
@@ -24,20 +27,31 @@ result_t event_service_connection_handler(sock_fd_t sock_fd) {
 
 #define MAX_BUF_SIZE 256
 
-result_t echo_service_connection_handler(sock_fd_t sock_fd) {
+result_t echo_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd) {
 
     char buf[MAX_BUF_SIZE];
     int n_recv; // number of bytes received
     int n_sent; // number of bytes sent
 
+    fcntl(sock_fd, F_SETFL, O_NONBLOCK);
+
     while(1) {
+
+        if(server_info_should_shut_down(server_info))
+            return CLOSED;
 
         if ((n_recv = recv(sock_fd, buf, sizeof(buf) - 1, 0)) <= 0) {
             if(n_recv == 0) {
                 printf("echo connection is closing...\n");
                 return CLOSED;
             }
+            if( (errno == EAGAIN) || (errno == EWOULDBLOCK)) {
+                // call to recv() on non-blocking socket result with nothing to receive
+                continue;
+            }
             perror("recv");
+            // publish connection error event
+            server_info_connection_error_event(server_info, sock_fd, CONN_ERROR_RECV, strerror(errno));
             return FAILURE;
         }
 
@@ -47,6 +61,8 @@ result_t echo_service_connection_handler(sock_fd_t sock_fd) {
 
         if ((n_sent = send(sock_fd, buf, strlen(buf), 0)) < 0) {
             perror("send");
+            // publish connection error event
+            server_info_connection_error_event(server_info, sock_fd, CONN_ERROR_SEND, strerror(errno));
             return FAILURE;
         }
     }

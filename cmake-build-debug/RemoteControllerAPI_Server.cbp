@@ -299,6 +299,14 @@
 			<Option target="RC_Server_Lib"/>
 			<Option target="RC_Server_Lib_Static"/>
 		</Unit>
+		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c">
+			<Option target="RC_Server_Lib"/>
+			<Option target="RC_Server_Lib_Static"/>
+		</Unit>
+		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.h">
+			<Option target="RC_Server_Lib"/>
+			<Option target="RC_Server_Lib_Static"/>
+		</Unit>
 		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.c">
 			<Option target="RC_Server_Lib"/>
 			<Option target="RC_Server_Lib_Static"/>

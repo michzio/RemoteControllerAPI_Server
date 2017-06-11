@@ -7,11 +7,13 @@
 
 #include "../../networking/helpers/address_helper.h"
 #include "passive_socket.h"
+#include "datagram.h"
+#include "server_info.h"
 
 // TCP
-result_t rpc_service_connection_handler(sock_fd_t sock_fd);
-result_t event_service_connection_handler(sock_fd_t sock_fd);
-result_t echo_service_connection_handler(sock_fd_t sock_fd); // only for testing
+result_t rpc_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd);
+result_t event_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd);
+result_t echo_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd); // only for testing
 result_t echo_service_request_handler(sock_fd_t sock_fd); // only for testing
 
 // UDP

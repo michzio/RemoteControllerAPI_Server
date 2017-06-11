@@ -71,7 +71,7 @@ CMakeFiles/Install_RemoteControllerAPI_Server.dir/all: CMakeFiles/RemoteControll
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Install_RemoteControllerAPI_Server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 20
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Install_RemoteControllerAPI_Server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Install_RemoteControllerAPI_Server.dir/rule
@@ -98,7 +98,7 @@ clean: CMakeFiles/Install_RemoteControllerAPI_Server.dir/clean
 CMakeFiles/RC_Server_Lib.dir/all:
 	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/depend
 	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target RC_Server_Lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target RC_Server_Lib"
 .PHONY : CMakeFiles/RC_Server_Lib.dir/all
 
 # Include target in all.
@@ -108,7 +108,7 @@ all: CMakeFiles/RC_Server_Lib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/RC_Server_Lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RC_Server_Lib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/RC_Server_Lib.dir/rule
@@ -135,7 +135,7 @@ clean: CMakeFiles/RC_Server_Lib.dir/clean
 CMakeFiles/RemoteControllerAPI_Server.dir/all: CMakeFiles/RC_Server_Lib_Static.dir/all
 	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/depend
 	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=28,29,30,31,32 "Built target RemoteControllerAPI_Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=30,31,32,33,34 "Built target RemoteControllerAPI_Server"
 .PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/all
 
 # Include target in all.
@@ -145,7 +145,7 @@ all: CMakeFiles/RemoteControllerAPI_Server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/RemoteControllerAPI_Server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 19
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RemoteControllerAPI_Server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/rule
@@ -172,7 +172,7 @@ clean: CMakeFiles/RemoteControllerAPI_Server.dir/clean
 CMakeFiles/RC_Server_Lib_Static.dir/all:
 	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/depend
 	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=15,16,17,18,19,20,21,22,23,24,25,26,27 "Built target RC_Server_Lib_Static"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target RC_Server_Lib_Static"
 .PHONY : CMakeFiles/RC_Server_Lib_Static.dir/all
 
 # Include target in all.
@@ -182,7 +182,7 @@ all: CMakeFiles/RC_Server_Lib_Static.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/RC_Server_Lib_Static.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RC_Server_Lib_Static.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/RC_Server_Lib_Static.dir/rule

@@ -10,7 +10,8 @@
 #include "../networking/helpers/address_helper.h"
 #include "networking/generic_server.h"
 
-int start_server(server_t server, server_info_t *server_info);
-int end_server(server_info_t *server_info);
+result_t start_server(server_t server, server_info_t *server_info);
+result_t end_server(server_info_t *server_info);
+result_t shutdown_server(server_info_t *server_info);
 
 #endif /* REMOTECONTROLLERAPI_SERVER_SERVER_H */
