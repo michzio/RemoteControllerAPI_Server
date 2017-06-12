@@ -13,13 +13,13 @@ struct server_info;
 typedef struct server_info server_info_t;
 
 // server events callbacks
-typedef void (*server_start_callback_t)(sock_fd_t ps_fd, int server_port, const char *server_ip);
-typedef void (*server_end_callback_t)(void);
-typedef void (*server_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg);
-typedef void (*client_connected_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip);
-typedef void (*client_disconnecting_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip);
-typedef void (*connection_error_callback_t)(sock_fd_t cs_fd, const int error_code, const char *error_msg);
-typedef void (*datagram_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg);
+typedef void (*server_start_callback_t)(sock_fd_t ps_fd, int server_port, const char *server_ip, void *callback_arg);
+typedef void (*server_end_callback_t)(void *callbackArg);
+typedef void (*server_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
+typedef void (*client_connected_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip, void *callback_arg);
+typedef void (*client_disconnecting_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip, void *callback_arg);
+typedef void (*connection_error_callback_t)(sock_fd_t cs_fd, const int error_code, const char *error_msg, void *callback_arg);
+typedef void (*datagram_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
 
 // server_info_t operations
 void server_info_init(server_info_t **info);
@@ -56,6 +56,15 @@ void server_info_set_client_disconnecting_callback(server_info_t *info, client_d
 void server_info_set_connection_error_callback(server_info_t *info, connection_error_callback_t callback);
 void server_info_set_datagram_error_callback(server_info_t *info, datagram_error_callback_t callback);
 
+// set callbacks custom arguments
+void server_info_set_server_start_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_server_end_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_server_error_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_client_connected_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_client_disconnecting_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_connection_error_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_datagram_error_callback_arg(server_info_t *info, void *callback_arg);
+
 // get event handlers (callbacks)
 server_start_callback_t server_info_server_start_callback(server_info_t *info);
 server_end_callback_t server_info_server_end_callback(server_info_t *info);
@@ -64,6 +73,15 @@ client_connected_callback_t server_info_client_connected_callback(server_info_t 
 client_disconnecting_callback_t server_info_client_disconnecting_callback(server_info_t *info);
 connection_error_callback_t  server_info_connection_error_callback(server_info_t *info);
 datagram_error_callback_t  server_info_datagram_error_callback(server_info_t *info);
+
+// get callbacks custom arguments
+void *server_info_server_start_callback_arg(server_info_t *info);
+void *server_info_server_end_callback_arg(server_info_t *info);
+void *server_info_server_error_callback_arg(server_info_t *info);
+void *server_info_client_connected_callback_arg(server_info_t *info);
+void *server_info_client_disconnecting_callback_arg(server_info_t *info);
+void *server_info_connection_error_callback_arg(server_info_t *info);
+void *server_info_datagram_error_callback_arg(server_info_t *info);
 
 // helper methods that publish server events
 void server_info_server_start_event(server_info_t *info);

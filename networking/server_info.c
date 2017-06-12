@@ -35,6 +35,15 @@ struct server_info {
     client_disconnecting_callback_t client_disconnecting_callback;
     connection_error_callback_t connection_error_callback;
     datagram_error_callback_t datagram_error_callback;
+
+    // server events callbacks custom arguments
+    void *server_start_callback_arg;
+    void *server_end_callback_arg;
+    void *server_error_callback_arg;
+    void *client_connected_callback_arg;
+    void *client_disconnecting_callback_arg;
+    void *connection_error_callback_arg;
+    void *datagram_error_callback_arg;
 };
 
 // server_info_t operations
@@ -58,6 +67,14 @@ void server_info_init(server_info_t **info) {
     (*info)->client_disconnecting_callback = NULL;
     (*info)->connection_error_callback = NULL;
     (*info)->datagram_error_callback = NULL;
+
+    (*info)->server_start_callback_arg = NULL;
+    (*info)->server_end_callback_arg = NULL;
+    (*info)->server_error_callback_arg = NULL;
+    (*info)->client_connected_callback_arg = NULL;
+    (*info)->client_disconnecting_callback_arg = NULL;
+    (*info)->connection_error_callback_arg = NULL;
+    (*info)->datagram_error_callback_arg = NULL;
 
     (*info)->SHUT_DOWN_FLAG = 0;
     (*info)->FORCE_SHUT_DOWN_FLAG = 0;
@@ -253,6 +270,29 @@ void server_info_set_datagram_error_callback(server_info_t *info, datagram_error
     info->datagram_error_callback = callback;
 }
 
+// set callbacks custom arguments
+void server_info_set_server_start_callback_arg(server_info_t *info, void *callback_arg) {
+    info->server_start_callback_arg = callback_arg;
+}
+void server_info_set_server_end_callback_arg(server_info_t *info, void *callback_arg) {
+    info->server_end_callback_arg = callback_arg;
+}
+void server_info_set_server_error_callback_arg(server_info_t *info, void *callback_arg) {
+    info->server_error_callback_arg = callback_arg;
+}
+void server_info_set_client_connected_callback_arg(server_info_t *info, void *callback_arg) {
+    info->client_connected_callback_arg = callback_arg;
+}
+void server_info_set_client_disconnecting_callback_arg(server_info_t *info, void *callback_arg) {
+    info->client_disconnecting_callback_arg = callback_arg;
+}
+void server_info_set_connection_error_callback_arg(server_info_t *info, void *callback_arg) {
+    info->connection_error_callback_arg = callback_arg;
+}
+void server_info_set_datagram_error_callback_arg(server_info_t *info, void *callback_arg) {
+    info->datagram_error_callback_arg = callback_arg;
+}
+
 // get event handlers (callbacks)
 server_start_callback_t server_info_server_start_callback(server_info_t *info) {
     return info->server_start_callback;
@@ -282,6 +322,34 @@ datagram_error_callback_t  server_info_datagram_error_callback(server_info_t *in
     return info->datagram_error_callback;
 }
 
+// get callbacks custom arguments
+void *server_info_server_start_callback_arg(server_info_t *info) {
+    return info->server_start_callback_arg;
+}
+
+void *server_info_server_end_callback_arg(server_info_t *info) {
+    return info->server_end_callback_arg;
+}
+
+void *server_info_server_error_callback_arg(server_info_t *info) {
+    return info->server_error_callback_arg;
+}
+
+void *server_info_client_connected_callback_arg(server_info_t *info) {
+    return info->client_connected_callback_arg;
+}
+
+void *server_info_client_disconnecting_callback_arg(server_info_t *info) {
+    return info->client_disconnecting_callback_arg;
+}
+
+void *server_info_connection_error_callback_arg(server_info_t *info) {
+    return info->connection_error_callback_arg;
+}
+
+void *server_info_datagram_error_callback_arg(server_info_t *info) {
+    return info->datagram_error_callback_arg;
+}
 
 // server events helper methods
 void server_info_server_start_event(server_info_t *info) {
@@ -292,23 +360,24 @@ void server_info_server_start_event(server_info_t *info) {
     get_current_address_and_port(info->sockfd, &server_ip, &server_port);
 
     if(info->server_start_callback != NULL)
-        info->server_start_callback(info->sockfd, server_port, server_ip);
+        info->server_start_callback(info->sockfd, server_port, server_ip, info->server_start_callback_arg);
 }
 
 void server_info_server_end_event(server_info_t *info) {
 
     server_end_callback_t callback = info->server_end_callback;
+    void *callback_arg = info->server_end_callback_arg;
 
     server_info_free(info);
 
-    if( callback != NULL) callback();
+    if( callback != NULL) callback(callback_arg);
 
 }
 
 void server_info_server_error_event(server_info_t *info, const int error_code, const char *error_msg) {
 
     if(info->server_error_callback != NULL)
-        info->server_error_callback(info->sockfd, error_code, error_msg);
+        info->server_error_callback(info->sockfd, error_code, error_msg, info->server_error_callback_arg);
 }
 
 void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sockfd) {
@@ -327,14 +396,14 @@ void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sock
     server_info_add_conn_sock(info, conn_sockfd);
 
     if(info->client_connected_callback != NULL)
-        info->client_connected_callback(conn_sockfd, client_port, client_ip);
+        info->client_connected_callback(conn_sockfd, client_port, client_ip, info->client_connected_callback_arg);
 }
 
 void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_sockfd) {
 
     if(server_info_force_shut_down(info)) {
         if(info->client_disconnecting_callback != NULL)
-            info->client_disconnecting_callback(conn_sockfd, -1, NULL);
+            info->client_disconnecting_callback(conn_sockfd, -1, NULL, info->client_disconnecting_callback_arg);
 
     } else {
 
@@ -344,7 +413,7 @@ void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_
         get_peer_address_and_port(conn_sockfd, &client_ip, &client_port);
 
         if (info->client_disconnecting_callback != NULL)
-            info->client_disconnecting_callback(conn_sockfd, client_port, client_ip);
+            info->client_disconnecting_callback(conn_sockfd, client_port, client_ip, info->client_disconnecting_callback_arg);
     }
 
     server_info_remove_conn_sock(info, conn_sockfd);
@@ -353,7 +422,7 @@ void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_
 void server_info_connection_error_event(server_info_t *info, sock_fd_t conn_sockfd, const int error_code, const char *error_msg) {
 
     if(info->connection_error_callback != NULL)
-        info->connection_error_callback(conn_sockfd, error_code, error_msg);
+        info->connection_error_callback(conn_sockfd, error_code, error_msg, info->connection_error_callback_arg);
 
     if(conn_sockfd >= 0) {
         server_info_remove_conn_sock(info, conn_sockfd);
@@ -363,7 +432,7 @@ void server_info_connection_error_event(server_info_t *info, sock_fd_t conn_sock
 void server_info_datagram_error_event(server_info_t *info, const int error_code, const char *error_msg) {
 
     if(info->datagram_error_callback != NULL)
-        info->datagram_error_callback(info->sockfd, error_code, error_msg);
+        info->datagram_error_callback(info->sockfd, error_code, error_msg, info->datagram_error_callback_arg);
 }
 
 
@@ -388,6 +457,14 @@ void server_info_free(server_info_t *info) {
     info->client_disconnecting_callback = NULL;
     info->connection_error_callback = NULL;
     info->datagram_error_callback = NULL;
+
+    info->server_start_callback_arg = NULL;
+    info->server_end_callback_arg = NULL;
+    info->server_error_callback_arg = NULL;
+    info->client_connected_callback_arg = NULL;
+    info->client_disconnecting_callback_arg = NULL;
+    info->connection_error_callback_arg = NULL;
+    info->datagram_error_callback_arg = NULL;
 
     info->SHUT_DOWN_FLAG = 0;
     info->FORCE_SHUT_DOWN_FLAG = 0;
