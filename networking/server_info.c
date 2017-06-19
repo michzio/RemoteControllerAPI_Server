@@ -32,6 +32,7 @@ struct server_info {
     server_end_callback_t server_end_callback;
     server_error_callback_t server_error_callback;
     client_connected_callback_t client_connected_callback;
+    client_authenticated_callback_t client_authenticated_callback;
     client_disconnecting_callback_t client_disconnecting_callback;
     connection_error_callback_t connection_error_callback;
     datagram_error_callback_t datagram_error_callback;
@@ -41,6 +42,7 @@ struct server_info {
     void *server_end_callback_arg;
     void *server_error_callback_arg;
     void *client_connected_callback_arg;
+    void *client_authenticated_callback_arg;
     void *client_disconnecting_callback_arg;
     void *connection_error_callback_arg;
     void *datagram_error_callback_arg;
@@ -64,6 +66,7 @@ void server_info_init(server_info_t **info) {
     (*info)->server_end_callback = NULL;
     (*info)->server_error_callback = NULL;
     (*info)->client_connected_callback = NULL;
+    (*info)->client_authenticated_callback = NULL;
     (*info)->client_disconnecting_callback = NULL;
     (*info)->connection_error_callback = NULL;
     (*info)->datagram_error_callback = NULL;
@@ -72,6 +75,7 @@ void server_info_init(server_info_t **info) {
     (*info)->server_end_callback_arg = NULL;
     (*info)->server_error_callback_arg = NULL;
     (*info)->client_connected_callback_arg = NULL;
+    (*info)->client_authenticated_callback_arg = NULL;
     (*info)->client_disconnecting_callback_arg = NULL;
     (*info)->connection_error_callback_arg = NULL;
     (*info)->datagram_error_callback_arg = NULL;
@@ -259,6 +263,10 @@ void server_info_set_client_connected_callback(server_info_t *info, client_conne
     info->client_connected_callback = callback;
 }
 
+void server_info_set_client_authenticated_callback(server_info_t *info, client_authenticated_callback_t callback) {
+    info->client_authenticated_callback = callback;
+}
+
 void server_info_set_client_disconnecting_callback(server_info_t *info, client_disconnecting_callback_t callback) {
     info->client_disconnecting_callback = callback;
 }
@@ -274,21 +282,31 @@ void server_info_set_datagram_error_callback(server_info_t *info, datagram_error
 void server_info_set_server_start_callback_arg(server_info_t *info, void *callback_arg) {
     info->server_start_callback_arg = callback_arg;
 }
+
 void server_info_set_server_end_callback_arg(server_info_t *info, void *callback_arg) {
     info->server_end_callback_arg = callback_arg;
 }
+
 void server_info_set_server_error_callback_arg(server_info_t *info, void *callback_arg) {
     info->server_error_callback_arg = callback_arg;
 }
+
 void server_info_set_client_connected_callback_arg(server_info_t *info, void *callback_arg) {
     info->client_connected_callback_arg = callback_arg;
 }
+
+void server_info_set_client_authenticated_callback_arg(server_info_t *info, void *callback_arg) {
+    info->client_authenticated_callback_arg = callback_arg;
+}
+
 void server_info_set_client_disconnecting_callback_arg(server_info_t *info, void *callback_arg) {
     info->client_disconnecting_callback_arg = callback_arg;
 }
+
 void server_info_set_connection_error_callback_arg(server_info_t *info, void *callback_arg) {
     info->connection_error_callback_arg = callback_arg;
 }
+
 void server_info_set_datagram_error_callback_arg(server_info_t *info, void *callback_arg) {
     info->datagram_error_callback_arg = callback_arg;
 }
@@ -308,6 +326,10 @@ server_error_callback_t server_info_server_error_callback(server_info_t *info) {
 
 client_connected_callback_t server_info_client_connected_callback(server_info_t *info) {
     return info->client_connected_callback;
+}
+
+client_authenticated_callback_t server_info_client_authenticated_callback(server_info_t *info) {
+    return info->client_authenticated_callback;
 }
 
 client_disconnecting_callback_t server_info_client_disconnecting_callback(server_info_t *info) {
@@ -339,6 +361,10 @@ void *server_info_client_connected_callback_arg(server_info_t *info) {
     return info->client_connected_callback_arg;
 }
 
+void *server_info_client_authenticated_callback_arg(server_info_t *info) {
+    return info->client_authenticated_callback_arg;
+}
+
 void *server_info_client_disconnecting_callback_arg(server_info_t *info) {
     return info->client_disconnecting_callback_arg;
 }
@@ -365,12 +391,13 @@ void server_info_server_start_event(server_info_t *info) {
 
 void server_info_server_end_event(server_info_t *info) {
 
+    sock_fd_t pasv_sock = info->sockfd;
     server_end_callback_t callback = info->server_end_callback;
     void *callback_arg = info->server_end_callback_arg;
 
     server_info_free(info);
 
-    if( callback != NULL) callback(callback_arg);
+    if( callback != NULL) callback(pasv_sock, callback_arg);
 
 }
 
@@ -397,6 +424,17 @@ void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sock
 
     if(info->client_connected_callback != NULL)
         info->client_connected_callback(conn_sockfd, client_port, client_ip, info->client_connected_callback_arg);
+}
+
+void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity) {
+
+    char *client_ip;
+    int client_port;
+
+    get_peer_address_and_port(conn_sockfd, &client_ip, &client_port);
+
+    if(info->client_authenticated_callback != NULL)
+        info->client_authenticated_callback(conn_sockfd, client_port, client_ip, client_identity, info->client_authenticated_callback_arg);
 }
 
 void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_sockfd) {
@@ -454,14 +492,17 @@ void server_info_free(server_info_t *info) {
     info->server_end_callback = NULL;
     info->server_error_callback = NULL;
     info->client_connected_callback = NULL;
+    info->client_authenticated_callback = NULL;
     info->client_disconnecting_callback = NULL;
     info->connection_error_callback = NULL;
     info->datagram_error_callback = NULL;
 
+    // set callbacks arguments to NULL
     info->server_start_callback_arg = NULL;
     info->server_end_callback_arg = NULL;
     info->server_error_callback_arg = NULL;
     info->client_connected_callback_arg = NULL;
+    info->client_authenticated_callback_arg = NULL;
     info->client_disconnecting_callback_arg = NULL;
     info->connection_error_callback_arg = NULL;
     info->datagram_error_callback_arg = NULL;

@@ -6,9 +6,9 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include "service.h"
 #include "../../unit_tests/common/terminal.h"
+#include "authentication.h"
 
 // TCP
 result_t rpc_service_connection_handler(server_info_t *server_info, sock_fd_t sock_fd) {
@@ -32,6 +32,15 @@ result_t echo_service_connection_handler(server_info_t *server_info, sock_fd_t s
     char buf[MAX_BUF_SIZE];
     int n_recv; // number of bytes received
     int n_sent; // number of bytes sent
+
+    // authenticate client
+    char client_identity[MAX_BUF_SIZE];
+    if(authenticate_client(server_info, sock_fd, client_identity) == FAILURE) {
+        fprintf(stderr, "authenticate_client: failed!\n");
+        // publish connection error event
+        server_info_connection_error_event(server_info, sock_fd, CONN_ERROR_AUTH, "authenticate_client: failed!");
+        return FAILURE;
+    }
 
     fcntl(sock_fd, F_SETFL, O_NONBLOCK);
 

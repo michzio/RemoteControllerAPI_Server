@@ -96,7 +96,7 @@ else
 endif
 
 # source files 
-SOURCE_FILES = runner.o thread.o threads_manager.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o server_info.o
+SOURCE_FILES = runner.o thread.o threads_manager.o authentication.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o server_info.o
 
 # test source files 
 TEST_SOURCE_FILES = test_server_loop.o test_transfer.o test_transfer_osx.o
@@ -134,6 +134,9 @@ thread.o: concurrency/thread.c concurrency/thread.h
 
 threads_manager.o: concurrency/threads_manager.c concurrency/threads_manager.h
 	$(CC) $(CFLAGS) -c concurrency/threads_manager.c -o $(OUTPUT_DIR)/threads_manager.o
+
+authentication.o: networking/authentication.c networking/authentication.h
+	$(CC) $(CFLAGS) -c networking/authentication.c -o $(OUTPUT_DIR)/authentication.o
 
 datagram.o: networking/datagram.c networking/datagram.h
 	$(CC) $(CFLAGS) -c networking/datagram.c -o $(OUTPUT_DIR)/datagram.o

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6)
 project(RemoteControllerAPI_Server)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c99")
-set(SOURCE_FILES server.h server.c networking/passive_socket.h networking/passive_socket.c networking/passive_connection.h networking/passive_connection.c networking/service.h networking/service.c networking/stream_server.h networking/stream_server.c networking/generic_server.h networking/generic_server.c networking/server_info.h networking/server_info.c networking/server_loop.h networking/server_loop.c networking/datagram.h networking/datagram.c networking/datagram_server.h networking/datagram_server.c concurrency/threads_manager.h concurrency/threads_manager.c concurrency/thread.h concurrency/thread.c concurrency/runner.h concurrency/runner.c)
+set(SOURCE_FILES server.h server.c networking/authentication.h networking/authentication.c networking/passive_socket.h networking/passive_socket.c networking/passive_connection.h networking/passive_connection.c networking/service.h networking/service.c networking/stream_server.h networking/stream_server.c networking/generic_server.h networking/generic_server.c networking/server_info.h networking/server_info.c networking/server_loop.h networking/server_loop.c networking/datagram.h networking/datagram.c networking/datagram_server.h networking/datagram_server.c concurrency/threads_manager.h concurrency/threads_manager.c concurrency/thread.h concurrency/thread.c concurrency/runner.h concurrency/runner.c)
 set(TEST_SOURCE_FILES test/test_server_loop.h test/test_server_loop.c test/test_transfer.h test/test_transfer.c test/test_transfer_osx.c)
 
 if(CYGWIN)

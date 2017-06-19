@@ -51,6 +51,17 @@ CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_connection.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_socket.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.h
+CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.o
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/common/allocator.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/common/data_handler.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/linked_list/doubly_linked_list.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/strings.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/comparer.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.h
 CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
@@ -152,6 +163,7 @@ CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/comparer.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/helpers/address_helper.h
+ /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_socket.h
  /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.h

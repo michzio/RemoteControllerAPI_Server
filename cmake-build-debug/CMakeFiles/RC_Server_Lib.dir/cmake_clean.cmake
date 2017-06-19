@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/RC_Server_Lib.dir/server.c.o"
+  "CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o"
   "CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o"
   "CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o"
   "CMakeFiles/RC_Server_Lib.dir/networking/service.c.o"

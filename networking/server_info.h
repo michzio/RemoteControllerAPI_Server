@@ -13,13 +13,14 @@ struct server_info;
 typedef struct server_info server_info_t;
 
 // server events callbacks
-typedef void (*server_start_callback_t)(sock_fd_t ps_fd, int server_port, const char *server_ip, void *callback_arg);
-typedef void (*server_end_callback_t)(void *callbackArg);
-typedef void (*server_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
-typedef void (*client_connected_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip, void *callback_arg);
-typedef void (*client_disconnecting_callback_t)(sock_fd_t cs_fd, int client_port, const char *client_ip, void *callback_arg);
-typedef void (*connection_error_callback_t)(sock_fd_t cs_fd, const int error_code, const char *error_msg, void *callback_arg);
-typedef void (*datagram_error_callback_t)(sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
+typedef void (*server_start_callback_t)(const sock_fd_t ps_fd, int server_port, const char *server_ip, void *callback_arg);
+typedef void (*server_end_callback_t)(const sock_fd_t ps_fd, void *callback_arg);
+typedef void (*server_error_callback_t)(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
+typedef void (*client_connected_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
+typedef void (*client_authenticated_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, void *callback_arg);
+typedef void (*client_disconnecting_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
+typedef void (*connection_error_callback_t)(const sock_fd_t cs_fd, const int error_code, const char *error_msg, void *callback_arg);
+typedef void (*datagram_error_callback_t)(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
 
 // server_info_t operations
 void server_info_init(server_info_t **info);
@@ -52,6 +53,7 @@ void server_info_set_server_start_callback(server_info_t *info, server_start_cal
 void server_info_set_server_end_callback(server_info_t *info, server_end_callback_t callback);
 void server_info_set_server_error_callback(server_info_t *info, server_error_callback_t callback);
 void server_info_set_client_connected_callback(server_info_t *info, client_connected_callback_t callback);
+void server_info_set_client_authenticated_callback(server_info_t *info, client_authenticated_callback_t callback);
 void server_info_set_client_disconnecting_callback(server_info_t *info, client_disconnecting_callback_t callback);
 void server_info_set_connection_error_callback(server_info_t *info, connection_error_callback_t callback);
 void server_info_set_datagram_error_callback(server_info_t *info, datagram_error_callback_t callback);
@@ -61,6 +63,7 @@ void server_info_set_server_start_callback_arg(server_info_t *info, void *callba
 void server_info_set_server_end_callback_arg(server_info_t *info, void *callback_arg);
 void server_info_set_server_error_callback_arg(server_info_t *info, void *callback_arg);
 void server_info_set_client_connected_callback_arg(server_info_t *info, void *callback_arg);
+void server_info_set_client_authenticated_callback_arg(server_info_t *info, void *callback_arg);
 void server_info_set_client_disconnecting_callback_arg(server_info_t *info, void *callback_arg);
 void server_info_set_connection_error_callback_arg(server_info_t *info, void *callback_arg);
 void server_info_set_datagram_error_callback_arg(server_info_t *info, void *callback_arg);
@@ -70,6 +73,7 @@ server_start_callback_t server_info_server_start_callback(server_info_t *info);
 server_end_callback_t server_info_server_end_callback(server_info_t *info);
 server_error_callback_t server_info_server_error_callback(server_info_t *info);
 client_connected_callback_t server_info_client_connected_callback(server_info_t *info);
+client_authenticated_callback_t server_info_client_authenticated_callback(server_info_t *info);
 client_disconnecting_callback_t server_info_client_disconnecting_callback(server_info_t *info);
 connection_error_callback_t  server_info_connection_error_callback(server_info_t *info);
 datagram_error_callback_t  server_info_datagram_error_callback(server_info_t *info);
@@ -79,6 +83,7 @@ void *server_info_server_start_callback_arg(server_info_t *info);
 void *server_info_server_end_callback_arg(server_info_t *info);
 void *server_info_server_error_callback_arg(server_info_t *info);
 void *server_info_client_connected_callback_arg(server_info_t *info);
+void *server_info_client_authenticated_callback_arg(server_info_t *info);
 void *server_info_client_disconnecting_callback_arg(server_info_t *info);
 void *server_info_connection_error_callback_arg(server_info_t *info);
 void *server_info_datagram_error_callback_arg(server_info_t *info);
@@ -88,6 +93,7 @@ void server_info_server_start_event(server_info_t *info);
 void server_info_server_end_event(server_info_t *info);
 void server_info_server_error_event(server_info_t *info, const int error_code, const char *error_msg);
 void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sockfd);
+void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity);
 void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_sockfd);
 void server_info_connection_error_event(server_info_t *info, sock_fd_t conn_sockfd, const int error_code, const char *error_msg);
 void server_info_datagram_error_event(server_info_t *info, const int error_code, const char *error_msg);
@@ -112,6 +118,7 @@ void server_info_free(server_info_t *info);
 #define CONN_ERROR_THREAD (CONN_ERROR_BASE+4)
 #define CONN_ERROR_RECV (CONN_ERROR_BASE+5)
 #define CONN_ERROR_SEND (CONN_ERROR_BASE+6)
+#define CONN_ERROR_AUTH (CONN_ERROR_BASE+7)
 
 // DATAGRAM ERROR CONSTANTS
 #define DATAGRAM_ERROR_BASE 3000

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <fcntl.h>
 #include "server_loop.h"
 #include "../concurrency/thread.h"
 #include "../concurrency/threads_manager.h"
@@ -51,6 +52,11 @@ result_t iterative_stream_server_loop(server_info_t *server_info, connection_han
         server_info_client_connected_event(server_info, cs_fd);
 
         printf("Handle connection on the main thread...\n");
+
+        // revert connection socket to non-blocking
+        int opts = fcntl(cs_fd, F_GETFL);
+        opts = opts & (~O_NONBLOCK);
+        fcntl(cs_fd, F_SETFL, opts);
 
         switch (handle_connection(server_info, cs_fd)) {
             case FAILURE:

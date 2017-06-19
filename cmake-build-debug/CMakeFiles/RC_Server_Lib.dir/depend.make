@@ -51,6 +51,17 @@ CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o: ../networking/pass
 CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o: ../networking/passive_socket.h
 CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o: ../networking/server_info.h
 
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/common/allocator.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/common/data_handler.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/linked_list/doubly_linked_list.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/strings.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/comparer.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: ../networking/authentication.c
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: ../networking/authentication.h
+CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: ../networking/server_info.h
+
 CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
 CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
 CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/helpers/address_helper.h
@@ -151,6 +162,7 @@ CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: /Users/michzio/Developer/My
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/comparer.h
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/helpers/address_helper.h
+CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: ../networking/authentication.h
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: ../networking/datagram.h
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: ../networking/passive_socket.h
 CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: ../networking/server_info.h

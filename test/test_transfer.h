@@ -54,7 +54,7 @@ static result_t test_stream_server_handler(server_info_t *server_info, connectio
 static void test_create_stream_server(connection_handler_t test_conn_handler) {
 
     server_info_t *info;
-    server_info_init(info);
+    server_info_init(&info);
     server_info_set_port(info, TEST_PORT);
 
     if(create_stream_server(info, test_stream_server_handler, test_conn_handler)) {

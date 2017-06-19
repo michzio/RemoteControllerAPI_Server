@@ -259,6 +259,14 @@
 		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/main.c">
 			<Option target="RemoteControllerAPI_Server"/>
 		</Unit>
+		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c">
+			<Option target="RC_Server_Lib"/>
+			<Option target="RC_Server_Lib_Static"/>
+		</Unit>
+		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h">
+			<Option target="RC_Server_Lib"/>
+			<Option target="RC_Server_Lib_Static"/>
+		</Unit>
 		<Unit filename="/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c">
 			<Option target="RC_Server_Lib"/>
 			<Option target="RC_Server_Lib_Static"/>

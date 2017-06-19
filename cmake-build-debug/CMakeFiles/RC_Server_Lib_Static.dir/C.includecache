@@ -34,6 +34,8 @@ stdio.h
 ../../comparers/comparer.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/comparer.h
 
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/common/strings.h
+
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
 stdio.h
 -
@@ -143,6 +145,26 @@ stdio.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.h
 ../../concurrency/threads/generic_threads_manager.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/threads/generic_threads_manager.h
+
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c
+string.h
+-
+sys/socket.h
+-
+errno.h
+-
+authentication.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h
+../../common/strings.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/common/strings.h
+
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h
+../../common/types.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/common/types.h
+../../networking/common/network_types.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/common/network_types.h
+server_info.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.h
 
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c
 datagram.h
@@ -277,6 +299,8 @@ string.h
 -
 errno.h
 -
+fcntl.h
+-
 server_loop.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.h
 ../concurrency/thread.h
@@ -305,12 +329,12 @@ errno.h
 -
 fcntl.h
 -
-unistd.h
--
 service.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/service.h
 ../../unit_tests/common/terminal.h
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/unit_tests/common/terminal.h
+authentication.h
+/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.h
 
 /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/service.h
 ../../networking/helpers/address_helper.h

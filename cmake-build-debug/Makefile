@@ -323,6 +323,36 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/main.c.s
 .PHONY : main.c.s
 
+networking/authentication.o: networking/authentication.c.o
+
+.PHONY : networking/authentication.o
+
+# target to build an object file
+networking/authentication.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.o
+.PHONY : networking/authentication.c.o
+
+networking/authentication.i: networking/authentication.c.i
+
+.PHONY : networking/authentication.i
+
+# target to preprocess a source file
+networking/authentication.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.i
+.PHONY : networking/authentication.c.i
+
+networking/authentication.s: networking/authentication.c.s
+
+.PHONY : networking/authentication.s
+
+# target to generate assembly for a file
+networking/authentication.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.s
+.PHONY : networking/authentication.c.s
+
 networking/datagram.o: networking/datagram.c.o
 
 .PHONY : networking/datagram.o
@@ -732,6 +762,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... networking/authentication.o"
+	@echo "... networking/authentication.i"
+	@echo "... networking/authentication.s"
 	@echo "... networking/datagram.o"
 	@echo "... networking/datagram.i"
 	@echo "... networking/datagram.s"
