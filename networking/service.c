@@ -35,12 +35,15 @@ result_t echo_service_connection_handler(server_info_t *server_info, sock_fd_t s
 
     // authenticate client
     char client_identity[MAX_BUF_SIZE];
-    if(authenticate_client(server_info, sock_fd, client_identity) == FAILURE) {
+    char client_os[MAX_BUF_SIZE];
+    if(authenticate_client(server_info, sock_fd, client_identity, client_os) == FAILURE) {
         fprintf(stderr, "authenticate_client: failed!\n");
         // publish connection error event
         server_info_connection_error_event(server_info, sock_fd, CONN_ERROR_AUTH, "authenticate_client: failed!");
         return FAILURE;
     }
+    // publish client authenticated event
+    server_info_client_authenticated_event(server_info, sock_fd, client_identity, client_os);
 
     fcntl(sock_fd, F_SETFL, O_NONBLOCK);
 

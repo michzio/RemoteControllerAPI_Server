@@ -39,7 +39,7 @@ static void authentication_failed(const server_info_t *server_info, const sock_f
     }
 }
 
-result_t authenticate_client(const server_info_t *server_info, const sock_fd_t sock_fd, char *client_identity) {
+result_t authenticate_client(const server_info_t *server_info, const sock_fd_t sock_fd, char *client_identity, char *client_os) {
 
     char buf[MAX_BUF_SIZE];
     int n_recv; // number of bytes received
@@ -66,30 +66,35 @@ result_t authenticate_client(const server_info_t *server_info, const sock_fd_t s
 
     size_t num_tokens = 0;
     size_t num_subtokens = 0;
+    size_t num_ostokens = 0;
     char **tokens = str_split(buf, " PASS ", &num_tokens);
-    char **subtokens = str_split(tokens[0], "ID ", &num_subtokens);
+    char **subtokens = str_split(tokens[0], " ID ", &num_subtokens);
+    char **ostokens = str_split(subtokens[0], "OS ", &num_ostokens);
 
-    if(num_tokens < 1 && num_subtokens < 2) {
+    if(num_tokens < 1 && num_subtokens < 2 && num_ostokens < 2) {
         // minimal client authentication response is: ID <client_identity>
         // there is also possibility to provide password: ID <client_identity> PASS <security_password>
         fprintf(stderr, "Authentication protocol error. Incorrect client authentication response %s!\n", buf);
         // publish connection error event
         server_info_connection_error_event(server_info, sock_fd, CONN_ERROR_AUTH, "Authentication protocol error.");
+        authentication_failed(server_info, sock_fd);
         return FAILURE;
     }
 
     const char *required_password = server_info_security_password(server_info);
     if(required_password == NULL) {
         // get only the client identity
-        printf("Client identity: %s\n", subtokens[1]);
+        printf("Client identity: %s and OS: %s\n", subtokens[1], ostokens[1]);
         strcpy(client_identity, subtokens[1]);
+        strcpy(client_os, ostokens[1]);
 
         return authentication_success(server_info, sock_fd);
     } else {
         // check password and get client identity
         if(num_tokens == 2 && strcmp(tokens[1], required_password) == 0) {
-            printf("Client identity: %s and password: %s\n", subtokens[1], tokens[1]);
+            printf("Client identity: %s and password: %s and OS: %s\n", subtokens[1], tokens[1], ostokens[1]);
             strcpy(client_identity, subtokens[1]);
+            strcpy(client_os, ostokens[1]);
 
             return authentication_success(server_info, sock_fd);
         } else {

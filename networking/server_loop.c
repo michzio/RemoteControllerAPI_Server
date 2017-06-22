@@ -117,6 +117,11 @@ result_t concurrent_stream_server_loop(server_info_t *server_info, connection_ha
         // publish client connected event
         server_info_client_connected_event(server_info, cs_fd);
 
+        // revert connection socket to non-blocking
+        int opts = fcntl(cs_fd, F_GETFL);
+        opts = opts & (~O_NONBLOCK);
+        fcntl(cs_fd, F_SETFL, opts);
+
         // handle new connection on concurrent thread
         if( (conn_thread = connection_thread(conn_handler, server_info, cs_fd)) == NULL ) {
             fprintf(stderr, "connection_thread: failed!\n");
@@ -169,6 +174,11 @@ result_t managed_concurrent_stream_server_loop(server_info_t *server_info, conne
 
         // publish client connected event
         server_info_client_connected_event(server_info, cs_fd);
+
+        // revert connection socket to non-blocking
+        int opts = fcntl(cs_fd, F_GETFL);
+        opts = opts & (~O_NONBLOCK);
+        fcntl(cs_fd, F_SETFL, opts);
 
         // handle new connection on concurrent managed thread
         if(timed_wait_for_connection_thread(threads_manager, 3000 /* [ms] */,  conn_handler, server_info, cs_fd) == FAILURE) {
@@ -223,6 +233,11 @@ result_t thread_pool_stream_server_loop(server_info_t *server_info, connection_h
 
         // publish client connected event
         server_info_client_connected_event(server_info, cs_fd);
+
+        // revert connection socket to non-blocking
+        int opts = fcntl(cs_fd, F_GETFL);
+        opts = opts & (~O_NONBLOCK);
+        fcntl(cs_fd, F_SETFL, opts);
 
         // handle new connection by thread pool's worker thread
         conn_thread_runner_attr_t *connection_thread_runner_attr;
@@ -325,6 +340,11 @@ result_t pseudo_concurrent_stream_server_loop(server_info_t *server_info, reques
 
             // publish client connected event
             server_info_client_connected_event(server_info, cs_fd);
+
+            // revert connection socket to non-blocking
+            int opts = fcntl(cs_fd, F_GETFL);
+            opts = opts & (~O_NONBLOCK);
+            fcntl(cs_fd, F_SETFL, opts);
         }
 
         // 4. handle requests on pseudo-concurrently available connections

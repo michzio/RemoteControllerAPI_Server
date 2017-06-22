@@ -2,10 +2,10 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="RemoteControllerAPI_Server" targetName="RC_Server_Lib_Static" />
-      <config projectName="RemoteControllerAPI_Server" targetName="Install_RemoteControllerAPI_Server" />
       <config projectName="RemoteControllerAPI_Server" targetName="RemoteControllerAPI_Server" />
+      <config projectName="RemoteControllerAPI_Server" targetName="RC_Server_Lib_Static" />
       <config projectName="RemoteControllerAPI_Server" targetName="RC_Server_Lib" />
+      <config projectName="RemoteControllerAPI_Server" targetName="Install_RemoteControllerAPI_Server" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -15,12 +15,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30a41a37-e719-42de-8401-b68e64807243" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/networking/authentication.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/networking/authentication.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/service.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/networking/service.c.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o" />
@@ -30,52 +28,15 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/apple/bin/rc_server" afterPath="$PROJECT_DIR$/output/apple/bin/rc_server" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/apple/lib/librc_server.dylib" afterPath="$PROJECT_DIR$/output/apple/lib/librc_server.dylib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/apple/lib/static/librc_server.a" afterPath="$PROJECT_DIR$/output/apple/lib/static/librc_server.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/bin/rc_server" afterPath="$PROJECT_DIR$/output/debug/bin/rc_server" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/bin/rc_server.dSYM/Contents/Resources/DWARF/rc_server" afterPath="$PROJECT_DIR$/output/debug/bin/rc_server.dSYM/Contents/Resources/DWARF/rc_server" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/datagram_server.o" afterPath="$PROJECT_DIR$/output/debug/datagram_server.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/generic_server.o" afterPath="$PROJECT_DIR$/output/debug/generic_server.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/lib/static/librc_server.a" afterPath="$PROJECT_DIR$/output/debug/lib/static/librc_server.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/passive_connection.o" afterPath="$PROJECT_DIR$/output/debug/passive_connection.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/passive_socket.o" afterPath="$PROJECT_DIR$/output/debug/passive_socket.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/runner.o" afterPath="$PROJECT_DIR$/output/debug/runner.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/server.o" afterPath="$PROJECT_DIR$/output/debug/server.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/server_info.o" afterPath="$PROJECT_DIR$/output/debug/server_info.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/server_loop.o" afterPath="$PROJECT_DIR$/output/debug/server_loop.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/service.o" afterPath="$PROJECT_DIR$/output/debug/service.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/stream_server.o" afterPath="$PROJECT_DIR$/output/debug/stream_server.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/test/test_server_loop.o" afterPath="$PROJECT_DIR$/output/debug/test/test_server_loop.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/thread.o" afterPath="$PROJECT_DIR$/output/debug/thread.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/debug/threads_manager.o" afterPath="$PROJECT_DIR$/output/debug/threads_manager.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/C.includecache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/DependInfo.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/build.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/build.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/cmake_clean.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/depend.internal" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/depend.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/link.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/link.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib.dir/progress.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/C.includecache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/DependInfo.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/build.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/build.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/cmake_clean.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/depend.internal" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/depend.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/link.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/link.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RC_Server_Lib_Static.dir/progress.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RemoteControllerAPI_Server.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RemoteControllerAPI_Server.dir/progress.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/RemoteControllerAPI_Server.cbp" afterPath="$PROJECT_DIR$/cmake-build-debug/RemoteControllerAPI_Server.cbp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.c" afterPath="$PROJECT_DIR$/main.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/make.txt" afterPath="$PROJECT_DIR$/make.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/authentication.c" afterPath="$PROJECT_DIR$/networking/authentication.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/authentication.h" afterPath="$PROJECT_DIR$/networking/authentication.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/server_info.c" afterPath="$PROJECT_DIR$/networking/server_info.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/server_info.h" afterPath="$PROJECT_DIR$/networking/server_info.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/server_loop.c" afterPath="$PROJECT_DIR$/networking/server_loop.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/service.c" afterPath="$PROJECT_DIR$/networking/service.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_transfer.h" afterPath="$PROJECT_DIR$/test/test_transfer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/networking/stream_server.c" afterPath="$PROJECT_DIR$/networking/stream_server.c" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,14 +56,14 @@
     <favorites_list name="server" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50125104">
+    <splitter split-orientation="horizontal" split-proportion="0.17395104">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="main.c" pinned="false" current-in-tab="true">
+          <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="417">
-                  <caret line="76" column="7" lean-forward="false" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+                <state relative-caret-position="1770">
+                  <caret line="118" column="68" lean-forward="false" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
                   <folding />
                 </state>
               </provider>
@@ -111,7 +72,7 @@
           <file leaf-file-name="test_transfer.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test/test_transfer.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2422">
+                <state relative-caret-position="945">
                   <caret line="63" column="18" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="18" />
                   <folding>
                     <element signature="e#50#76#0" expanded="true" />
@@ -120,11 +81,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="service.c" pinned="false" current-in-tab="false">
+          <file leaf-file-name="service.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/networking/service.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="148">
-                  <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+                <state relative-caret-position="-284">
+                  <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
                   <folding>
                     <element signature="e#50#68#0" expanded="true" />
                   </folding>
@@ -145,28 +106,8 @@
           <file leaf-file-name="server.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/server.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="224">
+                <state relative-caret-position="315">
                   <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="server_info.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/networking/server_info.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1108">
-                  <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="server_info.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/networking/server_info.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1065">
-                  <caret line="97" column="1" lean-forward="false" selection-start-line="97" selection-start-column="1" selection-end-line="97" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -175,7 +116,7 @@
           <file leaf-file-name="generic_server.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/networking/generic_server.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
+                <state relative-caret-position="270">
                   <caret line="18" column="126" lean-forward="false" selection-start-line="18" selection-start-column="126" selection-end-line="18" selection-end-column="126" />
                   <folding />
                 </state>
@@ -189,8 +130,8 @@
           <file leaf-file-name="server_loop.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/networking/server_loop.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-5975">
-                  <caret line="58" column="36" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="58" selection-end-column="36" />
+                <state relative-caret-position="263">
+                  <caret line="346" column="40" lean-forward="false" selection-start-line="346" selection-start-column="40" selection-end-line="346" selection-end-column="40" />
                   <folding />
                 </state>
               </provider>
@@ -199,8 +140,8 @@
           <file leaf-file-name="authentication.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/networking/authentication.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="870">
-                  <caret line="58" column="64" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="64" />
+                <state relative-caret-position="229">
+                  <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
                   <folding>
                     <element signature="e#50#69#0" expanded="true" />
                   </folding>
@@ -212,7 +153,7 @@
             <entry file="file://$PROJECT_DIR$/networking/authentication.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="165">
-                  <caret line="11" column="69" lean-forward="false" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
+                  <caret line="11" column="126" lean-forward="false" selection-start-line="11" selection-start-column="126" selection-end-line="11" selection-end-column="126" />
                   <folding>
                     <element signature="e#50#81#0" expanded="true" />
                   </folding>
@@ -225,6 +166,18 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="765">
                   <caret line="51" column="38" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="38" />
+                  <folding>
+                    <element signature="e#50#68#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="stream_server.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="360">
+                  <caret line="28" column="41" lean-forward="false" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
                   <folding>
                     <element signature="e#50#68#0" expanded="true" />
                   </folding>
@@ -293,7 +246,6 @@
         <option value="$PROJECT_DIR$/networking/stream_server.h" />
         <option value="$PROJECT_DIR$/test/test_server_loop.h" />
         <option value="$PROJECT_DIR$/test/test_server_loop.c" />
-        <option value="$PROJECT_DIR$/networking/stream_server.c" />
         <option value="$PROJECT_DIR$/networking/datagram_server.c" />
         <option value="$PROJECT_DIR$/networking/passive_socket.c" />
         <option value="$PROJECT_DIR$/concurrency/threads_manager.h" />
@@ -313,15 +265,16 @@
         <option value="$PROJECT_DIR$/server.c" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/make.txt" />
-        <option value="$PROJECT_DIR$/networking/authentication.h" />
-        <option value="$PROJECT_DIR$/networking/service.c" />
         <option value="$PROJECT_DIR$/test/test_transfer.h" />
+        <option value="$PROJECT_DIR$/networking/generic_server.c" />
+        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/networking/server_info.h" />
         <option value="$PROJECT_DIR$/networking/server_info.c" />
+        <option value="$PROJECT_DIR$/networking/authentication.h" />
         <option value="$PROJECT_DIR$/networking/authentication.c" />
-        <option value="$PROJECT_DIR$/networking/generic_server.c" />
+        <option value="$PROJECT_DIR$/networking/service.c" />
+        <option value="$PROJECT_DIR$/networking/stream_server.c" />
         <option value="$PROJECT_DIR$/networking/server_loop.c" />
-        <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
   </component>
@@ -333,8 +286,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-12" />
-    <option name="y" value="172" />
+    <option name="x" value="79" />
+    <option name="y" value="150" />
     <option name="width" value="1434" />
     <option name="height" value="645" />
   </component>
@@ -697,7 +650,9 @@
       <workItem from="1497462954965" duration="1551000" />
       <workItem from="1497728739863" duration="21000" />
       <workItem from="1497731265736" duration="1835000" />
-      <workItem from="1497813178621" duration="22799000" />
+      <workItem from="1497813178621" duration="22867000" />
+      <workItem from="1497958964763" duration="3398000" />
+      <workItem from="1498037598945" duration="1177000" />
     </task>
     <task id="LOCAL-00006" summary="helper.h, helper.c - repaired ip_address string allocation and sizeof ip_address">
       <created>1469437823564</created>
@@ -1046,7 +1001,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247945000" />
+    <option name="totallyTimeSpent" value="252588000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1058,19 +1013,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-12" y="172" width="1434" height="645" extended-state="0" />
+    <frame x="79" y="150" width="1434" height="645" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13864942" sideWeight="0.6299639" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17816092" sideWeight="0.6299639" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38878843" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23563218" sideWeight="0.496063" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706767" sideWeight="0.503937" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36166364" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23981191" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36166364" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24492979" sideWeight="0.4914481" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18213537" sideWeight="0.3700361" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38689548" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18213537" sideWeight="0.3700361" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1357,7 +1312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="80" lean-forward="false" selection-start-line="36" selection-start-column="80" selection-end-line="36" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1382,21 +1336,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="38" />
-          <folding>
-            <element signature="e#50#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networking/passive_socket.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="56" lean-forward="false" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1404,9 +1347,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1414,7 +1354,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1430,7 +1369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
           <caret line="138" column="84" lean-forward="false" selection-start-line="138" selection-start-column="84" selection-end-line="138" selection-end-column="84" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1438,13 +1376,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="7" lean-forward="false" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/networking/generic_server.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="270">
           <caret line="18" column="126" lean-forward="false" selection-start-line="18" selection-start-column="126" selection-end-line="18" selection-end-column="126" />
           <folding />
         </state>
@@ -1454,70 +1391,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_transfer.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2422">
+        <state relative-caret-position="945">
           <caret line="63" column="18" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="18" />
           <folding>
             <element signature="e#50#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/server_info.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1065">
-          <caret line="97" column="1" lean-forward="false" selection-start-line="97" selection-start-column="1" selection-end-line="97" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/server_info.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1108">
-          <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/service.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding>
-            <element signature="e#50#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/authentication.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="69" lean-forward="false" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
-          <folding>
-            <element signature="e#50#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networking/authentication.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="58" column="64" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="64" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1532,18 +1414,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/networking/server_loop.c">
+    <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5975">
-          <caret line="58" column="36" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="58" selection-end-column="36" />
+        <state relative-caret-position="1770">
+          <caret line="118" column="68" lean-forward="false" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
+    <entry file="file://$PROJECT_DIR$/networking/server_info.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="76" column="7" lean-forward="false" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+        <state relative-caret-position="1187">
+          <caret line="95" column="138" lean-forward="false" selection-start-line="95" selection-start-column="138" selection-end-line="95" selection-end-column="138" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/authentication.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="126" lean-forward="false" selection-start-line="11" selection-start-column="126" selection-end-line="11" selection-end-column="126" />
+          <folding>
+            <element signature="e#50#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/server_info.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="428" column="43" lean-forward="false" selection-start-line="428" selection-start-column="5" selection-end-line="428" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/authentication.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/service.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-284">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#50#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/stream_server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="41" lean-forward="false" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+          <folding>
+            <element signature="e#50#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networking/server_loop.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="346" column="40" lean-forward="false" selection-start-line="346" selection-start-column="40" selection-end-line="346" selection-end-column="40" />
           <folding />
         </state>
       </provider>

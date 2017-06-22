@@ -17,7 +17,7 @@ typedef void (*server_start_callback_t)(const sock_fd_t ps_fd, int server_port, 
 typedef void (*server_end_callback_t)(const sock_fd_t ps_fd, void *callback_arg);
 typedef void (*server_error_callback_t)(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
 typedef void (*client_connected_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
-typedef void (*client_authenticated_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, void *callback_arg);
+typedef void (*client_authenticated_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_identity, const char *client_os, void *callback_arg);
 typedef void (*client_disconnecting_callback_t)(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
 typedef void (*connection_error_callback_t)(const sock_fd_t cs_fd, const int error_code, const char *error_msg, void *callback_arg);
 typedef void (*datagram_error_callback_t)(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
@@ -93,7 +93,7 @@ void server_info_server_start_event(server_info_t *info);
 void server_info_server_end_event(server_info_t *info);
 void server_info_server_error_event(server_info_t *info, const int error_code, const char *error_msg);
 void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sockfd);
-void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity);
+void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity, const char *client_os);
 void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_sockfd);
 void server_info_connection_error_event(server_info_t *info, sock_fd_t conn_sockfd, const int error_code, const char *error_msg);
 void server_info_datagram_error_event(server_info_t *info, const int error_code, const char *error_msg);

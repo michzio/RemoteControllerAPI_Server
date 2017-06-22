@@ -426,7 +426,7 @@ void server_info_client_connected_event(server_info_t *info, sock_fd_t conn_sock
         info->client_connected_callback(conn_sockfd, client_port, client_ip, info->client_connected_callback_arg);
 }
 
-void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity) {
+void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_sockfd, const char *client_identity, const char *client_os) {
 
     char *client_ip;
     int client_port;
@@ -434,7 +434,7 @@ void server_info_client_authenticated_event(server_info_t *info, sock_fd_t conn_
     get_peer_address_and_port(conn_sockfd, &client_ip, &client_port);
 
     if(info->client_authenticated_callback != NULL)
-        info->client_authenticated_callback(conn_sockfd, client_port, client_ip, client_identity, info->client_authenticated_callback_arg);
+        info->client_authenticated_callback(conn_sockfd, client_port, client_ip, client_identity, client_os, info->client_authenticated_callback_arg);
 }
 
 void server_info_client_disconnecting_event(server_info_t *info, sock_fd_t conn_sockfd) {

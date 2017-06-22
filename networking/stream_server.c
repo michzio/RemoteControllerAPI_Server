@@ -26,7 +26,7 @@ result_t event_stream_server(server_info_t *info) {
 
 // ECHO TCP SERVER
 result_t echo_stream_server(server_info_t *info) {
-    return echo_iterative_stream_server(info);
+    return echo_thread_pool_stream_server(info);
 }
 
 result_t echo_iterative_stream_server(server_info_t *info) {

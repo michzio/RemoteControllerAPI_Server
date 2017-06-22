@@ -12,7 +12,7 @@ void on_server_start(const sock_fd_t ps_fd, const int server_port, const char *s
 void on_server_end(const sock_fd_t ps_fd, void *callback_arg);
 void on_server_error(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
 void on_client_connected(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
-void on_client_authenticated(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, void *callback_arg);
+void on_client_authenticated(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, const char *client_os, void *callback_arg);
 void on_client_disconnecting(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg);
 void on_connection_error(const sock_fd_t cs_fd, const int error_code, const char *error_msg, void *callback_arg);
 void on_datagram_error(const sock_fd_t ps_fd, const int error_code, const char *error_msg, void *callback_arg);
@@ -110,10 +110,10 @@ void on_client_connected(const sock_fd_t cs_fd, const int client_port, const cha
     printf("New client connected on conn socket: %d (port number: %d, host name: %s)\n", cs_fd, client_port, client_ip);
 }
 
-void on_client_authenticated(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, void *callback_arg) {
+void on_client_authenticated(const sock_fd_t cs_fd, const int client_port, const char *client_ip, const char *client_name, const char *client_os, void *callback_arg) {
 
-    printf("Client authenticated on conn socket: %d (port number: %d, host name: %s) with name: %s\n",
-            cs_fd, client_port, client_ip, client_name);
+    printf("Client authenticated on conn socket: %d (port number: %d, host name: %s) with name: %s and os: %s\n",
+            cs_fd, client_port, client_ip, client_name, client_os);
 }
 
 void on_client_disconnecting(const sock_fd_t cs_fd, const int client_port, const char *client_ip, void *callback_arg) {
