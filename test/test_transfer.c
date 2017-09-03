@@ -4,12 +4,12 @@
 
 #include "test_transfer.h"
 #include <stdlib.h>
-#include "../../common/bitwise.h"
-#include "../../networking/transfer/integer_transfer.h"
-#include "../../networking/transfer/str_transfer.h"
-#include "../../networking/transfer/binary_transfer.h"
-#include "../../unit_tests/test/assertion.h"
-#include "../../unit_tests/common/terminal.h"
+#include "bitwise.h"
+#include "transfer/integer_transfer.h"
+#include "transfer/str_transfer.h"
+#include "transfer/binary_transfer.h"
+#include "test/assertion.h"
+#include "common/terminal.h"
 
 #ifdef __APPLE__
     #include "test_transfer_osx.c"

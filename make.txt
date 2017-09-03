@@ -24,10 +24,10 @@ else
 	OPENCV_LIBS = `pkg-config --cflags --libs opencv`
 endif
 
+ # mas OS X
 ifneq ($(OS),Windows_NT)
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
-        # OS X
         OS_X_LIBS += -framework ApplicationServices
         OS_X_LIBS += -framework Carbon
         OS_X_LIBS += -framework IOKit
@@ -39,48 +39,61 @@ else
 endif
 
 # custom
-NETWORKING_INCL_DIR = ../networking
-CONCURRENCY_INCL_DIR = ../concurrency
-COMMON_FUNCTIONS_INCL_DIR = ../common
-COLLECTIONS_INCL_DIR = ../collections
-COMPARERS_INCL_DIR = ../comparers
-UNIT_TESTS_INCL_DIR = ../unit_tests
-LIBPNG_INCL_DIR = ../libpng-1.6.24
-ZLIB_INCL_DIR = ../zlib-1.2.8
-
-NETWORKING_LIBRARY = $(NETWORKING_INCL_DIR)/output/debug/lib/static/libnetworking.a
-CONCURRENCY_LIBRARY = $(CONCURRENCY_INCL_DIR)/output/debug/lib/static/libconcurrency.a
-COMMON_FUNCTIONS_LIBRARY = $(COMMON_FUNCTIONS_INCL_DIR)/output/debug/lib/static/libcommon_functions.a
-COLLECTIONS_LIBRARY = $(COLLECTIONS_INCL_DIR)/output/debug/lib/static/libcollections.a
-COMPARERS_LIBRARY = $(COMPARERS_INCL_DIR)/output/debug/lib/static/libcomparers.a
-UNIT_TESTS_LIBRARY = $(UNIT_TESTS_INCL_DIR)/output/debug/lib/static/libunit_tests.a
-LIBPNG_LIBRARY = $(LIBPNG_INCL_DIR)/output/debug/lib/static/liblibpng.a
-ZLIB_LIBRARY = $(ZLIB_INCL_DIR)/output/debug/lib/static/libzlib.a
+NETWORKING_LIB_DIR=../networking/outputs/debug/lib
+NETWORKING_STATIC_LIB_PATH=$(NETWORKING_LIB_DIR)/libnetworking.a
+CONCURRENCY_LIB_DIR=../concurrency/outputs/debug/lib
+CONCURRENCY_STATIC_LIB_PATH=$(CONCURRENCY_LIB_DIR)/libconcurrency.a
+COMMON_FUNCTIONS_LIB_DIR=../common/outputs/debug/lib
+COMMON_FUNCTIONS_STATIC_LIB_PATH=$(COMMON_FUNCTIONS_LIB_DIR)/libcommon_functions.a
+COLLECTIONS_LIB_DIR=../collections/outputs/debug/lib
+COLLECTIONS_STATIC_LIB_PATH=$(COLLECTIONS_LIB_DIR)/libcollections.a
+LIBPNG_LIB_DIR=../libpng-1.6.24/outputs/debug/lib
+LIBPNG_STATIC_LIB_PATH=$(LIBPNG_LIB_DIR)/liblibpng.a
+ZLIB_LIB_DIR=../zlib-1.2.8/outputs/debug/lib
+ZLIB_STATIC_LIB_PATH=$(ZLIB_LIB_DIR)/libzlib.a
+COMPARERS_LIB_DIR=../comparers/outputs/debug/lib
+# executable's libraries
+COMPARERS_STATIC_LIB_PATH=../comparers/outputs/debug/lib/libcomparers.a
+UNIT_TESTS_STATIC_LIB_PATH=../unit_tests/outputs/debug/lib/libunit_tests.a
 
 ifneq ($(OS),Windows_NT)
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
         # custom OS X
-        AUTOMATION_SCRIPTS_INCL_DIR = ../system/OS_X/automation_scripts
-        COCOA_HELPER_INCL_DIR = ../system/OS_X/cocoa_helper
+        MOUSE_EVENTS_SRC_DIR=../system/OS_X/mouse_events
+        MOUSE_EVENTS_LIB_DIR=../system/OS_X/mouse_events/outputs/debug/lib
+        KEYBOARD_EVENTS_SRC_DIR=../system/OS_X/keyboard_events
+        KEYBOARD_EVENTS_LIB_DIR=../system/OS_X/keyboard_events/outputs/debug/lib
+        AUTOMATION_SCRIPTS_LIB_DIR=../system/OS_X/automation_scripts/outputs/debug/lib
+        COCOA_HELPER_LIB_DIR=../system/OS_X/cocoa_helper/outputs/debug/lib
 
-        AUTOMATION_SCRIPTS_LIBRARY = $(AUTOMATION_SCRIPTS_INCL_DIR)/output/debug/lib/static/libautomation_scripts.a
-        COCOA_HELPER_LIBRARY = $(COCOA_HELPER_INCL_DIR)/output/debug/lib/static/libcocoa_helper.a
+        MOUSE_EVENTS_STATIC_LIB_PATH=$(MOUSE_EVENTS_LIB_DIR)/libmouse_events.a
+        KEYBOARD_EVENTS_STATIC_LIB_PATH=$(KEYBOARD_EVENTS_LIB_DIR)/libkeyboard_events.a
+        AUTOMATION_SCRIPTS_STATIC_LIB_PATH=$(AUTOMATION_SCRIPTS_LIB_DIR)/libautomation_scripts.a
+        COCOA_HELPER_STATIC_LIB_PATH=$(COCOA_HELPER_LIB_DIR)/libcocoa_helper.a
     endif
 else
-    AUTOMATION_SCRIPTS_LIBRARY =
-    COCOA_HELPER_LIBRARY =
+    # custom Cygwin
+    MOUSE_EVENTS_SRC_DIR=../system/Windows/mouse_events
+    MOUSE_EVENTS_LIB_DIR=../system/Windows/mouse_events/outputs/debug/lib
+    KEYBOARD_EVENTS_SRC_DIR=../system/Windows/keyboard_events
+    KEYBOARD_EVENTS_LIB_DIR=../system/Windows/keyboard_events/outputs/debug/lib
+    WINDOWS_HELPERS_LIB_DIR=../system/Windows/windows_helpers/outputs/debug/lib
+
+    MOUSE_EVENTS_STATIC_LIB_PATH=$(MOUSE_EVENTS_LIB_DIR)/libmouse_events.a
+    KEYBOARD_EVENTS_STATIC_LIB_PATH=$(KEYBOARD_EVENTS_LIB_DIR)/libkeyboard_events.a
+    WINDOWS_HELPERS_STATIC_LIB_PATH=$(WINDOWS_HELPERS_LIB_DIR)/libwindows_helpers.a
 endif
 
-# include headers
-INCL_DIRS += -I$(LIBPNG_INCL_DIR)
-INCL_DIRS += -I$(ZLIB_INCL_DIR)
+# include directories
+INCLUDE_DIRS= ./include ../networking/include ../concurrency/include $(MOUSE_EVENTS_SRC_DIR)/include $(KEYBOARD_EVENTS_SRC_DIR)/include ../common/include ../common/libraries ../collections/include ../system/OS_X/automation_scripts/include ../unit_tests/include ../comparers/include
+CFLAGS+= $(foreach d, $(INCLUDE_DIRS), -I$d)
+
 ifeq ($(OS),Windows_NT)
-    INCL_DIRS += -Ic:/opencv/build/include
+    CFLAGS += -Ic:/opencv/build/include
 else
-    INCL_DIRS += -I/usr/local/include
+    CFLAGS += -I/usr/local/include
 endif
-CFLAGS += $(INCL_DIRS)
 
 # the build target executable: 
 TARGET = rc_server
@@ -96,86 +109,99 @@ else
 endif
 
 # source files 
-SOURCE_FILES = runner.o thread.o threads_manager.o authentication.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o server_info.o
+SOURCE_FILES = runner.o thread.o threads_manager.o authentication.o datagram.o datagram_server.o generic_server.o passive_connection.o passive_socket.o server_loop.o service.o stream_server.o server.o server_info.o keyboard_input.o mouse_input.o app_event.o
 
 # test source files 
 TEST_SOURCE_FILES = test_server_loop.o test_transfer.o test_transfer_osx.o
 
-# output directories 
-OUTPUT_DIR = output/debug
-OUTPUT_LIB_DIR = $(OUTPUT_DIR)/lib
-OUTPUT_STATIC_LIB_DIR = $(OUTPUT_LIB_DIR)/static
-OUTPUT_BIN_DIR = $(OUTPUT_DIR)/bin
-OUTPUT_TEST_DIR = $(OUTPUT_DIR)/test
+# outputs directories
+OUTPUTS_DIR = outputs/debug
+OUTPUTS_LIB_DIR = $(OUTPUTS_DIR)/lib
+OUTPUTS_BIN_DIR = $(OUTPUTS_DIR)/bin
+OUTPUTS_TEST_DIR = $(OUTPUTS_DIR)/test
 
 all: directories libraries $(TARGET)
 
-# make output directories
+# make outputs directories
 directories: 
-	@mkdir -p $(OUTPUT_DIR)
-	@mkdir -p $(OUTPUT_LIB_DIR)
-	@mkdir -p $(OUTPUT_STATIC_LIB_DIR)
-	@mkdir -p $(OUTPUT_BIN_DIR)
-	@mkdir -p $(OUTPUT_TEST_DIR)
+	@mkdir -p $(OUTPUTS_DIR)
+	@mkdir -p $(OUTPUTS_LIB_DIR)
+	@mkdir -p $(OUTPUTS_BIN_DIR)
+	@mkdir -p $(OUTPUTS_TEST_DIR)
 
-libraries: $(LIBRARY)
+libraries: $(LIBRARY) $(SHARED_LIBRARY) $(DYNAMIC_LIBRARY)
 
 $(TARGET): $(LIBRARY) $(TEST_SOURCE_FILES)
-	$(CC) $(CFLAGS) -o $(OUTPUT_BIN_DIR)/$(TARGET) main.c $(OUTPUT_TEST_DIR)/*.o $(OUTPUT_STATIC_LIB_DIR)/$(LIBRARY) $(NETWORKING_LIBRARY) $(CONCURRENCY_LIBRARY) $(COMMON_FUNCTIONS_LIBRARY) $(COLLECTIONS_LIBRARY) $(LIBPNG_LIBRARY) $(ZLIB_LIBRARY) $(COMPARERS_LIBRARY) $(UNIT_TESTS_LIBRARY) $(AUTOMATION_SCRIPTS_LIBRARY) $(COCOA_HELPER_LIBRARY) $(OS_X_LIBS) $(OPENCV_LIBS)
+	$(CC) $(CFLAGS) -o $(OUTPUTS_BIN_DIR)/$(TARGET) src/main.c $(OUTPUTS_TEST_DIR)/*.o $(OUTPUTS_LIB_DIR)/$(LIBRARY) $(NETWORKING_STATIC_LIB_PATH) $(CONCURRENCY_STATIC_LIB_PATH) $(COMMON_FUNCTIONS_STATIC_LIB_PATH) $(COLLECTIONS_STATIC_LIB_PATH) $(LIBPNG_STATIC_LIB_PATH) $(ZLIB_STATIC_LIB_PATH) $(COMPARERS_STATIC_LIB_PATH) $(MOUSE_EVENTS_STATIC_LIB_PATH) $(KEYBOARD_EVENTS_STATIC_LIB_PATH) $(UNIT_TESTS_STATIC_LIB_PATH) $(AUTOMATION_SCRIPTS_STATIC_LIB_PATH) $(COCOA_HELPER_STATIC_LIB_PATH) $(OS_X_LIBS) $(OPENCV_LIBS)
+
+$(SHARED_LIBRARY): $(SOURCE_FILES)
+	$(CC) $(CFLAGS) $(OS_X_LIBS) -L$(NETWORKING_LIB_DIR) -L$(CONCURRENCY_LIB_DIR) -L$(COMMON_FUNCTIONS_LIB_DIR) -L$(COLLECTIONS_LIB_DIR) -L$(LIBPNG_LIB_DIR) -L$(ZLIB_LIB_DIR) -L$(COMPARERS_LIB_DIR) -L$(MOUSE_EVENTS_LIB_DIR) -L$(KEYBOARD_EVENTS_LIB_DIR) -L$(AUTOMATION_SCRIPTS_LIB_DIR) -L$(COCOA_HELPER_LIB_DIR) -shared -o $(OUTPUTS_LIB_DIR)/$(SHARED_LIBRARY) $(OUTPUTS_DIR)/*.o -lnetworking -lconcurrency -lcommon_functions -lcollections -llibpng -lzlib -lcomparers -lmouse_events -lkeyboard_events -lautomation_scripts -lcocoa_helper $(OPENCV_LIBS)
+
+$(DYNAMIC_LIBRARY): $(SOURCE_FILES)
+	$(CC) $(CFLAGS) $(OS_X_LIBS) -L$(NETWORKING_LIB_DIR) -L$(CONCURRENCY_LIB_DIR) -L$(COMMON_FUNCTIONS_LIB_DIR) -L$(COLLECTIONS_LIB_DIR) -L$(LIBPNG_LIB_DIR) -L$(ZLIB_LIB_DIR) -L$(COMPARERS_LIB_DIR) -L$(MOUSE_EVENTS_LIB_DIR) -L$(KEYBOARD_EVENTS_LIB_DIR) -L$(AUTOMATION_SCRIPTS_LIB_DIR) -L$(COCOA_HELPER_LIB_DIR) -dynamiclib -o $(OUTPUTS_LIB_DIR)/$(DYNAMIC_LIBRARY) $(OUTPUTS_DIR)/*.o -lnetworking -lconcurrency -lcommon_functions -lcollections -llibpng -lzlib -lcomparers -lmouse_events -lkeyboard_events -lautomation_scripts -lcocoa_helper $(OPENCV_LIBS)
 
 $(LIBRARY): $(SOURCE_FILES)
-	$(AR) $(OUTPUT_STATIC_LIB_DIR)/$(LIBRARY) $(OUTPUT_DIR)/*.o
+	$(AR) $(OUTPUTS_LIB_DIR)/$(LIBRARY) $(OUTPUTS_DIR)/*.o
 
-runner.o: concurrency/runner.c concurrency/runner.h
-	$(CC) $(CFLAGS) -c concurrency/runner.c  -o $(OUTPUT_DIR)/runner.o
+runner.o: src/concurrency/runner.c include/concurrency/runner.h
+	$(CC) $(CFLAGS) -c src/concurrency/runner.c  -o $(OUTPUTS_DIR)/runner.o
 
-thread.o: concurrency/thread.c concurrency/thread.h 
-	$(CC) $(CFLAGS) -c concurrency/thread.c -o $(OUTPUT_DIR)/thread.o
+thread.o: src/concurrency/thread.c include/concurrency/thread.h
+	$(CC) $(CFLAGS) -c src/concurrency/thread.c -o $(OUTPUTS_DIR)/thread.o
 
-threads_manager.o: concurrency/threads_manager.c concurrency/threads_manager.h
-	$(CC) $(CFLAGS) -c concurrency/threads_manager.c -o $(OUTPUT_DIR)/threads_manager.o
+threads_manager.o: src/concurrency/threads_manager.c include/concurrency/threads_manager.h
+	$(CC) $(CFLAGS) -c src/concurrency/threads_manager.c -o $(OUTPUTS_DIR)/threads_manager.o
 
-authentication.o: networking/authentication.c networking/authentication.h
-	$(CC) $(CFLAGS) -c networking/authentication.c -o $(OUTPUT_DIR)/authentication.o
+authentication.o: src/networking/authentication.c include/networking/authentication.h
+	$(CC) $(CFLAGS) -c src/networking/authentication.c -o $(OUTPUTS_DIR)/authentication.o
 
-datagram.o: networking/datagram.c networking/datagram.h
-	$(CC) $(CFLAGS) -c networking/datagram.c -o $(OUTPUT_DIR)/datagram.o
+datagram.o: src/networking/datagram.c include/networking/datagram.h
+	$(CC) $(CFLAGS) -c src/networking/datagram.c -o $(OUTPUTS_DIR)/datagram.o
 
-datagram_server.o: networking/datagram_server.c networking/datagram_server.h
-	$(CC) $(CFLAGS) -c networking/datagram_server.c -o $(OUTPUT_DIR)/datagram_server.o
+datagram_server.o: src/networking/datagram_server.c include/networking/datagram_server.h
+	$(CC) $(CFLAGS) -c src/networking/datagram_server.c -o $(OUTPUTS_DIR)/datagram_server.o
 
-generic_server.o: networking/generic_server.c networking/generic_server.h
-	$(CC) $(CFLAGS) -c networking/generic_server.c -o $(OUTPUT_DIR)/generic_server.o
+generic_server.o: src/networking/generic_server.c include/networking/generic_server.h
+	$(CC) $(CFLAGS) -c src/networking/generic_server.c -o $(OUTPUTS_DIR)/generic_server.o
 
-passive_connection.o: networking/passive_connection.c networking/passive_connection.h
-	$(CC) $(CFLAGS) -c networking/passive_connection.c -o $(OUTPUT_DIR)/passive_connection.o
+passive_connection.o: src/networking/passive_connection.c include/networking/passive_connection.h
+	$(CC) $(CFLAGS) -c src/networking/passive_connection.c -o $(OUTPUTS_DIR)/passive_connection.o
 
-passive_socket.o: networking/passive_socket.c networking/passive_socket.h
-	$(CC) $(CFLAGS) -c networking/passive_socket.c -o $(OUTPUT_DIR)/passive_socket.o
+passive_socket.o: src/networking/passive_socket.c include/networking/passive_socket.h
+	$(CC) $(CFLAGS) -c src/networking/passive_socket.c -o $(OUTPUTS_DIR)/passive_socket.o
 
-server_loop.o: networking/server_loop.c networking/server_loop.h
-	$(CC) $(CFLAGS) -c networking/server_loop.c -o $(OUTPUT_DIR)/server_loop.o
+server_loop.o: src/networking/server_loop.c include/networking/server_loop.h
+	$(CC) $(CFLAGS) -c src/networking/server_loop.c -o $(OUTPUTS_DIR)/server_loop.o
 
-service.o: networking/service.c networking/service.h
-	$(CC) $(CFLAGS) -c networking/service.c -o $(OUTPUT_DIR)/service.o
+service.o: src/networking/service.c include/networking/service.h
+	$(CC) $(CFLAGS) -c src/networking/service.c -o $(OUTPUTS_DIR)/service.o
 
-stream_server.o: networking/stream_server.c networking/stream_server.h
-	$(CC) $(CFLAGS) -c networking/stream_server.c -o $(OUTPUT_DIR)/stream_server.o
+stream_server.o: src/networking/stream_server.c include/networking/stream_server.h
+	$(CC) $(CFLAGS) -c src/networking/stream_server.c -o $(OUTPUTS_DIR)/stream_server.o
 
-server_info.o: networking/server_info.c networking/server_info.h
-	$(CC) $(CFLAGS) -c networking/server_info.c -o $(OUTPUT_DIR)/server_info.o
+server_info.o: src/networking/server_info.c include/networking/server_info.h
+	$(CC) $(CFLAGS) -c src/networking/server_info.c -o $(OUTPUTS_DIR)/server_info.o
 
-server.o: server.c server.h
-	$(CC) $(CFLAGS) -c server.c -o $(OUTPUT_DIR)/server.o
+server.o: src/server.c include/server.h
+	$(CC) $(CFLAGS) -c src/server.c -o $(OUTPUTS_DIR)/server.o
+
+keyboard_input.o: src/service_handler/keyboard_input.c include/service_handler/keyboard_input.h
+	$(CC) $(CFLAGS) -c src/service_handler/keyboard_input.c -o $(OUTPUTS_DIR)/keyboard_input.o
+
+mouse_input.o: src/service_handler/mouse_input.c include/service_handler/mouse_input.h
+	$(CC) $(CFLAGS) -c src/service_handler/mouse_input.c -o $(OUTPUTS_DIR)/mouse_input.o
+
+app_event.o: src/service_handler/app_event.c include/service_handler/app_event.h
+	$(CC) $(CFLAGS) -c src/service_handler/app_event.c -o $(OUTPUTS_DIR)/app_event.o
 
 test_server_loop.o: test/test_server_loop.c test/test_server_loop.h 
-	$(CC) $(CFLAGS) -c test/test_server_loop.c -o $(OUTPUT_TEST_DIR)/test_server_loop.o
+	$(CC) $(CFLAGS) -c test/test_server_loop.c -o $(OUTPUTS_TEST_DIR)/test_server_loop.o
 
 test_transfer.o: test/test_transfer.c test/test_transfer.h
-	$(CC) $(CFLAGS) -c test/test_transfer.c -o $(OUTPUT_TEST_DIR)/test_transfer.o
+	$(CC) $(CFLAGS) -c test/test_transfer.c -o $(OUTPUTS_TEST_DIR)/test_transfer.o
 
 test_transfer_osx.o: test/test_transfer_osx.c test/test_transfer.h
-	$(CC) $(CFLAGS) -c test/test_transfer_osx.c -o $(OUTPUT_TEST_DIR)/test_transfer_osx.o
+	$(CC) $(CFLAGS) -c test/test_transfer_osx.c -o $(OUTPUTS_TEST_DIR)/test_transfer_osx.o
 
 clean:
-	$(RM) -rf $(OUTPUT_DIR)
+	$(RM) -rf $(OUTPUTS_DIR)

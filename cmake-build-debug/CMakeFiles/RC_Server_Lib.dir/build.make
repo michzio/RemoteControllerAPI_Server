@@ -57,411 +57,496 @@ include CMakeFiles/RC_Server_Lib.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/RC_Server_Lib.dir/flags.make
 
-CMakeFiles/RC_Server_Lib.dir/server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RC_Server_Lib.dir/server.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/server.c
+CMakeFiles/RC_Server_Lib.dir/src/server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/server.c.o: ../src/server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RC_Server_Lib.dir/src/server.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/server.c
 
-CMakeFiles/RC_Server_Lib.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/server.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/server.c > CMakeFiles/RC_Server_Lib.dir/server.c.i
+CMakeFiles/RC_Server_Lib.dir/src/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/server.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/server.c > CMakeFiles/RC_Server_Lib.dir/src/server.c.i
 
-CMakeFiles/RC_Server_Lib.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/server.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/server.c -o CMakeFiles/RC_Server_Lib.dir/server.c.s
+CMakeFiles/RC_Server_Lib.dir/src/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/server.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/server.c -o CMakeFiles/RC_Server_Lib.dir/src/server.c.s
 
-CMakeFiles/RC_Server_Lib.dir/server.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/server.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/server.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/server.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/server.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/server.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/server.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/server.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/server.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/server.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/server.c.o
+CMakeFiles/RC_Server_Lib.dir/src/server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/server.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o: ../networking/authentication.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o: ../src/networking/authentication.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/authentication.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c > CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/authentication.c > CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/authentication.c -o CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/authentication.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o: ../networking/passive_socket.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_socket.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o: ../src/networking/passive_socket.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_socket.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_socket.c > CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_socket.c > CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_socket.c -o CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_socket.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o: ../networking/passive_connection.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_connection.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o: ../src/networking/passive_connection.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_connection.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_connection.c > CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_connection.c > CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/passive_connection.c -o CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/passive_connection.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.o: ../networking/service.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/service.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/service.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/service.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o: ../src/networking/service.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/service.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/service.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/service.c > CMakeFiles/RC_Server_Lib.dir/networking/service.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/service.c > CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/service.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/service.c -o CMakeFiles/RC_Server_Lib.dir/networking/service.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/service.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/service.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o: ../networking/stream_server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/stream_server.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o: ../src/networking/stream_server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/stream_server.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/stream_server.c > CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/stream_server.c > CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/stream_server.c -o CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/stream_server.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o: ../networking/generic_server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/generic_server.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o: ../src/networking/generic_server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/generic_server.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/generic_server.c > CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/generic_server.c > CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/generic_server.c -o CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/generic_server.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o: ../networking/server_info.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o: ../src/networking/server_info.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_info.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c > CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_info.c > CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_info.c -o CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_info.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o: ../networking/server_loop.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o: ../src/networking/server_loop.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_loop.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.c > CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_loop.c > CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/server_loop.c -o CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/server_loop.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o: ../networking/datagram.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o: ../src/networking/datagram.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c > CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram.c > CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram.c -o CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o: ../networking/datagram_server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram_server.c
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o: ../src/networking/datagram_server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram_server.c
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram_server.c > CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.i
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram_server.c > CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.i
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/networking/datagram_server.c -o CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.s
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/networking/datagram_server.c -o CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.s
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o
+CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o: ../concurrency/threads_manager.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/threads_manager.c
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o: ../src/concurrency/threads_manager.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/threads_manager.c
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/threads_manager.c > CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.i
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/threads_manager.c > CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.i
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/threads_manager.c -o CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.s
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/threads_manager.c -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.s
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.provides: CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o: ../concurrency/thread.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/thread.c
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o: ../src/concurrency/thread.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/thread.c
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/thread.c > CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.i
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/thread.c > CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.i
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/thread.c -o CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.s
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/thread.c -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.s
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.provides: CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o
 
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o: ../concurrency/runner.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/runner.c
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o: ../src/concurrency/runner.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/runner.c
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/runner.c > CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.i
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/runner.c > CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.i
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/concurrency/runner.c -o CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.s
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/concurrency/runner.c -o CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.s
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.requires:
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.requires:
 
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.requires
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.requires
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.provides: CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.requires
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.provides.build
-.PHONY : CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.provides
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.provides
 
-CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o
+CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o
+
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o: ../src/service_handler/keyboard_input.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/keyboard_input.c
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/keyboard_input.c > CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.i
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/keyboard_input.c -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.s
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.requires:
+
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.requires
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.provides
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o
+
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o: ../src/service_handler/mouse_input.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/mouse_input.c
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/mouse_input.c > CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.i
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/mouse_input.c -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.s
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.requires:
+
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.requires
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.provides
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o
+
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o: CMakeFiles/RC_Server_Lib.dir/flags.make
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o: ../src/service_handler/app_event.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/app_event.c
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/app_event.c > CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.i
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/service_handler/app_event.c -o CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.s
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.requires:
+
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.requires
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.provides: CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.requires
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.provides.build
+.PHONY : CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.provides
+
+CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.provides.build: CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o
 
 
 # Object files for target RC_Server_Lib
 RC_Server_Lib_OBJECTS = \
-"CMakeFiles/RC_Server_Lib.dir/server.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/service.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o" \
-"CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o"
+"CMakeFiles/RC_Server_Lib.dir/src/server.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o" \
+"CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o"
 
 # External object files for target RC_Server_Lib
 RC_Server_Lib_EXTERNAL_OBJECTS =
 
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/server.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/service.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/build.make
-librc_server.dylib: ../../networking/output/unix/lib/static/libnetworking.a
-librc_server.dylib: ../../concurrency/output/unix/lib/static/libconcurrency.a
-librc_server.dylib: ../../common/output/unix/lib/static/libcommon_functions.a
-librc_server.dylib: ../../collections/output/unix/lib/static/libcollections.a
-librc_server.dylib: ../../libpng-1.6.24/output/unix/lib/static/liblibpng.a
-librc_server.dylib: ../../comparers/output/unix/lib/static/libcomparers.a
-librc_server.dylib: ../../system/OS_X/automation_scripts/output/apple/lib/static/libautomation_scripts.a
-librc_server.dylib: ../../system/OS_X/cocoa_helper/output/apple/lib/static/libcocoa_helper.a
-librc_server.dylib: /usr/local/lib/libopencv_highgui.2.4.13.dylib
-librc_server.dylib: /usr/local/lib/libopencv_imgproc.2.4.13.dylib
-librc_server.dylib: /usr/local/lib/libopencv_core.2.4.13.dylib
-librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking C shared library librc_server.dylib"
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/server.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/build.make
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/lib/apple/libnetworking.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/lib/apple/libconcurrency.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/lib/apple/libmouse_events.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/lib/apple/libkeyboard_events.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/lib/apple/libcollections.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/lib/apple/libcomparers.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/lib/apple/libautomation_scripts.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/../../../../cocoa/AppleScriptSystemAutomation/libAppleScriptSystemAutomation.a
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/lib/apple/libcocoa_helper.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/lib/apple/libcommon_functions.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/lib/apple/liblibpng.dylib
+../outputs/lib/apple/librc_server.dylib: /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/lib/apple/libzlib.dylib
+../outputs/lib/apple/librc_server.dylib: /usr/local/lib/libopencv_highgui.2.4.13.dylib
+../outputs/lib/apple/librc_server.dylib: /usr/local/lib/libopencv_imgproc.2.4.13.dylib
+../outputs/lib/apple/librc_server.dylib: /usr/local/lib/libopencv_core.2.4.13.dylib
+../outputs/lib/apple/librc_server.dylib: CMakeFiles/RC_Server_Lib.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking C shared library ../outputs/lib/apple/librc_server.dylib"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RC_Server_Lib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/RC_Server_Lib.dir/build: librc_server.dylib
+CMakeFiles/RC_Server_Lib.dir/build: ../outputs/lib/apple/librc_server.dylib
 
 .PHONY : CMakeFiles/RC_Server_Lib.dir/build
 
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/server.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/service.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o.requires
-CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/server.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o.requires
+CMakeFiles/RC_Server_Lib.dir/requires: CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o.requires
 
 .PHONY : CMakeFiles/RC_Server_Lib.dir/requires
 

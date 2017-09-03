@@ -57,28 +57,28 @@ include CMakeFiles/RemoteControllerAPI_Server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/RemoteControllerAPI_Server.dir/flags.make
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o: CMakeFiles/RemoteControllerAPI_Server.dir/flags.make
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/main.c
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o: CMakeFiles/RemoteControllerAPI_Server.dir/flags.make
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o: ../src/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o   -c /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/main.c
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RemoteControllerAPI_Server.dir/main.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/main.c > CMakeFiles/RemoteControllerAPI_Server.dir/main.c.i
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/main.c > CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.i
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RemoteControllerAPI_Server.dir/main.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/main.c -o CMakeFiles/RemoteControllerAPI_Server.dir/main.c.s
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/src/main.c -o CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.s
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.requires:
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.requires:
 
-.PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.requires
+.PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.requires
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.provides: CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.requires
-	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.provides.build
-.PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.provides
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.provides: CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.requires
+	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.provides.build
+.PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.provides
 
-CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.provides.build: CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o
+CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.provides.build: CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o
 
 
 CMakeFiles/RemoteControllerAPI_Server.dir/test/test_server_loop.c.o: CMakeFiles/RemoteControllerAPI_Server.dir/flags.make
@@ -155,7 +155,7 @@ CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer_osx.c.o.provides.bu
 
 # Object files for target RemoteControllerAPI_Server
 RemoteControllerAPI_Server_OBJECTS = \
-"CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o" \
+"CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o" \
 "CMakeFiles/RemoteControllerAPI_Server.dir/test/test_server_loop.c.o" \
 "CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer.c.o" \
 "CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer_osx.c.o"
@@ -163,34 +163,40 @@ RemoteControllerAPI_Server_OBJECTS = \
 # External object files for target RemoteControllerAPI_Server
 RemoteControllerAPI_Server_EXTERNAL_OBJECTS =
 
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_server_loop.c.o
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer.c.o
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer_osx.c.o
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/build.make
-rc_server: librc_server.a
-rc_server: ../../unit_tests/output/unix/lib/static/libunit_tests.a
-rc_server: ../../networking/output/unix/lib/static/libnetworking.a
-rc_server: ../../concurrency/output/unix/lib/static/libconcurrency.a
-rc_server: ../../common/output/unix/lib/static/libcommon_functions.a
-rc_server: ../../collections/output/unix/lib/static/libcollections.a
-rc_server: ../../libpng-1.6.24/output/unix/lib/static/liblibpng.a
-rc_server: ../../comparers/output/unix/lib/static/libcomparers.a
-rc_server: ../../system/OS_X/automation_scripts/output/apple/lib/static/libautomation_scripts.a
-rc_server: ../../system/OS_X/cocoa_helper/output/apple/lib/static/libcocoa_helper.a
-rc_server: /usr/local/lib/libopencv_highgui.2.4.13.dylib
-rc_server: /usr/local/lib/libopencv_imgproc.2.4.13.dylib
-rc_server: /usr/local/lib/libopencv_core.2.4.13.dylib
-rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable rc_server"
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_server_loop.c.o
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer.c.o
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer_osx.c.o
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/build.make
+../outputs/bin/apple/rc_server: ../outputs/lib/apple/librc_server.dylib
+../outputs/bin/apple/rc_server: ../../unit_tests/outputs/lib/apple/libunit_tests.dylib
+../outputs/bin/apple/rc_server: ../../comparers/outputs/lib/apple/libcomparers.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/lib/apple/libnetworking.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/lib/apple/libconcurrency.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/lib/apple/libcollections.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/lib/apple/libcomparers.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/lib/apple/libmouse_events.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/lib/apple/libkeyboard_events.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/lib/apple/libautomation_scripts.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/../../../../cocoa/AppleScriptSystemAutomation/libAppleScriptSystemAutomation.a
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/lib/apple/libcocoa_helper.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/lib/apple/libcommon_functions.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/lib/apple/liblibpng.dylib
+../outputs/bin/apple/rc_server: /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/lib/apple/libzlib.dylib
+../outputs/bin/apple/rc_server: /usr/local/lib/libopencv_highgui.2.4.13.dylib
+../outputs/bin/apple/rc_server: /usr/local/lib/libopencv_imgproc.2.4.13.dylib
+../outputs/bin/apple/rc_server: /usr/local/lib/libopencv_core.2.4.13.dylib
+../outputs/bin/apple/rc_server: CMakeFiles/RemoteControllerAPI_Server.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable ../outputs/bin/apple/rc_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RemoteControllerAPI_Server.dir/link.txt --verbose=$(VERBOSE)
+	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E copy_directory /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../system/OS_X/keyboard_events/resources /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/outputs/bin/apple/resources
 
 # Rule to build all files generated by this target.
-CMakeFiles/RemoteControllerAPI_Server.dir/build: rc_server
+CMakeFiles/RemoteControllerAPI_Server.dir/build: ../outputs/bin/apple/rc_server
 
 .PHONY : CMakeFiles/RemoteControllerAPI_Server.dir/build
 
-CMakeFiles/RemoteControllerAPI_Server.dir/requires: CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o.requires
+CMakeFiles/RemoteControllerAPI_Server.dir/requires: CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o.requires
 CMakeFiles/RemoteControllerAPI_Server.dir/requires: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_server_loop.c.o.requires
 CMakeFiles/RemoteControllerAPI_Server.dir/requires: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer.c.o.requires
 CMakeFiles/RemoteControllerAPI_Server.dir/requires: CMakeFiles/RemoteControllerAPI_Server.dir/test/test_transfer_osx.c.o.requires

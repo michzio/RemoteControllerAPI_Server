@@ -8,16 +8,16 @@
 #ifdef __APPLE__
 
 #include "test_transfer.h"
-#include "../../common/libraries/png/png-encoding.h"
-#include "../../common/libraries/png/png-helper.h"
-#include "../../common/bitmaps.h"
-#include "../../common/bitwise.h"
-#include "../../common/libraries/lz4/lz4.h"
-#include "../../networking/transfer/integer_transfer.h"
-#include "../../networking/transfer/binary_transfer.h"
-#include "../../unit_tests/test/assertion.h"
-#include "../../system/OS_X/automation_scripts/system/display.h"
-#include "../../system/OS_X/automation_scripts/system/display_stream.h"
+#include "png/png-encoding.h"
+#include "png/png-helper.h"
+#include "bitmaps.h"
+#include "bitwise.h"
+#include "lz4/lz4.h"
+#include "transfer/integer_transfer.h"
+#include "transfer/binary_transfer.h"
+#include "test/assertion.h"
+#include "system/display.h"
+#include "system/display_stream.h"
 
 /**
  * PNG transfer

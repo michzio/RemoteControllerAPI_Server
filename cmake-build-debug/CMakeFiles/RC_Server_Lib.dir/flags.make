@@ -6,5 +6,5 @@ C_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacO
 
 C_DEFINES = -DRC_Server_Lib_EXPORTS
 
-C_INCLUDES = -I/usr/local/include/opencv -I/usr/local/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../libpng-1.6.24 -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../zlib-1.2.8 
+C_INCLUDES = -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/include -I/usr/local/include/opencv -I/usr/local/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../networking/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../concurrency/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../system/OS_X/mouse_events/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../system/OS_X/keyboard_events/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../common/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../common/libraries -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../collections/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../system/OS_X/automation_scripts/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../unit_tests/include -I/Users/michzio/Developer/MyProjects/BachelorDegree/c/server/../comparers/include 
 

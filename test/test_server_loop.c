@@ -8,14 +8,14 @@
 #include <signal.h>
 #include <stdlib.h>
 #include "test_server_loop.h"
-#include "../networking/stream_server.h"
-#include "../../common/system.h"
-#include "../server.h"
-#include "../../concurrency/common/time.h"
-#include "../../unit_tests/test/assertion.h"
-#include "../../unit_tests/common/terminal.h"
-#include "../networking/generic_server.h"
-#include "../networking/datagram_server.h"
+#include "networking/stream_server.h"
+#include "system.h"
+#include "server.h"
+#include "common/time.h"
+#include "test/assertion.h"
+#include "common/terminal.h"
+#include "networking/generic_server.h"
+#include "networking/datagram_server.h"
 
 static void test_echo_server(server_t server, sock_type_t sock_type, const char *message, const char *test_name) {
 

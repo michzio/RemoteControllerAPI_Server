@@ -9,8 +9,8 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
-#include "../../networking/common/network_types.h"
-#include "../networking/generic_server.h"
+#include "common/network_types.h"
+#include "networking/generic_server.h"
 
 typedef struct {
     void (*run_tests)(void);

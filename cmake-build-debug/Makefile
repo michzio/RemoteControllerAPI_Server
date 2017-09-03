@@ -56,27 +56,6 @@ CMAKE_BINARY_DIR = /Users/michzio/Developer/MyProjects/BachelorDegree/c/server/c
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -98,29 +77,6 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -155,32 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Install_RemoteControllerAPI_Server
-
-# Build rule for target.
-Install_RemoteControllerAPI_Server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Install_RemoteControllerAPI_Server
-.PHONY : Install_RemoteControllerAPI_Server
-
-# fast build rule for target.
-Install_RemoteControllerAPI_Server/fast:
-	$(MAKE) -f CMakeFiles/Install_RemoteControllerAPI_Server.dir/build.make CMakeFiles/Install_RemoteControllerAPI_Server.dir/build
-.PHONY : Install_RemoteControllerAPI_Server/fast
-
-#=============================================================================
-# Target rules for targets named RC_Server_Lib
-
-# Build rule for target.
-RC_Server_Lib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RC_Server_Lib
-.PHONY : RC_Server_Lib
-
-# fast build rule for target.
-RC_Server_Lib/fast:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/build
-.PHONY : RC_Server_Lib/fast
-
-#=============================================================================
 # Target rules for targets named RemoteControllerAPI_Server
 
 # Build rule for target.
@@ -206,452 +136,984 @@ RC_Server_Lib_Static/fast:
 	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/build
 .PHONY : RC_Server_Lib_Static/fast
 
-concurrency/runner.o: concurrency/runner.c.o
+#=============================================================================
+# Target rules for targets named RC_Server_Lib
 
-.PHONY : concurrency/runner.o
+# Build rule for target.
+RC_Server_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RC_Server_Lib
+.PHONY : RC_Server_Lib
+
+# fast build rule for target.
+RC_Server_Lib/fast:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/build
+.PHONY : RC_Server_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Networking
+
+# Build rule for target.
+Networking: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Networking
+.PHONY : Networking
+
+# fast build rule for target.
+Networking/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking.dir/build
+.PHONY : Networking/fast
+
+#=============================================================================
+# Target rules for targets named Networking_Lib_Static
+
+# Build rule for target.
+Networking_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Networking_Lib_Static
+.PHONY : Networking_Lib_Static
+
+# fast build rule for target.
+Networking_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking_Lib_Static.dir/build
+.PHONY : Networking_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Networking_Lib
+
+# Build rule for target.
+Networking_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Networking_Lib
+.PHONY : Networking_Lib
+
+# fast build rule for target.
+Networking_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/networking/outputs/CMakeFiles/Networking_Lib.dir/build
+.PHONY : Networking_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Concurrency
+
+# Build rule for target.
+Concurrency: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Concurrency
+.PHONY : Concurrency
+
+# fast build rule for target.
+Concurrency/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency.dir/build
+.PHONY : Concurrency/fast
+
+#=============================================================================
+# Target rules for targets named Concurrency_Lib_Static
+
+# Build rule for target.
+Concurrency_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Concurrency_Lib_Static
+.PHONY : Concurrency_Lib_Static
+
+# fast build rule for target.
+Concurrency_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency_Lib_Static.dir/build
+.PHONY : Concurrency_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Concurrency_Lib
+
+# Build rule for target.
+Concurrency_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Concurrency_Lib
+.PHONY : Concurrency_Lib
+
+# fast build rule for target.
+Concurrency_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/concurrency/outputs/CMakeFiles/Concurrency_Lib.dir/build
+.PHONY : Concurrency_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Collections
+
+# Build rule for target.
+Collections: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Collections
+.PHONY : Collections
+
+# fast build rule for target.
+Collections/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections.dir/build
+.PHONY : Collections/fast
+
+#=============================================================================
+# Target rules for targets named Collections_Lib_Static
+
+# Build rule for target.
+Collections_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Collections_Lib_Static
+.PHONY : Collections_Lib_Static
+
+# fast build rule for target.
+Collections_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections_Lib_Static.dir/build
+.PHONY : Collections_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Collections_Lib
+
+# Build rule for target.
+Collections_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Collections_Lib
+.PHONY : Collections_Lib
+
+# fast build rule for target.
+Collections_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/collections/outputs/CMakeFiles/Collections_Lib.dir/build
+.PHONY : Collections_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Comparers
+
+# Build rule for target.
+Comparers: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Comparers
+.PHONY : Comparers
+
+# fast build rule for target.
+Comparers/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers.dir/build
+.PHONY : Comparers/fast
+
+#=============================================================================
+# Target rules for targets named Comparers_Lib_Static
+
+# Build rule for target.
+Comparers_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Comparers_Lib_Static
+.PHONY : Comparers_Lib_Static
+
+# fast build rule for target.
+Comparers_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers_Lib_Static.dir/build
+.PHONY : Comparers_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Comparers_Lib
+
+# Build rule for target.
+Comparers_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Comparers_Lib
+.PHONY : Comparers_Lib
+
+# fast build rule for target.
+Comparers_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/comparers/outputs/CMakeFiles/Comparers_Lib.dir/build
+.PHONY : Comparers_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Mouse_Events_in_OS_X
+
+# Build rule for target.
+Mouse_Events_in_OS_X: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Mouse_Events_in_OS_X
+.PHONY : Mouse_Events_in_OS_X
+
+# fast build rule for target.
+Mouse_Events_in_OS_X/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_in_OS_X.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_in_OS_X.dir/build
+.PHONY : Mouse_Events_in_OS_X/fast
+
+#=============================================================================
+# Target rules for targets named Mouse_Events_Lib_Static
+
+# Build rule for target.
+Mouse_Events_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Mouse_Events_Lib_Static
+.PHONY : Mouse_Events_Lib_Static
+
+# fast build rule for target.
+Mouse_Events_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_Lib_Static.dir/build
+.PHONY : Mouse_Events_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Mouse_Events_Lib
+
+# Build rule for target.
+Mouse_Events_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Mouse_Events_Lib
+.PHONY : Mouse_Events_Lib
+
+# fast build rule for target.
+Mouse_Events_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/mouse_events/outputs/CMakeFiles/Mouse_Events_Lib.dir/build
+.PHONY : Mouse_Events_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Keyboard_Events_in_OS_X
+
+# Build rule for target.
+Keyboard_Events_in_OS_X: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Keyboard_Events_in_OS_X
+.PHONY : Keyboard_Events_in_OS_X
+
+# fast build rule for target.
+Keyboard_Events_in_OS_X/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_in_OS_X.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_in_OS_X.dir/build
+.PHONY : Keyboard_Events_in_OS_X/fast
+
+#=============================================================================
+# Target rules for targets named Keyboard_Events_Lib_Static
+
+# Build rule for target.
+Keyboard_Events_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Keyboard_Events_Lib_Static
+.PHONY : Keyboard_Events_Lib_Static
+
+# fast build rule for target.
+Keyboard_Events_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_Lib_Static.dir/build
+.PHONY : Keyboard_Events_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Keyboard_Events_Lib
+
+# Build rule for target.
+Keyboard_Events_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Keyboard_Events_Lib
+.PHONY : Keyboard_Events_Lib
+
+# fast build rule for target.
+Keyboard_Events_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/keyboard_events/outputs/CMakeFiles/Keyboard_Events_Lib.dir/build
+.PHONY : Keyboard_Events_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Automation_Scripts_in_OS_X
+
+# Build rule for target.
+Automation_Scripts_in_OS_X: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Automation_Scripts_in_OS_X
+.PHONY : Automation_Scripts_in_OS_X
+
+# fast build rule for target.
+Automation_Scripts_in_OS_X/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_in_OS_X.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_in_OS_X.dir/build
+.PHONY : Automation_Scripts_in_OS_X/fast
+
+#=============================================================================
+# Target rules for targets named Automation_Scripts_Lib_Static
+
+# Build rule for target.
+Automation_Scripts_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Automation_Scripts_Lib_Static
+.PHONY : Automation_Scripts_Lib_Static
+
+# fast build rule for target.
+Automation_Scripts_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_Lib_Static.dir/build
+.PHONY : Automation_Scripts_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Automation_Scripts_Lib
+
+# Build rule for target.
+Automation_Scripts_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Automation_Scripts_Lib
+.PHONY : Automation_Scripts_Lib
+
+# fast build rule for target.
+Automation_Scripts_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/automation_scripts/outputs/CMakeFiles/Automation_Scripts_Lib.dir/build
+.PHONY : Automation_Scripts_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Cocoa_Helper_in_OS_X
+
+# Build rule for target.
+Cocoa_Helper_in_OS_X: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Cocoa_Helper_in_OS_X
+.PHONY : Cocoa_Helper_in_OS_X
+
+# fast build rule for target.
+Cocoa_Helper_in_OS_X/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_in_OS_X.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_in_OS_X.dir/build
+.PHONY : Cocoa_Helper_in_OS_X/fast
+
+#=============================================================================
+# Target rules for targets named Cocoa_Helper_Lib_Static
+
+# Build rule for target.
+Cocoa_Helper_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Cocoa_Helper_Lib_Static
+.PHONY : Cocoa_Helper_Lib_Static
+
+# fast build rule for target.
+Cocoa_Helper_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_Lib_Static.dir/build
+.PHONY : Cocoa_Helper_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Cocoa_Helper_Lib
+
+# Build rule for target.
+Cocoa_Helper_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Cocoa_Helper_Lib
+.PHONY : Cocoa_Helper_Lib
+
+# fast build rule for target.
+Cocoa_Helper_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/system/OS_X/cocoa_helper/outputs/CMakeFiles/Cocoa_Helper_Lib.dir/build
+.PHONY : Cocoa_Helper_Lib/fast
+
+#=============================================================================
+# Target rules for targets named Common_Functions
+
+# Build rule for target.
+Common_Functions: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Common_Functions
+.PHONY : Common_Functions
+
+# fast build rule for target.
+Common_Functions/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions.dir/build
+.PHONY : Common_Functions/fast
+
+#=============================================================================
+# Target rules for targets named Common_Functions_Lib_Static
+
+# Build rule for target.
+Common_Functions_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Common_Functions_Lib_Static
+.PHONY : Common_Functions_Lib_Static
+
+# fast build rule for target.
+Common_Functions_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions_Lib_Static.dir/build
+.PHONY : Common_Functions_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named Common_Functions_Lib
+
+# Build rule for target.
+Common_Functions_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Common_Functions_Lib
+.PHONY : Common_Functions_Lib
+
+# fast build rule for target.
+Common_Functions_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/common/outputs/CMakeFiles/Common_Functions_Lib.dir/build
+.PHONY : Common_Functions_Lib/fast
+
+#=============================================================================
+# Target rules for targets named libpng_1_6_24
+
+# Build rule for target.
+libpng_1_6_24: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 libpng_1_6_24
+.PHONY : libpng_1_6_24
+
+# fast build rule for target.
+libpng_1_6_24/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_1_6_24.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_1_6_24.dir/build
+.PHONY : libpng_1_6_24/fast
+
+#=============================================================================
+# Target rules for targets named libpng_Lib_Static
+
+# Build rule for target.
+libpng_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 libpng_Lib_Static
+.PHONY : libpng_Lib_Static
+
+# fast build rule for target.
+libpng_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_Lib_Static.dir/build
+.PHONY : libpng_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named libpng_Lib
+
+# Build rule for target.
+libpng_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 libpng_Lib
+.PHONY : libpng_Lib
+
+# fast build rule for target.
+libpng_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/libpng-1.6.24/outputs/CMakeFiles/libpng_Lib.dir/build
+.PHONY : libpng_Lib/fast
+
+#=============================================================================
+# Target rules for targets named zlib_1_2_8
+
+# Build rule for target.
+zlib_1_2_8: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zlib_1_2_8
+.PHONY : zlib_1_2_8
+
+# fast build rule for target.
+zlib_1_2_8/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_1_2_8.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_1_2_8.dir/build
+.PHONY : zlib_1_2_8/fast
+
+#=============================================================================
+# Target rules for targets named zlib_Lib_Static
+
+# Build rule for target.
+zlib_Lib_Static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zlib_Lib_Static
+.PHONY : zlib_Lib_Static
+
+# fast build rule for target.
+zlib_Lib_Static/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_Lib_Static.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_Lib_Static.dir/build
+.PHONY : zlib_Lib_Static/fast
+
+#=============================================================================
+# Target rules for targets named zlib_Lib
+
+# Build rule for target.
+zlib_Lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zlib_Lib
+.PHONY : zlib_Lib
+
+# fast build rule for target.
+zlib_Lib/fast:
+	$(MAKE) -f /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_Lib.dir/build.make /Users/michzio/Developer/MyProjects/BachelorDegree/c/zlib-1.2.8/outputs/CMakeFiles/zlib_Lib.dir/build
+.PHONY : zlib_Lib/fast
+
+src/concurrency/runner.o: src/concurrency/runner.c.o
+
+.PHONY : src/concurrency/runner.o
 
 # target to build an object file
-concurrency/runner.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.o
-.PHONY : concurrency/runner.c.o
+src/concurrency/runner.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/runner.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.o
+.PHONY : src/concurrency/runner.c.o
 
-concurrency/runner.i: concurrency/runner.c.i
+src/concurrency/runner.i: src/concurrency/runner.c.i
 
-.PHONY : concurrency/runner.i
+.PHONY : src/concurrency/runner.i
 
 # target to preprocess a source file
-concurrency/runner.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.i
-.PHONY : concurrency/runner.c.i
+src/concurrency/runner.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/runner.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.i
+.PHONY : src/concurrency/runner.c.i
 
-concurrency/runner.s: concurrency/runner.c.s
+src/concurrency/runner.s: src/concurrency/runner.c.s
 
-.PHONY : concurrency/runner.s
+.PHONY : src/concurrency/runner.s
 
 # target to generate assembly for a file
-concurrency/runner.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/runner.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/runner.c.s
-.PHONY : concurrency/runner.c.s
+src/concurrency/runner.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/runner.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/runner.c.s
+.PHONY : src/concurrency/runner.c.s
 
-concurrency/thread.o: concurrency/thread.c.o
+src/concurrency/thread.o: src/concurrency/thread.c.o
 
-.PHONY : concurrency/thread.o
+.PHONY : src/concurrency/thread.o
 
 # target to build an object file
-concurrency/thread.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.o
-.PHONY : concurrency/thread.c.o
+src/concurrency/thread.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/thread.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.o
+.PHONY : src/concurrency/thread.c.o
 
-concurrency/thread.i: concurrency/thread.c.i
+src/concurrency/thread.i: src/concurrency/thread.c.i
 
-.PHONY : concurrency/thread.i
+.PHONY : src/concurrency/thread.i
 
 # target to preprocess a source file
-concurrency/thread.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.i
-.PHONY : concurrency/thread.c.i
+src/concurrency/thread.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/thread.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.i
+.PHONY : src/concurrency/thread.c.i
 
-concurrency/thread.s: concurrency/thread.c.s
+src/concurrency/thread.s: src/concurrency/thread.c.s
 
-.PHONY : concurrency/thread.s
+.PHONY : src/concurrency/thread.s
 
 # target to generate assembly for a file
-concurrency/thread.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/thread.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/thread.c.s
-.PHONY : concurrency/thread.c.s
+src/concurrency/thread.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/thread.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/thread.c.s
+.PHONY : src/concurrency/thread.c.s
 
-concurrency/threads_manager.o: concurrency/threads_manager.c.o
+src/concurrency/threads_manager.o: src/concurrency/threads_manager.c.o
 
-.PHONY : concurrency/threads_manager.o
+.PHONY : src/concurrency/threads_manager.o
 
 # target to build an object file
-concurrency/threads_manager.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.o
-.PHONY : concurrency/threads_manager.c.o
+src/concurrency/threads_manager.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/threads_manager.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.o
+.PHONY : src/concurrency/threads_manager.c.o
 
-concurrency/threads_manager.i: concurrency/threads_manager.c.i
+src/concurrency/threads_manager.i: src/concurrency/threads_manager.c.i
 
-.PHONY : concurrency/threads_manager.i
+.PHONY : src/concurrency/threads_manager.i
 
 # target to preprocess a source file
-concurrency/threads_manager.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.i
-.PHONY : concurrency/threads_manager.c.i
+src/concurrency/threads_manager.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/threads_manager.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.i
+.PHONY : src/concurrency/threads_manager.c.i
 
-concurrency/threads_manager.s: concurrency/threads_manager.c.s
+src/concurrency/threads_manager.s: src/concurrency/threads_manager.c.s
 
-.PHONY : concurrency/threads_manager.s
+.PHONY : src/concurrency/threads_manager.s
 
 # target to generate assembly for a file
-concurrency/threads_manager.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/concurrency/threads_manager.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/concurrency/threads_manager.c.s
-.PHONY : concurrency/threads_manager.c.s
+src/concurrency/threads_manager.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/concurrency/threads_manager.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/concurrency/threads_manager.c.s
+.PHONY : src/concurrency/threads_manager.c.s
 
-main.o: main.c.o
+src/main.o: src/main.c.o
 
-.PHONY : main.o
+.PHONY : src/main.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/main.c.o
-.PHONY : main.c.o
+src/main.c.o:
+	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.o
+.PHONY : src/main.c.o
 
-main.i: main.c.i
+src/main.i: src/main.c.i
 
-.PHONY : main.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/main.c.i
-.PHONY : main.c.i
+src/main.c.i:
+	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.i
+.PHONY : src/main.c.i
 
-main.s: main.c.s
+src/main.s: src/main.c.s
 
-.PHONY : main.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/main.c.s
-.PHONY : main.c.s
+src/main.c.s:
+	$(MAKE) -f CMakeFiles/RemoteControllerAPI_Server.dir/build.make CMakeFiles/RemoteControllerAPI_Server.dir/src/main.c.s
+.PHONY : src/main.c.s
 
-networking/authentication.o: networking/authentication.c.o
+src/networking/authentication.o: src/networking/authentication.c.o
 
-.PHONY : networking/authentication.o
+.PHONY : src/networking/authentication.o
 
 # target to build an object file
-networking/authentication.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.o
-.PHONY : networking/authentication.c.o
+src/networking/authentication.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/authentication.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.o
+.PHONY : src/networking/authentication.c.o
 
-networking/authentication.i: networking/authentication.c.i
+src/networking/authentication.i: src/networking/authentication.c.i
 
-.PHONY : networking/authentication.i
+.PHONY : src/networking/authentication.i
 
 # target to preprocess a source file
-networking/authentication.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.i
-.PHONY : networking/authentication.c.i
+src/networking/authentication.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/authentication.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.i
+.PHONY : src/networking/authentication.c.i
 
-networking/authentication.s: networking/authentication.c.s
+src/networking/authentication.s: src/networking/authentication.c.s
 
-.PHONY : networking/authentication.s
+.PHONY : src/networking/authentication.s
 
 # target to generate assembly for a file
-networking/authentication.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/authentication.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/authentication.c.s
-.PHONY : networking/authentication.c.s
+src/networking/authentication.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/authentication.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/authentication.c.s
+.PHONY : src/networking/authentication.c.s
 
-networking/datagram.o: networking/datagram.c.o
+src/networking/datagram.o: src/networking/datagram.c.o
 
-.PHONY : networking/datagram.o
+.PHONY : src/networking/datagram.o
 
 # target to build an object file
-networking/datagram.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.o
-.PHONY : networking/datagram.c.o
+src/networking/datagram.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.o
+.PHONY : src/networking/datagram.c.o
 
-networking/datagram.i: networking/datagram.c.i
+src/networking/datagram.i: src/networking/datagram.c.i
 
-.PHONY : networking/datagram.i
+.PHONY : src/networking/datagram.i
 
 # target to preprocess a source file
-networking/datagram.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.i
-.PHONY : networking/datagram.c.i
+src/networking/datagram.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.i
+.PHONY : src/networking/datagram.c.i
 
-networking/datagram.s: networking/datagram.c.s
+src/networking/datagram.s: src/networking/datagram.c.s
 
-.PHONY : networking/datagram.s
+.PHONY : src/networking/datagram.s
 
 # target to generate assembly for a file
-networking/datagram.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram.c.s
-.PHONY : networking/datagram.c.s
+src/networking/datagram.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram.c.s
+.PHONY : src/networking/datagram.c.s
 
-networking/datagram_server.o: networking/datagram_server.c.o
+src/networking/datagram_server.o: src/networking/datagram_server.c.o
 
-.PHONY : networking/datagram_server.o
+.PHONY : src/networking/datagram_server.o
 
 # target to build an object file
-networking/datagram_server.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.o
-.PHONY : networking/datagram_server.c.o
+src/networking/datagram_server.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram_server.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.o
+.PHONY : src/networking/datagram_server.c.o
 
-networking/datagram_server.i: networking/datagram_server.c.i
+src/networking/datagram_server.i: src/networking/datagram_server.c.i
 
-.PHONY : networking/datagram_server.i
+.PHONY : src/networking/datagram_server.i
 
 # target to preprocess a source file
-networking/datagram_server.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.i
-.PHONY : networking/datagram_server.c.i
+src/networking/datagram_server.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram_server.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.i
+.PHONY : src/networking/datagram_server.c.i
 
-networking/datagram_server.s: networking/datagram_server.c.s
+src/networking/datagram_server.s: src/networking/datagram_server.c.s
 
-.PHONY : networking/datagram_server.s
+.PHONY : src/networking/datagram_server.s
 
 # target to generate assembly for a file
-networking/datagram_server.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/datagram_server.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/datagram_server.c.s
-.PHONY : networking/datagram_server.c.s
+src/networking/datagram_server.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/datagram_server.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/datagram_server.c.s
+.PHONY : src/networking/datagram_server.c.s
 
-networking/generic_server.o: networking/generic_server.c.o
+src/networking/generic_server.o: src/networking/generic_server.c.o
 
-.PHONY : networking/generic_server.o
+.PHONY : src/networking/generic_server.o
 
 # target to build an object file
-networking/generic_server.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.o
-.PHONY : networking/generic_server.c.o
+src/networking/generic_server.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/generic_server.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.o
+.PHONY : src/networking/generic_server.c.o
 
-networking/generic_server.i: networking/generic_server.c.i
+src/networking/generic_server.i: src/networking/generic_server.c.i
 
-.PHONY : networking/generic_server.i
+.PHONY : src/networking/generic_server.i
 
 # target to preprocess a source file
-networking/generic_server.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.i
-.PHONY : networking/generic_server.c.i
+src/networking/generic_server.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/generic_server.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.i
+.PHONY : src/networking/generic_server.c.i
 
-networking/generic_server.s: networking/generic_server.c.s
+src/networking/generic_server.s: src/networking/generic_server.c.s
 
-.PHONY : networking/generic_server.s
+.PHONY : src/networking/generic_server.s
 
 # target to generate assembly for a file
-networking/generic_server.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/generic_server.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/generic_server.c.s
-.PHONY : networking/generic_server.c.s
+src/networking/generic_server.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/generic_server.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/generic_server.c.s
+.PHONY : src/networking/generic_server.c.s
 
-networking/passive_connection.o: networking/passive_connection.c.o
+src/networking/passive_connection.o: src/networking/passive_connection.c.o
 
-.PHONY : networking/passive_connection.o
+.PHONY : src/networking/passive_connection.o
 
 # target to build an object file
-networking/passive_connection.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_connection.c.o
-.PHONY : networking/passive_connection.c.o
+src/networking/passive_connection.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_connection.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.o
+.PHONY : src/networking/passive_connection.c.o
 
-networking/passive_connection.i: networking/passive_connection.c.i
+src/networking/passive_connection.i: src/networking/passive_connection.c.i
 
-.PHONY : networking/passive_connection.i
+.PHONY : src/networking/passive_connection.i
 
 # target to preprocess a source file
-networking/passive_connection.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_connection.c.i
-.PHONY : networking/passive_connection.c.i
+src/networking/passive_connection.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_connection.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.i
+.PHONY : src/networking/passive_connection.c.i
 
-networking/passive_connection.s: networking/passive_connection.c.s
+src/networking/passive_connection.s: src/networking/passive_connection.c.s
 
-.PHONY : networking/passive_connection.s
+.PHONY : src/networking/passive_connection.s
 
 # target to generate assembly for a file
-networking/passive_connection.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_connection.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_connection.c.s
-.PHONY : networking/passive_connection.c.s
+src/networking/passive_connection.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_connection.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_connection.c.s
+.PHONY : src/networking/passive_connection.c.s
 
-networking/passive_socket.o: networking/passive_socket.c.o
+src/networking/passive_socket.o: src/networking/passive_socket.c.o
 
-.PHONY : networking/passive_socket.o
+.PHONY : src/networking/passive_socket.o
 
 # target to build an object file
-networking/passive_socket.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_socket.c.o
-.PHONY : networking/passive_socket.c.o
+src/networking/passive_socket.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_socket.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.o
+.PHONY : src/networking/passive_socket.c.o
 
-networking/passive_socket.i: networking/passive_socket.c.i
+src/networking/passive_socket.i: src/networking/passive_socket.c.i
 
-.PHONY : networking/passive_socket.i
+.PHONY : src/networking/passive_socket.i
 
 # target to preprocess a source file
-networking/passive_socket.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_socket.c.i
-.PHONY : networking/passive_socket.c.i
+src/networking/passive_socket.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_socket.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.i
+.PHONY : src/networking/passive_socket.c.i
 
-networking/passive_socket.s: networking/passive_socket.c.s
+src/networking/passive_socket.s: src/networking/passive_socket.c.s
 
-.PHONY : networking/passive_socket.s
+.PHONY : src/networking/passive_socket.s
 
 # target to generate assembly for a file
-networking/passive_socket.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/passive_socket.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/passive_socket.c.s
-.PHONY : networking/passive_socket.c.s
+src/networking/passive_socket.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/passive_socket.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/passive_socket.c.s
+.PHONY : src/networking/passive_socket.c.s
 
-networking/server_info.o: networking/server_info.c.o
+src/networking/server_info.o: src/networking/server_info.c.o
 
-.PHONY : networking/server_info.o
+.PHONY : src/networking/server_info.o
 
 # target to build an object file
-networking/server_info.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.o
-.PHONY : networking/server_info.c.o
+src/networking/server_info.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_info.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.o
+.PHONY : src/networking/server_info.c.o
 
-networking/server_info.i: networking/server_info.c.i
+src/networking/server_info.i: src/networking/server_info.c.i
 
-.PHONY : networking/server_info.i
+.PHONY : src/networking/server_info.i
 
 # target to preprocess a source file
-networking/server_info.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.i
-.PHONY : networking/server_info.c.i
+src/networking/server_info.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_info.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.i
+.PHONY : src/networking/server_info.c.i
 
-networking/server_info.s: networking/server_info.c.s
+src/networking/server_info.s: src/networking/server_info.c.s
 
-.PHONY : networking/server_info.s
+.PHONY : src/networking/server_info.s
 
 # target to generate assembly for a file
-networking/server_info.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_info.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_info.c.s
-.PHONY : networking/server_info.c.s
+src/networking/server_info.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_info.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_info.c.s
+.PHONY : src/networking/server_info.c.s
 
-networking/server_loop.o: networking/server_loop.c.o
+src/networking/server_loop.o: src/networking/server_loop.c.o
 
-.PHONY : networking/server_loop.o
+.PHONY : src/networking/server_loop.o
 
 # target to build an object file
-networking/server_loop.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.o
-.PHONY : networking/server_loop.c.o
+src/networking/server_loop.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_loop.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.o
+.PHONY : src/networking/server_loop.c.o
 
-networking/server_loop.i: networking/server_loop.c.i
+src/networking/server_loop.i: src/networking/server_loop.c.i
 
-.PHONY : networking/server_loop.i
+.PHONY : src/networking/server_loop.i
 
 # target to preprocess a source file
-networking/server_loop.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.i
-.PHONY : networking/server_loop.c.i
+src/networking/server_loop.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_loop.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.i
+.PHONY : src/networking/server_loop.c.i
 
-networking/server_loop.s: networking/server_loop.c.s
+src/networking/server_loop.s: src/networking/server_loop.c.s
 
-.PHONY : networking/server_loop.s
+.PHONY : src/networking/server_loop.s
 
 # target to generate assembly for a file
-networking/server_loop.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/server_loop.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/server_loop.c.s
-.PHONY : networking/server_loop.c.s
+src/networking/server_loop.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/server_loop.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/server_loop.c.s
+.PHONY : src/networking/server_loop.c.s
 
-networking/service.o: networking/service.c.o
+src/networking/service.o: src/networking/service.c.o
 
-.PHONY : networking/service.o
+.PHONY : src/networking/service.o
 
 # target to build an object file
-networking/service.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/service.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.o
-.PHONY : networking/service.c.o
+src/networking/service.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/service.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.o
+.PHONY : src/networking/service.c.o
 
-networking/service.i: networking/service.c.i
+src/networking/service.i: src/networking/service.c.i
 
-.PHONY : networking/service.i
+.PHONY : src/networking/service.i
 
 # target to preprocess a source file
-networking/service.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/service.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.i
-.PHONY : networking/service.c.i
+src/networking/service.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/service.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.i
+.PHONY : src/networking/service.c.i
 
-networking/service.s: networking/service.c.s
+src/networking/service.s: src/networking/service.c.s
 
-.PHONY : networking/service.s
+.PHONY : src/networking/service.s
 
 # target to generate assembly for a file
-networking/service.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/service.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/service.c.s
-.PHONY : networking/service.c.s
+src/networking/service.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/service.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/service.c.s
+.PHONY : src/networking/service.c.s
 
-networking/stream_server.o: networking/stream_server.c.o
+src/networking/stream_server.o: src/networking/stream_server.c.o
 
-.PHONY : networking/stream_server.o
+.PHONY : src/networking/stream_server.o
 
 # target to build an object file
-networking/stream_server.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.o
-.PHONY : networking/stream_server.c.o
+src/networking/stream_server.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/stream_server.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.o
+.PHONY : src/networking/stream_server.c.o
 
-networking/stream_server.i: networking/stream_server.c.i
+src/networking/stream_server.i: src/networking/stream_server.c.i
 
-.PHONY : networking/stream_server.i
+.PHONY : src/networking/stream_server.i
 
 # target to preprocess a source file
-networking/stream_server.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.i
-.PHONY : networking/stream_server.c.i
+src/networking/stream_server.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/stream_server.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.i
+.PHONY : src/networking/stream_server.c.i
 
-networking/stream_server.s: networking/stream_server.c.s
+src/networking/stream_server.s: src/networking/stream_server.c.s
 
-.PHONY : networking/stream_server.s
+.PHONY : src/networking/stream_server.s
 
 # target to generate assembly for a file
-networking/stream_server.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/networking/stream_server.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/networking/stream_server.c.s
-.PHONY : networking/stream_server.c.s
+src/networking/stream_server.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/networking/stream_server.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/networking/stream_server.c.s
+.PHONY : src/networking/stream_server.c.s
 
-server.o: server.c.o
+src/server.o: src/server.c.o
 
-.PHONY : server.o
+.PHONY : src/server.o
 
 # target to build an object file
-server.c.o:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/server.c.o
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/server.c.o
-.PHONY : server.c.o
+src/server.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/server.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/server.c.o
+.PHONY : src/server.c.o
 
-server.i: server.c.i
+src/server.i: src/server.c.i
 
-.PHONY : server.i
+.PHONY : src/server.i
 
 # target to preprocess a source file
-server.c.i:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/server.c.i
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/server.c.i
-.PHONY : server.c.i
+src/server.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/server.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/server.c.i
+.PHONY : src/server.c.i
 
-server.s: server.c.s
+src/server.s: src/server.c.s
 
-.PHONY : server.s
+.PHONY : src/server.s
 
 # target to generate assembly for a file
-server.c.s:
-	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/server.c.s
-	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/server.c.s
-.PHONY : server.c.s
+src/server.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/server.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/server.c.s
+.PHONY : src/server.c.s
+
+src/service_handler/app_event.o: src/service_handler/app_event.c.o
+
+.PHONY : src/service_handler/app_event.o
+
+# target to build an object file
+src/service_handler/app_event.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/app_event.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.o
+.PHONY : src/service_handler/app_event.c.o
+
+src/service_handler/app_event.i: src/service_handler/app_event.c.i
+
+.PHONY : src/service_handler/app_event.i
+
+# target to preprocess a source file
+src/service_handler/app_event.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/app_event.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.i
+.PHONY : src/service_handler/app_event.c.i
+
+src/service_handler/app_event.s: src/service_handler/app_event.c.s
+
+.PHONY : src/service_handler/app_event.s
+
+# target to generate assembly for a file
+src/service_handler/app_event.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/app_event.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/app_event.c.s
+.PHONY : src/service_handler/app_event.c.s
+
+src/service_handler/keyboard_input.o: src/service_handler/keyboard_input.c.o
+
+.PHONY : src/service_handler/keyboard_input.o
+
+# target to build an object file
+src/service_handler/keyboard_input.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/keyboard_input.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.o
+.PHONY : src/service_handler/keyboard_input.c.o
+
+src/service_handler/keyboard_input.i: src/service_handler/keyboard_input.c.i
+
+.PHONY : src/service_handler/keyboard_input.i
+
+# target to preprocess a source file
+src/service_handler/keyboard_input.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/keyboard_input.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.i
+.PHONY : src/service_handler/keyboard_input.c.i
+
+src/service_handler/keyboard_input.s: src/service_handler/keyboard_input.c.s
+
+.PHONY : src/service_handler/keyboard_input.s
+
+# target to generate assembly for a file
+src/service_handler/keyboard_input.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/keyboard_input.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/keyboard_input.c.s
+.PHONY : src/service_handler/keyboard_input.c.s
+
+src/service_handler/mouse_input.o: src/service_handler/mouse_input.c.o
+
+.PHONY : src/service_handler/mouse_input.o
+
+# target to build an object file
+src/service_handler/mouse_input.c.o:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/mouse_input.c.o
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.o
+.PHONY : src/service_handler/mouse_input.c.o
+
+src/service_handler/mouse_input.i: src/service_handler/mouse_input.c.i
+
+.PHONY : src/service_handler/mouse_input.i
+
+# target to preprocess a source file
+src/service_handler/mouse_input.c.i:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/mouse_input.c.i
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.i
+.PHONY : src/service_handler/mouse_input.c.i
+
+src/service_handler/mouse_input.s: src/service_handler/mouse_input.c.s
+
+.PHONY : src/service_handler/mouse_input.s
+
+# target to generate assembly for a file
+src/service_handler/mouse_input.c.s:
+	$(MAKE) -f CMakeFiles/RC_Server_Lib_Static.dir/build.make CMakeFiles/RC_Server_Lib_Static.dir/src/service_handler/mouse_input.c.s
+	$(MAKE) -f CMakeFiles/RC_Server_Lib.dir/build.make CMakeFiles/RC_Server_Lib.dir/src/service_handler/mouse_input.c.s
+.PHONY : src/service_handler/mouse_input.c.s
 
 test/test_server_loop.o: test/test_server_loop.c.o
 
@@ -740,61 +1202,98 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/local"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Install_RemoteControllerAPI_Server"
-	@echo "... install/strip"
-	@echo "... install"
-	@echo "... RC_Server_Lib"
 	@echo "... RemoteControllerAPI_Server"
 	@echo "... RC_Server_Lib_Static"
-	@echo "... concurrency/runner.o"
-	@echo "... concurrency/runner.i"
-	@echo "... concurrency/runner.s"
-	@echo "... concurrency/thread.o"
-	@echo "... concurrency/thread.i"
-	@echo "... concurrency/thread.s"
-	@echo "... concurrency/threads_manager.o"
-	@echo "... concurrency/threads_manager.i"
-	@echo "... concurrency/threads_manager.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... networking/authentication.o"
-	@echo "... networking/authentication.i"
-	@echo "... networking/authentication.s"
-	@echo "... networking/datagram.o"
-	@echo "... networking/datagram.i"
-	@echo "... networking/datagram.s"
-	@echo "... networking/datagram_server.o"
-	@echo "... networking/datagram_server.i"
-	@echo "... networking/datagram_server.s"
-	@echo "... networking/generic_server.o"
-	@echo "... networking/generic_server.i"
-	@echo "... networking/generic_server.s"
-	@echo "... networking/passive_connection.o"
-	@echo "... networking/passive_connection.i"
-	@echo "... networking/passive_connection.s"
-	@echo "... networking/passive_socket.o"
-	@echo "... networking/passive_socket.i"
-	@echo "... networking/passive_socket.s"
-	@echo "... networking/server_info.o"
-	@echo "... networking/server_info.i"
-	@echo "... networking/server_info.s"
-	@echo "... networking/server_loop.o"
-	@echo "... networking/server_loop.i"
-	@echo "... networking/server_loop.s"
-	@echo "... networking/service.o"
-	@echo "... networking/service.i"
-	@echo "... networking/service.s"
-	@echo "... networking/stream_server.o"
-	@echo "... networking/stream_server.i"
-	@echo "... networking/stream_server.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... RC_Server_Lib"
+	@echo "... Networking"
+	@echo "... Networking_Lib_Static"
+	@echo "... Networking_Lib"
+	@echo "... Concurrency"
+	@echo "... Concurrency_Lib_Static"
+	@echo "... Concurrency_Lib"
+	@echo "... Collections"
+	@echo "... Collections_Lib_Static"
+	@echo "... Collections_Lib"
+	@echo "... Comparers"
+	@echo "... Comparers_Lib_Static"
+	@echo "... Comparers_Lib"
+	@echo "... Mouse_Events_in_OS_X"
+	@echo "... Mouse_Events_Lib_Static"
+	@echo "... Mouse_Events_Lib"
+	@echo "... Keyboard_Events_in_OS_X"
+	@echo "... Keyboard_Events_Lib_Static"
+	@echo "... Keyboard_Events_Lib"
+	@echo "... Automation_Scripts_in_OS_X"
+	@echo "... Automation_Scripts_Lib_Static"
+	@echo "... Automation_Scripts_Lib"
+	@echo "... Cocoa_Helper_in_OS_X"
+	@echo "... Cocoa_Helper_Lib_Static"
+	@echo "... Cocoa_Helper_Lib"
+	@echo "... Common_Functions"
+	@echo "... Common_Functions_Lib_Static"
+	@echo "... Common_Functions_Lib"
+	@echo "... libpng_1_6_24"
+	@echo "... libpng_Lib_Static"
+	@echo "... libpng_Lib"
+	@echo "... zlib_1_2_8"
+	@echo "... zlib_Lib_Static"
+	@echo "... zlib_Lib"
+	@echo "... src/concurrency/runner.o"
+	@echo "... src/concurrency/runner.i"
+	@echo "... src/concurrency/runner.s"
+	@echo "... src/concurrency/thread.o"
+	@echo "... src/concurrency/thread.i"
+	@echo "... src/concurrency/thread.s"
+	@echo "... src/concurrency/threads_manager.o"
+	@echo "... src/concurrency/threads_manager.i"
+	@echo "... src/concurrency/threads_manager.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/networking/authentication.o"
+	@echo "... src/networking/authentication.i"
+	@echo "... src/networking/authentication.s"
+	@echo "... src/networking/datagram.o"
+	@echo "... src/networking/datagram.i"
+	@echo "... src/networking/datagram.s"
+	@echo "... src/networking/datagram_server.o"
+	@echo "... src/networking/datagram_server.i"
+	@echo "... src/networking/datagram_server.s"
+	@echo "... src/networking/generic_server.o"
+	@echo "... src/networking/generic_server.i"
+	@echo "... src/networking/generic_server.s"
+	@echo "... src/networking/passive_connection.o"
+	@echo "... src/networking/passive_connection.i"
+	@echo "... src/networking/passive_connection.s"
+	@echo "... src/networking/passive_socket.o"
+	@echo "... src/networking/passive_socket.i"
+	@echo "... src/networking/passive_socket.s"
+	@echo "... src/networking/server_info.o"
+	@echo "... src/networking/server_info.i"
+	@echo "... src/networking/server_info.s"
+	@echo "... src/networking/server_loop.o"
+	@echo "... src/networking/server_loop.i"
+	@echo "... src/networking/server_loop.s"
+	@echo "... src/networking/service.o"
+	@echo "... src/networking/service.i"
+	@echo "... src/networking/service.s"
+	@echo "... src/networking/stream_server.o"
+	@echo "... src/networking/stream_server.i"
+	@echo "... src/networking/stream_server.s"
+	@echo "... src/server.o"
+	@echo "... src/server.i"
+	@echo "... src/server.s"
+	@echo "... src/service_handler/app_event.o"
+	@echo "... src/service_handler/app_event.i"
+	@echo "... src/service_handler/app_event.s"
+	@echo "... src/service_handler/keyboard_input.o"
+	@echo "... src/service_handler/keyboard_input.i"
+	@echo "... src/service_handler/keyboard_input.s"
+	@echo "... src/service_handler/mouse_input.o"
+	@echo "... src/service_handler/mouse_input.i"
+	@echo "... src/service_handler/mouse_input.s"
 	@echo "... test/test_server_loop.o"
 	@echo "... test/test_server_loop.i"
 	@echo "... test/test_server_loop.s"
